@@ -2,16 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//*
+//* ラグドール化のOn Offをするクラス
+//*
 public class Ragdoll_enable : MonoBehaviour
 {
     Animator _anim;
     Rigidbody _rb;
     CapsuleCollider _col;
-    Quaternion q;
+    float _time;
     /* 自分の全ての子供のRigidbodyとColliderを操作 */
-
     [SerializeField]
-    bool active;
+    bool isRagdoll;
+    RagdollState _state;
 
     readonly List<RigidComponent> _rigids = new List<RigidComponent>();
     readonly List<TransformComponent> _transforms = new List<TransformComponent>();
@@ -21,11 +24,10 @@ public class Ragdoll_enable : MonoBehaviour
     void Start()
     {
         _anim = GetComponent<Animator>();
-        _anim.enabled = !active;
+        _anim.enabled = !isRagdoll;
         _col = GetComponent<CapsuleCollider>();
-        _col.enabled = !active;
-
-        q = transform.GetChild(0).localRotation;
+        _col.enabled = !isRagdoll;
+        _state = BooltoState(isRagdoll);
 
         Rigidbody[] rigidbodies = GetComponentsInChildren<Rigidbody>();
         Transform[] transforms= GetComponentsInChildren<Transform>();
@@ -34,15 +36,15 @@ public class Ragdoll_enable : MonoBehaviour
         {
             if(rb.transform == transform)
             {
-                rb.isKinematic = active;
+                rb.isKinematic = isRagdoll;
                 _rb = rb;
                 continue;
             }
 
-            rb.isKinematic = !active;
+            rb.isKinematic = !isRagdoll;
             Collider col = rb.GetComponent<Collider>();
             if(col != null)
-                col.enabled = active;
+                col.enabled = isRagdoll;
             RigidComponent rC = new RigidComponent(rb, col);
             _rigids.Add(rC);
         }
@@ -61,44 +63,72 @@ public class Ragdoll_enable : MonoBehaviour
 
     private void Update()
     {
-        if(InputManager_y.IMIsButtonOn(InputManager_y.IM_BUTTON.JUMP)
-            && active)
+        
+        if (_state == RagdollState.Ragdolled
+            && _rigids[0].RigidBody.velocity.magnitude < 0.1f
+            && Physics.Raycast(_rigids[0].RigidBody.transform.position,
+            Vector3.down, 1f, ~LayerMask.GetMask("Player"))
+            )
         {
             Getup();
         }
     }
 
-    public void Ragdoll(bool active)
+    public IEnumerator Ragdoll(bool active)
     {
+
+        if (!active)    //起き上がり時のみ
+        {
+            _time = 0;
+            while (_time <= 1f)
+            {
+                foreach (TransformComponent t in _transforms)
+                {
+                    t.Transform.localPosition =
+                        Vector3.Slerp(t.StoredPosition, t.DefaultPosition, _time);
+                    t.Transform.localRotation =
+                        Quaternion.Slerp(t.StoredRotation, t.DefaultRot, _time);
+
+                }
+                _time += 0.0333f;
+                if (_time > 1f)
+                    _time = 1f;
+                yield return null;
+            }
+        }
+
         foreach (RigidComponent rb in _rigids)
         {
             rb.RigidBody.isKinematic = !active;
             rb.Col.enabled = active;
         }
 
-        foreach(TransformComponent t in _transforms)
-        {
-            t.Transform.localPosition = t.DefaultPosition;
-            t.Transform.localRotation = t.DefaultRot;
-        }
-
         _anim.enabled = !active;
         _rb.isKinematic = active;
         _col.enabled = !active;
 
-        this.active = active;
+        this.isRagdoll = active;
+        _state = BooltoState(isRagdoll);
     }
 
     public void Getup()
     {
-        if (!active)
+        if (_state != RagdollState.Ragdolled)
             return;
+        _state = RagdollState.RagdolltoAnim;
 
-        Transform child = transform.GetChild(0);
-        transform.position = child.position +
-            new Vector3(0, _col.height / 2f, 0);
+        Transform child = transform.GetChild(0);    //Bone001(Hip)
+        transform.position = new Vector3(child.position.x,
+            child.position.y + _col.height / 2, 0);
 
-        Ragdoll(false);
+        foreach (TransformComponent t in _transforms)
+        {
+            t.StoredPosition = t.Transform.localPosition;
+            t.StoredRotation = t.Transform.localRotation;
+        }
+
+
+        StartCoroutine(Ragdoll(false));
     }
 
     //Declare a class that will hold useful information for each body part
@@ -140,4 +170,15 @@ public class Ragdoll_enable : MonoBehaviour
         }
     }
 
+    enum RagdollState
+    {
+        Animated,
+        RagdolltoAnim,
+        Ragdolled,
+    }
+    // Animated か Ragdolled　を返す
+    RagdollState BooltoState(bool active)
+    {
+        return active ? RagdollState.Ragdolled : RagdollState.Animated;
+    }
 }
