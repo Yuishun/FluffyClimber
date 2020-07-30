@@ -7,14 +7,20 @@ using UnityEngine;
 //*
 public class Ragdoll_enable : MonoBehaviour
 {
+    [SerializeField]
+    bool isRagdoll;
+    public bool IsRagdoll
+    {
+        get { return IsRagdoll; }
+    }
+    RagdollState _state;
+
+
     Animator _anim;
     Rigidbody _rb;
     CapsuleCollider _col;
     float _time;
     /* 自分の全ての子供のRigidbodyとColliderを操作 */
-    [SerializeField]
-    bool isRagdoll;
-    RagdollState _state;
 
     readonly List<RigidComponent> _rigids = new List<RigidComponent>();
     readonly List<TransformComponent> _transforms = new List<TransformComponent>();
@@ -79,8 +85,14 @@ public class Ragdoll_enable : MonoBehaviour
 
         if (!active)    //起き上がり時のみ
         {
+            yield return new WaitForEndOfFrame; //親のポジション移動が終わってからローカルを取得
+            foreach (TransformComponent t in _transforms)
+            {
+                t.StoredPosition = t.Transform.localPosition;
+                t.StoredRotation = t.Transform.localRotation;
+            }
             _time = 0;
-            while (_time <= 1f)
+            while (_time < 1f)
             {
                 foreach (TransformComponent t in _transforms)
                 {
@@ -120,12 +132,6 @@ public class Ragdoll_enable : MonoBehaviour
         Transform child = transform.GetChild(0);    //Bone001(Hip)
         transform.position = new Vector3(child.position.x,
             child.position.y + _col.height / 2, 0);
-
-        foreach (TransformComponent t in _transforms)
-        {
-            t.StoredPosition = t.Transform.localPosition;
-            t.StoredRotation = t.Transform.localRotation;
-        }
 
 
         StartCoroutine(Ragdoll(false));
