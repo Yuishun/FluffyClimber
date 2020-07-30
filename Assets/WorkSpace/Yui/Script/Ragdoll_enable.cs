@@ -11,7 +11,7 @@ public class Ragdoll_enable : MonoBehaviour
     bool isRagdoll;
     public bool IsRagdoll
     {
-        get { return IsRagdoll; }
+        get { return isRagdoll; }
     }
     RagdollState _state;
 

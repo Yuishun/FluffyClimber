@@ -26,9 +26,9 @@ public class PlayerMovement_y : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Ragdoll:" + RagdollCtrl.Ragdolled);
+        Debug.Log("Ragdoll:" + RagdollCtrl.IsRagdoll);
 
-        if(!RagdollCtrl.Ragdolled)
+        if(!RagdollCtrl.IsRagdoll)
         {
             NormalUpdate();
         }
