@@ -10,21 +10,25 @@ public class PlayerMovement_y : MonoBehaviour
     [SerializeField] private float GRAVITY = -9.8f;
     [SerializeField] private Rigidbody rb = null;
 
-    const float RayLength = 0.675f;
+    [SerializeField] private float RayLength = 0.675f;
 
-    private bool bRagdolled = false;
+    private Ragdoll_enable RagdollCtrl = null;
+    private Animator Anim = null;
     private bool bGround = true;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        RagdollCtrl = GetComponent<Ragdoll_enable>();
+        Anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(!bRagdolled)
+        Debug.Log("Ragdoll:" + RagdollCtrl.Ragdolled);
+
+        if(!RagdollCtrl.Ragdolled)
         {
             NormalUpdate();
         }
@@ -42,7 +46,6 @@ public class PlayerMovement_y : MonoBehaviour
         else
         {
             Ray ray_ = new Ray(transform.position, Vector3.down);
-            RaycastHit hitInfo_ = new RaycastHit();
 
             if(Physics.Raycast(ray_, RayLength))
             {
@@ -60,6 +63,10 @@ public class PlayerMovement_y : MonoBehaviour
         //  左右移動
         float horAxis_ = IMGetAxisValue(IM_AXIS.L_STICK_X);
         vecDelta_ += horAxis_ * Vector3.right * VELOCITY * Time.deltaTime;
+
+        //  animation
+        bool bRunning = Mathf.Abs(horAxis_) > 0.001f;
+        Anim.SetBool("bRunning", bRunning);
 
         transform.position += vecDelta_;
 
