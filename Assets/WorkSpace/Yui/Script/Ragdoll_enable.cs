@@ -85,7 +85,7 @@ public class Ragdoll_enable : MonoBehaviour
 
         if (!active)    //起き上がり時のみ
         {
-            yield return new WaitForEndOfFrame; //親のポジション移動が終わってからローカルを取得
+            yield return new WaitForEndOfFrame(); //親のポジション移動が終わってからローカルを取得
             foreach (TransformComponent t in _transforms)
             {
                 t.StoredPosition = t.Transform.localPosition;
