@@ -73,17 +73,12 @@ public class Ragdoll_enable : MonoBehaviour
         if (_state == RagdollState.Ragdolled
             && _rigids[0].RigidBody.velocity.magnitude < 0.05f
             && Physics.Raycast(_transforms[0].Transform.position,
-            Vector3.down, 0.3f, ~LayerMask.GetMask("Player"))
+            Vector3.down, 0.3f, ~LayerMask.GetMask("Player_Root","Player_Body"))
             )
         {
             Getup();
         }
 
-        // デバッグ用　強制的にRagdoll状態にする
-        if(InputManager_y.IMIsButtonOn(InputManager_y.IM_BUTTON.JUMP))
-        {
-            StartCoroutine(Ragdoll(true));
-        }
     }
 
     private void LateUpdate()

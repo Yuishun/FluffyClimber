@@ -1837,6 +1837,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d85479e58224aed44938f07c0db6d587, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  VELOCITY: 2
+  VELO_IN_AIR: 4
+  JUMP_VELO: 5
+  MAX_VELO: 5
+  GRAVITY: -9.8
+  rb: {fileID: 0}
+  RayLength: 0.675
 --- !u!136 &286109234
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -4619,6 +4626,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d85479e58224aed44938f07c0db6d587, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  VELOCITY: 2
+  VELO_IN_AIR: 4
+  JUMP_VELO: 5
+  MAX_VELO: 5
+  GRAVITY: -9.8
+  rb: {fileID: 580133186}
+  RayLength: 0.675
 --- !u!95 &580133184
 Animator:
   serializedVersion: 3
@@ -9799,6 +9813,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d85479e58224aed44938f07c0db6d587, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  VELOCITY: 2
+  VELO_IN_AIR: 4
+  JUMP_VELO: 5
+  MAX_VELO: 5
+  GRAVITY: -9.8
+  rb: {fileID: 0}
+  RayLength: 0.675
 --- !u!65 &1454671058
 BoxCollider:
   m_ObjectHideFlags: 0
