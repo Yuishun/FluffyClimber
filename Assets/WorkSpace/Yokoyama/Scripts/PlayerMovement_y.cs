@@ -108,7 +108,7 @@ public class PlayerMovement_y : MonoBehaviour
 
             Ray ray_ = new Ray(transform.position, Vector3.down);
             RaycastHit hitInfo_;
-            int layerMask_ = ~(1 << 8 | 1 << 9);
+            int layerMask_ = ~(1 << 8);
 
             if (Physics.Raycast(ray_, out hitInfo_, RayLength, layerMask_))
             {
