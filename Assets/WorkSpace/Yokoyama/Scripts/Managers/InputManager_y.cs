@@ -161,6 +161,10 @@ public class InputManager_y : MonoBehaviour
             case IM_BUTTON.ATTACK:
                 if (Input.GetButton("Fire1")) r = true;
                 break;
+
+            case IM_BUTTON.JUMP:
+                if (Input.GetButton("Jump")) r = true;
+                break;
         }
 
         return r;

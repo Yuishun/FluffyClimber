@@ -1509,7 +1509,7 @@ MonoBehaviour:
   VELO_IN_AIR: 4
   JUMP_VELO: 5
   MAX_VELO: 5
-  GRAVITY: -9.8
+  DOWN_FORCE: -9.8
   rb: {fileID: 0}
   RayLength: 0.675
 --- !u!1 &1545143467
@@ -1808,6 +1808,18 @@ PrefabInstance:
     - target: {fileID: 580133183, guid: 1b2c55c670ff8fa4592ee66f466cdbbd, type: 3}
       propertyPath: VELO_IN_AIR
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 580133183, guid: 1b2c55c670ff8fa4592ee66f466cdbbd, type: 3}
+      propertyPath: MAX_VELO
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 580133183, guid: 1b2c55c670ff8fa4592ee66f466cdbbd, type: 3}
+      propertyPath: DOWN_FORCE
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 580133183, guid: 1b2c55c670ff8fa4592ee66f466cdbbd, type: 3}
+      propertyPath: JUMP_VELO
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 622397111, guid: 1b2c55c670ff8fa4592ee66f466cdbbd, type: 3}
       propertyPath: m_ConnectedAnchor.z

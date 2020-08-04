@@ -9,7 +9,7 @@ public class PlayerMovement_y : MonoBehaviour
     [SerializeField] private float VELO_IN_AIR = 4.0f;
     [SerializeField] private float JUMP_VELO = 5f;
     [SerializeField] private float MAX_VELO = 5f;
-    [SerializeField] private float GRAVITY = -9.8f;
+    [SerializeField] private float DOWN_FORCE = -9.8f;
     [SerializeField] private Rigidbody rb = null;
 
     [SerializeField] private float RayLength = 0.675f;
@@ -100,11 +100,22 @@ public class PlayerMovement_y : MonoBehaviour
         }
         else
         {
-            Ray ray_ = new Ray(transform.position, Vector3.down);
-
-            if (Physics.Raycast(ray_, RayLength))
+            if(!IMKeepButtonOn(IM_BUTTON.JUMP))
             {
-                bGround = true;
+                if (rb.velocity.y > 0f)
+                    rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+            }
+
+            Ray ray_ = new Ray(transform.position, Vector3.down);
+            RaycastHit hitInfo_;
+            int layerMask_ = ~(1 << 8);
+
+            if (Physics.Raycast(ray_, out hitInfo_, RayLength, layerMask_))
+            {
+                if(rb.velocity.y < 0)
+                {
+                    bGround = true;
+                }
             }
         }
     }
