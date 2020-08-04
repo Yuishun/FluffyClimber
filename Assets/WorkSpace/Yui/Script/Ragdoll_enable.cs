@@ -15,7 +15,6 @@ public class Ragdoll_enable : MonoBehaviour
     }
     RagdollState _state;
 
-
     Animator _anim;
     Rigidbody _rb;
     CapsuleCollider _col;
@@ -69,30 +68,47 @@ public class Ragdoll_enable : MonoBehaviour
 
     private void Update()
     {
-        
+        // 現在Ragdoll状態かつ、速度が出ていない時かつ、
+        // 地面に設置しているとき　起き上がる
         if (_state == RagdollState.Ragdolled
-            && _rigids[0].RigidBody.velocity.magnitude < 0.1f
-            && Physics.Raycast(_rigids[0].RigidBody.transform.position,
-            Vector3.down, 1f, ~LayerMask.GetMask("Player"))
+            && _rigids[0].RigidBody.velocity.magnitude < 0.05f
+            && Physics.Raycast(_transforms[0].Transform.position,
+            Vector3.down, 0.3f, ~LayerMask.GetMask("Player"))
             )
         {
             Getup();
         }
+
+        // デバッグ用　強制的にRagdoll状態にする
+        if(InputManager_y.IMIsButtonOn(InputManager_y.IM_BUTTON.JUMP))
+        {
+            StartCoroutine(Ragdoll(true));
+        }
+    }
+
+    private void LateUpdate()
+    {
+        // 最初の1fでボーンの位置の修正を行う
+        if (_state != RagdollState.RagdolltoAnim1)            
+            return;
+
+        _transforms[0].Transform.localPosition +=
+            _transforms[0].PrivPosition;        
+        _state = RagdollState.RagdolltoAnim2;
     }
 
     public IEnumerator Ragdoll(bool active)
     {
-
         if (!active)    //起き上がり時のみ
         {
-            yield return new WaitForEndOfFrame(); //親のポジション移動が終わってからローカルを取得
+            yield return null;  // ボーンの位置の更新のため1f待つ
             foreach (TransformComponent t in _transforms)
             {
                 t.StoredPosition = t.Transform.localPosition;
                 t.StoredRotation = t.Transform.localRotation;
             }
             _time = 0;
-            while (_time < 1f)
+            while (_time <= 1f)
             {
                 foreach (TransformComponent t in _transforms)
                 {
@@ -102,11 +118,10 @@ public class Ragdoll_enable : MonoBehaviour
                         Quaternion.Slerp(t.StoredRotation, t.DefaultRot, _time);
 
                 }
-                _time += 0.0333f;
-                if (_time > 1f)
-                    _time = 1f;
+                _time += 0.0333f;                
                 yield return null;
-            }
+            }           
+            yield return null;
         }
 
         foreach (RigidComponent rb in _rigids)
@@ -127,12 +142,17 @@ public class Ragdoll_enable : MonoBehaviour
     {
         if (_state != RagdollState.Ragdolled)
             return;
-        _state = RagdollState.RagdolltoAnim;
+        _state = RagdollState.RagdolltoAnim1;       
 
         Transform child = transform.GetChild(0);    //Bone001(Hip)
-        transform.position = new Vector3(child.position.x,
+        // Rootの位置を設定
+        Vector3 pos = new Vector3(child.position.x,
             child.position.y + _col.height / 2, 0);
 
+        // Rootが動いた分の逆ベクトルを保管
+        _transforms[0].PrivPosition = transform.position - pos;
+
+        transform.position = pos;
 
         StartCoroutine(Ragdoll(false));
     }
@@ -176,11 +196,12 @@ public class Ragdoll_enable : MonoBehaviour
         }
     }
 
-    enum RagdollState
+    public enum RagdollState
     {
-        Animated,
-        RagdolltoAnim,
-        Ragdolled,
+        Animated,           // Animatorで制御されている
+        RagdolltoAnim1,     // RagdollからAnimatorに制御されるまで最初の1fのみ
+        RagdolltoAnim2,     // RagdollからAnimatorに制御されるまで上記以降
+        Ragdolled,          // Ragdollに身を任せている
     }
     // Animated か Ragdolled　を返す
     RagdollState BooltoState(bool active)
