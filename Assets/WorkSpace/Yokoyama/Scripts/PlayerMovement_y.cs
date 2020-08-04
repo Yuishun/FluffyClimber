@@ -6,7 +6,9 @@ using static InputManager_y;
 public class PlayerMovement_y : MonoBehaviour
 {
     [SerializeField] private float VELOCITY = 2.0f;
+    [SerializeField] private float VELO_IN_AIR = 4.0f;
     [SerializeField] private float JUMP_VELO = 5f;
+    [SerializeField] private float MAX_VELO = 5f;
     [SerializeField] private float GRAVITY = -9.8f;
     [SerializeField] private Rigidbody rb = null;
 
@@ -26,31 +28,17 @@ public class PlayerMovement_y : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Ragdoll:" + RagdollCtrl.IsRagdoll);
-
-        if(!RagdollCtrl.IsRagdoll)
-        {
-            NormalUpdate();
-        }
+        
     }
 
     private void FixedUpdate()
     {
-        if(bGround)
-        {
-            if(IMIsButtonOn(IM_BUTTON.JUMP))
-            {
-                Jump();
-            }
-        }
-        else
-        {
-            Ray ray_ = new Ray(transform.position, Vector3.down);
+        Debug.Log("Ragdoll:" + RagdollCtrl.IsRagdoll);
 
-            if(Physics.Raycast(ray_, RayLength))
-            {
-                bGround = true;
-            }
+        if (!RagdollCtrl.IsRagdoll)
+        {
+            NormalUpdate();
+            JumpUpdate();
         }
     }
 
@@ -58,25 +46,67 @@ public class PlayerMovement_y : MonoBehaviour
     //  非ラグドール時の移動処理
     private void NormalUpdate()
     {
+        //  ラグドール化
+        if(Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            RagdollCtrl.StartCoroutine(RagdollCtrl.Ragdoll(true));
+        }
+
+
         Vector3 vecDelta_ = Vector3.zero;
 
         //  左右移動
         float horAxis_ = IMGetAxisValue(IM_AXIS.L_STICK_X);
-        vecDelta_ += horAxis_ * Vector3.right * VELOCITY * Time.deltaTime;
+        vecDelta_ += horAxis_ * Vector3.right * (bGround ? VELOCITY : VELO_IN_AIR);
 
         //  animation
         bool bRunning = Mathf.Abs(horAxis_) > 0.001f;
         Anim.SetBool("bRunning", bRunning);
 
-        transform.position += vecDelta_;
+        if(bRunning)
+        {
+            if(Mathf.Sign(horAxis_) > 0)
+            {
+                transform.rotation = Quaternion.Euler(0, 0, 0);
+            }
+            else
+            {
+                transform.rotation = Quaternion.Euler(0, 180, 0);
+            }
+        }
+
+        //transform.position += vecDelta_;
+        rb.AddForce(vecDelta_, ForceMode.Acceleration);
+
+        Vector3 currentVelocity = rb.velocity;
+        if(Mathf.Abs(currentVelocity.x) >= MAX_VELO)
+        {
+            currentVelocity.x = Mathf.Sign(currentVelocity.x) * MAX_VELO;
+            rb.velocity = currentVelocity;
+        }
 
         Debug.DrawLine(transform.position, transform.position + Vector3.down * RayLength);
     }
 
-    //  ジャンプ処理(fixedUpdate)
-    private void Jump()
+    private void JumpUpdate()
     {
-        rb.AddForce(Vector3.up * JUMP_VELO, ForceMode.Impulse);
-        bGround = false;
+        if (bGround)
+        {
+            if (IMIsButtonOn(IM_BUTTON.JUMP))
+            {
+                rb.AddForce(Vector3.up * JUMP_VELO, ForceMode.Impulse);
+                bGround = false;
+            }
+        }
+        else
+        {
+            Ray ray_ = new Ray(transform.position, Vector3.down);
+
+            if (Physics.Raycast(ray_, RayLength))
+            {
+                bGround = true;
+            }
+        }
     }
+
 }

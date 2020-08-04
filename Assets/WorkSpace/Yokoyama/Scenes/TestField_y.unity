@@ -1506,7 +1506,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   VELOCITY: 2
+  VELO_IN_AIR: 4
   JUMP_VELO: 5
+  MAX_VELO: 5
   GRAVITY: -9.8
   rb: {fileID: 0}
   RayLength: 0.675
@@ -1798,6 +1800,14 @@ PrefabInstance:
     - target: {fileID: 580133183, guid: 1b2c55c670ff8fa4592ee66f466cdbbd, type: 3}
       propertyPath: RayLength
       value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 580133183, guid: 1b2c55c670ff8fa4592ee66f466cdbbd, type: 3}
+      propertyPath: VELOCITY
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 580133183, guid: 1b2c55c670ff8fa4592ee66f466cdbbd, type: 3}
+      propertyPath: VELO_IN_AIR
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 622397111, guid: 1b2c55c670ff8fa4592ee66f466cdbbd, type: 3}
       propertyPath: m_ConnectedAnchor.z
