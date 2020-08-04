@@ -79,6 +79,11 @@ public class Ragdoll_enable : MonoBehaviour
             Getup();
         }
 
+        if(Input.GetKeyDown(KeyCode.L))
+        {
+            _rigids[0].RigidBody.velocity = new Vector3(10, 0, 0);
+        }
+
     }
 
     private void LateUpdate()
@@ -121,9 +126,21 @@ public class Ragdoll_enable : MonoBehaviour
 
         foreach (RigidComponent rb in _rigids)
         {
-            rb.RigidBody.isKinematic = !active;
+            //if (rb.RigidBody.gameObject.tag != "IgnoreBone")
+                rb.RigidBody.isKinematic = !active;
             rb.Col.enabled = active;
         }
+        if (active)
+        {
+            Vector3 velocity = _rb.velocity;
+            velocity.z = 0;
+            yield return  new WaitForEndOfFrame();
+            foreach (RigidComponent rb in _rigids)
+            {
+                rb.RigidBody.velocity = velocity;
+            }
+        }
+
 
         _anim.enabled = !active;
         _rb.isKinematic = active;

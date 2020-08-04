@@ -888,6 +888,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: -7986249860330243914, guid: a4d2bcd0f63f47040b9ee9f8154b96f8,
+        type: 3}
+      propertyPath: m_TagString
+      value: IgnoreBone
+      objectReference: {fileID: 0}
     - target: {fileID: -7441974810650164064, guid: a4d2bcd0f63f47040b9ee9f8154b96f8,
         type: 3}
       propertyPath: m_LocalRotation.x
@@ -927,6 +932,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -6895422888917978749, guid: a4d2bcd0f63f47040b9ee9f8154b96f8,
+        type: 3}
+      propertyPath: m_TagString
+      value: IgnoreBone
       objectReference: {fileID: 0}
     - target: {fileID: -6797949205849385783, guid: a4d2bcd0f63f47040b9ee9f8154b96f8,
         type: 3}
@@ -1047,6 +1057,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -2489501534724487998, guid: a4d2bcd0f63f47040b9ee9f8154b96f8,
+        type: 3}
+      propertyPath: m_TagString
+      value: IgnoreBone
       objectReference: {fileID: 0}
     - target: {fileID: -2235245789278775237, guid: a4d2bcd0f63f47040b9ee9f8154b96f8,
         type: 3}
@@ -1293,6 +1308,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 4241956065459458215, guid: a4d2bcd0f63f47040b9ee9f8154b96f8,
+        type: 3}
+      propertyPath: m_TagString
+      value: IgnoreBone
+      objectReference: {fileID: 0}
     - target: {fileID: 4940309769317257123, guid: a4d2bcd0f63f47040b9ee9f8154b96f8,
         type: 3}
       propertyPath: m_Name
@@ -1343,6 +1363,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 7450443506182991955, guid: a4d2bcd0f63f47040b9ee9f8154b96f8,
+        type: 3}
+      propertyPath: m_TagString
+      value: IgnoreBone
+      objectReference: {fileID: 0}
     - target: {fileID: 8234015168616201375, guid: a4d2bcd0f63f47040b9ee9f8154b96f8,
         type: 3}
       propertyPath: m_Name
@@ -1352,6 +1377,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8234015168616201375, guid: a4d2bcd0f63f47040b9ee9f8154b96f8,
+        type: 3}
+      propertyPath: m_TagString
+      value: IgnoreBone
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a4d2bcd0f63f47040b9ee9f8154b96f8, type: 3}
@@ -1523,13 +1553,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d85479e58224aed44938f07c0db6d587, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  VELOCITY: 2
-  VELO_IN_AIR: 4
+  VELOCITY: 30
+  VELO_IN_AIR: 30
   JUMP_VELO: 5
   MAX_VELO: 5
   GRAVITY: -9.8
   rb: {fileID: 580133186}
-  RayLength: 0.675
+  RayLength: 0.8
 --- !u!95 &580133184
 Animator:
   serializedVersion: 3
@@ -1559,8 +1589,8 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.4
-  m_Height: 1.35
+  m_Radius: 0.2
+  m_Height: 1.6
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &580133186
