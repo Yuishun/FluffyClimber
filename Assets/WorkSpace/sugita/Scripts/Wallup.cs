@@ -31,6 +31,8 @@ public class Wallup : MonoBehaviour
                 new Vector3(0f, -5f, -10f);
             _wall.transform.position =
                 new Vector3(0f, -20f, 0f);
+            _player.transform.position = 
+                new Vector3(0f, -2.5f, 0f);
 
         }
 
@@ -45,7 +47,8 @@ public class Wallup : MonoBehaviour
 
         else
         {
-            _player.transform.position = new Vector3(0f, -2.5f, 0f);
+            _player.transform.position =
+                   new Vector3(0f, -2.5f, 0f);
 
         }
     }
