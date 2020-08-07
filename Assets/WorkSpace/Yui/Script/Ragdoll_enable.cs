@@ -79,11 +79,11 @@ public class Ragdoll_enable : MonoBehaviour
             Getup();
         }
 
-        // デバッグ用　強制的にRagdoll状態にする
-        if(InputManager_y.IMIsButtonOn(InputManager_y.IM_BUTTON.JUMP))
+        if(Input.GetKeyDown(KeyCode.L))
         {
-            StartCoroutine(Ragdoll(true));
+            _rigids[0].RigidBody.velocity = new Vector3(10, 0, 0);
         }
+
     }
 
     private void LateUpdate()
@@ -126,9 +126,21 @@ public class Ragdoll_enable : MonoBehaviour
 
         foreach (RigidComponent rb in _rigids)
         {
-            rb.RigidBody.isKinematic = !active;
+            //if (rb.RigidBody.gameObject.tag != "IgnoreBone")
+                rb.RigidBody.isKinematic = !active;
             rb.Col.enabled = active;
         }
+        if (active)
+        {
+            Vector3 velocity = _rb.velocity;
+            velocity.z = 0;
+            yield return  new WaitForEndOfFrame();
+            foreach (RigidComponent rb in _rigids)
+            {
+                rb.RigidBody.velocity = velocity;
+            }
+        }
+
 
         _anim.enabled = !active;
         _rb.isKinematic = active;
