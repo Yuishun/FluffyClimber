@@ -6,6 +6,10 @@ public class Camera2 : MonoBehaviour
 {
     GameObject _player,_wall;
 
+   bool flag = false;
+   bool flag2 = false;
+   bool flag3 = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,12 +23,18 @@ public class Camera2 : MonoBehaviour
 
     }
 
-    bool flag = false;
-    bool flag2 = false;
-
     // Update is called once per frame
     void Update()
     {
+
+        if (_player.transform.position.y >= 19 && flag3 == false)
+        {
+            transform.position =
+            new Vector3(transform.position.x,
+            _player.transform.position.y + 8,
+            transform.position.z -4);
+            flag3 = true;
+        }
 
         if (_player.transform.position.x >= -6.5 && _player.transform.position.y >= 10 && flag2 == false)
         {
@@ -43,8 +53,12 @@ public class Camera2 : MonoBehaviour
             transform.position.z);
             flag = true;
         }
-        else
-            ;
+        else if (_player.transform.position.y < 0)
+        {
+            flag = false;
+            flag2 = false;
+        }
+        else;
     }
 
 }
