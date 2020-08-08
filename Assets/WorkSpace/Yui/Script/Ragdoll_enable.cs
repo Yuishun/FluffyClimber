@@ -79,11 +79,21 @@ public class Ragdoll_enable : MonoBehaviour
             Getup();
         }
 
-        if(Input.GetKeyDown(KeyCode.L))
-        {
-            _rigids[0].RigidBody.velocity = new Vector3(10, 0, 0);
-        }
+        if (Input.GetKeyDown(KeyCode.L))
+            Explosion();
+    }
 
+    private void FixedUpdate()
+    {
+        if(_rb.velocity.magnitude >= 0.001f)
+        {
+            foreach (RigidComponent rb in _rigids)
+            {
+                if (rb.RigidBody.gameObject.tag == "IgnoreBone")
+                    rb.RigidBody.AddForce(-_rb.velocity * 5);
+                    //rb.RigidBody.AddTorque(-_rb.velocity * 5);
+            }
+        }
     }
 
     private void LateUpdate()
@@ -92,7 +102,7 @@ public class Ragdoll_enable : MonoBehaviour
         if (_state != RagdollState.RagdolltoAnim1)            
             return;
 
-        _transforms[0].Transform.localPosition +=
+        _transforms[0].Transform.position = 
             _transforms[0].PrivPosition;        
         _state = RagdollState.RagdolltoAnim2;
     }
@@ -126,9 +136,12 @@ public class Ragdoll_enable : MonoBehaviour
 
         foreach (RigidComponent rb in _rigids)
         {
-            //if (rb.RigidBody.gameObject.tag != "IgnoreBone")
+            if (rb.RigidBody.gameObject.tag != "IgnoreBone")
+            {
                 rb.RigidBody.isKinematic = !active;
+            }
             rb.Col.enabled = active;
+            
         }
         if (active)
         {
@@ -157,16 +170,27 @@ public class Ragdoll_enable : MonoBehaviour
         _state = RagdollState.RagdolltoAnim1;       
 
         Transform child = transform.GetChild(0);    //Bone001(Hip)
-        // Rootの位置を設定
-        Vector3 pos = new Vector3(child.position.x,
-            child.position.y + _col.height / 2, 0);
 
         // Rootが動いた分の逆ベクトルを保管
-        _transforms[0].PrivPosition = transform.position - pos;
+        _transforms[0].PrivPosition = child.position;
 
-        transform.position = pos;
+        // Rootの位置を設定
+        transform.position = new Vector3(child.position.x,
+            child.position.y + _col.height / 2, 0);
 
         StartCoroutine(Ragdoll(false));
+    }
+
+    void Explosion()
+    {
+        StartCoroutine(Ragdoll(true));
+        foreach(RigidComponent rb in _rigids)
+        {
+            if(rb.Joint!=null)
+                rb.Joint.breakForce = 1;
+            rb.RigidBody.AddForce((rb.Col.transform.position - transform.position) * 100
+                , ForceMode.Impulse);
+        }
     }
 
     //Declare a class that will hold useful information for each body part
