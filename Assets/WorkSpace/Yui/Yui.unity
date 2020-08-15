@@ -711,12 +711,12 @@ PrefabInstance:
     - target: {fileID: -7986249860330243914, guid: a4d2bcd0f63f47040b9ee9f8154b96f8,
         type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: -7986249860330243914, guid: a4d2bcd0f63f47040b9ee9f8154b96f8,
         type: 3}
       propertyPath: m_TagString
-      value: IgnoreBone
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: -7441974810650164064, guid: a4d2bcd0f63f47040b9ee9f8154b96f8,
         type: 3}
@@ -756,7 +756,7 @@ PrefabInstance:
     - target: {fileID: -6895422888917978749, guid: a4d2bcd0f63f47040b9ee9f8154b96f8,
         type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: -6895422888917978749, guid: a4d2bcd0f63f47040b9ee9f8154b96f8,
         type: 3}
@@ -806,7 +806,7 @@ PrefabInstance:
     - target: {fileID: -5825075902232687266, guid: a4d2bcd0f63f47040b9ee9f8154b96f8,
         type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: -5339355619053426210, guid: a4d2bcd0f63f47040b9ee9f8154b96f8,
         type: 3}
@@ -816,7 +816,7 @@ PrefabInstance:
     - target: {fileID: -5339355619053426210, guid: a4d2bcd0f63f47040b9ee9f8154b96f8,
         type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: -5339355619053426210, guid: a4d2bcd0f63f47040b9ee9f8154b96f8,
         type: 3}
@@ -886,7 +886,7 @@ PrefabInstance:
     - target: {fileID: -2489501534724487998, guid: a4d2bcd0f63f47040b9ee9f8154b96f8,
         type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: -2489501534724487998, guid: a4d2bcd0f63f47040b9ee9f8154b96f8,
         type: 3}
@@ -966,7 +966,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: a4d2bcd0f63f47040b9ee9f8154b96f8,
         type: 3}
       propertyPath: m_Name
-      value: hito_model (2)
+      value: hito_model
       objectReference: {fileID: 0}
     - target: {fileID: -927199367670048503, guid: a4d2bcd0f63f47040b9ee9f8154b96f8,
         type: 3}
@@ -986,7 +986,7 @@ PrefabInstance:
     - target: {fileID: -490610061946023075, guid: a4d2bcd0f63f47040b9ee9f8154b96f8,
         type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 967571113732206428, guid: a4d2bcd0f63f47040b9ee9f8154b96f8,
         type: 3}
@@ -1056,7 +1056,7 @@ PrefabInstance:
     - target: {fileID: 2187449669427467095, guid: a4d2bcd0f63f47040b9ee9f8154b96f8,
         type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 2210963481323279187, guid: a4d2bcd0f63f47040b9ee9f8154b96f8,
         type: 3}
@@ -1131,7 +1131,7 @@ PrefabInstance:
     - target: {fileID: 3415570406647697114, guid: a4d2bcd0f63f47040b9ee9f8154b96f8,
         type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 4241956065459458215, guid: a4d2bcd0f63f47040b9ee9f8154b96f8,
         type: 3}
@@ -1141,7 +1141,7 @@ PrefabInstance:
     - target: {fileID: 4241956065459458215, guid: a4d2bcd0f63f47040b9ee9f8154b96f8,
         type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 4241956065459458215, guid: a4d2bcd0f63f47040b9ee9f8154b96f8,
         type: 3}
@@ -1156,7 +1156,7 @@ PrefabInstance:
     - target: {fileID: 4940309769317257123, guid: a4d2bcd0f63f47040b9ee9f8154b96f8,
         type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 6948445073764056742, guid: a4d2bcd0f63f47040b9ee9f8154b96f8,
         type: 3}
@@ -1196,7 +1196,7 @@ PrefabInstance:
     - target: {fileID: 7450443506182991955, guid: a4d2bcd0f63f47040b9ee9f8154b96f8,
         type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 7450443506182991955, guid: a4d2bcd0f63f47040b9ee9f8154b96f8,
         type: 3}
@@ -1211,7 +1211,7 @@ PrefabInstance:
     - target: {fileID: 8234015168616201375, guid: a4d2bcd0f63f47040b9ee9f8154b96f8,
         type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8234015168616201375, guid: a4d2bcd0f63f47040b9ee9f8154b96f8,
         type: 3}
@@ -1634,8 +1634,8 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.05
-  m_Height: 0.3
+  m_Radius: 0.04
+  m_Height: 0.27
   m_Direction: 0
   m_Center: {x: -0.13, y: 0, z: 0}
 --- !u!1001 &522174706
@@ -1975,6 +1975,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: a4d2bcd0f63f47040b9ee9f8154b96f8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -490610061946023075, guid: a4d2bcd0f63f47040b9ee9f8154b96f8,
         type: 3}
       propertyPath: m_Name
@@ -2247,7 +2252,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1, y: 1, z: 3}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &561188927
 MeshRenderer:
@@ -2865,8 +2870,8 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.05
-  m_Height: 0.3
+  m_Radius: 0.04
+  m_Height: 0.27
   m_Direction: 0
   m_Center: {x: -0.13, y: 0, z: 0}
 --- !u!1 &875443854
@@ -3663,7 +3668,7 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.03
-  m_Height: 0.4
+  m_Height: 0.37
   m_Direction: 0
   m_Center: {x: -0.15, y: 0, z: 0}
 --- !u!1 &1567759036 stripped
@@ -4472,7 +4477,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1935651888}
   serializedVersion: 2
-  m_Mass: 10
+  m_Mass: 1
   m_Drag: 0
   m_AngularDrag: Infinity
   m_UseGravity: 1
@@ -4720,7 +4725,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1, y: 1, z: 3}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &2033411970
 MeshRenderer:

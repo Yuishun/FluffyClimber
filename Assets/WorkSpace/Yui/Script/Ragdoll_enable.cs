@@ -19,8 +19,8 @@ public class Ragdoll_enable : MonoBehaviour
     Rigidbody _rb;
     CapsuleCollider _col;
     float _time;
-    /* 自分の全ての子供のRigidbodyとColliderを操作 */
 
+    /* 自分の全ての子供のRigidbodyとColliderを操作 */
     readonly List<RigidComponent> _rigids = new List<RigidComponent>();
     readonly List<TransformComponent> _transforms = new List<TransformComponent>();
 
@@ -48,8 +48,8 @@ public class Ragdoll_enable : MonoBehaviour
 
             rb.isKinematic = !isRagdoll;
             Collider col = rb.GetComponent<Collider>();
-            if(col != null)
-                col.enabled = isRagdoll;
+            //if(col != null)
+            //    col.enabled = isRagdoll;
             RigidComponent rC = new RigidComponent(rb, col);
             _rigids.Add(rC);
         }
@@ -73,7 +73,7 @@ public class Ragdoll_enable : MonoBehaviour
         if (_state == RagdollState.Ragdolled
             && _rigids[0].RigidBody.velocity.magnitude < 0.05f
             && Physics.Raycast(_transforms[0].Transform.position,
-            Vector3.down, 0.3f, ~LayerMask.GetMask("Player"))
+            Vector3.down, 0.3f, ~LayerMask.GetMask("Player_Root","Player_Bone"))
             )
         {
             Getup();
@@ -83,22 +83,22 @@ public class Ragdoll_enable : MonoBehaviour
             Explosion();
     }
 
-    private void FixedUpdate()
-    {
-        if(_rb.velocity.magnitude >= 0.001f)
-        {
-            foreach (RigidComponent rb in _rigids)
-            {
-                if (rb.RigidBody.gameObject.tag == "IgnoreBone")
-                    rb.RigidBody.AddForce(-_rb.velocity * 5);
-                    //rb.RigidBody.AddTorque(-_rb.velocity * 5);
-            }
-        }
-    }
+    //private void FixedUpdate()
+    //{
+    //    if(_rb.velocity.magnitude >= 0.001f)
+    //    {
+    //        foreach (RigidComponent rb in _rigids)
+    //        {
+    //            if (rb.RigidBody.gameObject.tag == "IgnoreBone")
+    //                rb.RigidBody.AddForce(-_rb.velocity * 5);
+    //                //rb.RigidBody.AddTorque(-_rb.velocity * 5);
+    //        }
+    //    }
+    //}
 
     private void LateUpdate()
     {
-        // 最初の1fでボーンの位置の修正を行う
+        // ラグドールからアニメーションへの遷移の最初の1fでボーンの位置の修正を行う
         if (_state != RagdollState.RagdolltoAnim1)            
             return;
 
@@ -112,7 +112,7 @@ public class Ragdoll_enable : MonoBehaviour
         if (!active)    //起き上がり時のみ
         {
             yield return null;  // ボーンの位置の更新のため1f待つ
-            foreach (TransformComponent t in _transforms)
+            foreach (TransformComponent t in _transforms)   // 現在ローカル位置を保存
             {
                 t.StoredPosition = t.Transform.localPosition;
                 t.StoredRotation = t.Transform.localRotation;
@@ -120,29 +120,32 @@ public class Ragdoll_enable : MonoBehaviour
             _time = 0;
             while (_time <= 1f)
             {
+                // 円形補完で位置と回転を戻していく
                 foreach (TransformComponent t in _transforms)
                 {
                     t.Transform.localPosition =
                         Vector3.Slerp(t.StoredPosition, t.DefaultPosition, _time);
                     t.Transform.localRotation =
                         Quaternion.Slerp(t.StoredRotation, t.DefaultRot, _time);
-
                 }
-                _time += 0.0333f;                
+                _time += 0.0333f;  
                 yield return null;
             }           
             yield return null;
         }
 
+        //_rigids[0].Col.enabled = active;
         foreach (RigidComponent rb in _rigids)
         {
             if (rb.RigidBody.gameObject.tag != "IgnoreBone")
             {
-                rb.RigidBody.isKinematic = !active;
+                rb.RigidBody.isKinematic = !active;                
             }
-            rb.Col.enabled = active;
-            
+            //else
+            //    rb.Col.enabled = active;
         }
+
+        // ラグドール時、慣性をボーンに適用する
         if (active)
         {
             Vector3 velocity = _rb.velocity;
@@ -171,7 +174,7 @@ public class Ragdoll_enable : MonoBehaviour
 
         Transform child = transform.GetChild(0);    //Bone001(Hip)
 
-        // Rootが動いた分の逆ベクトルを保管
+        // ボーン(Hip)のワールド座標を保存  ->  LateUpdateへ
         _transforms[0].PrivPosition = child.position;
 
         // Rootの位置を設定
@@ -181,16 +184,28 @@ public class Ragdoll_enable : MonoBehaviour
         StartCoroutine(Ragdoll(false));
     }
 
-    void Explosion()
+     void Explosion()
     {
-        StartCoroutine(Ragdoll(true));
-        foreach(RigidComponent rb in _rigids)
+        // ボーンが制御されるのでアニメーターを切る
+        _anim.enabled = false;
+        foreach (RigidComponent rb in _rigids)
         {
+            // 物理挙動をさせる
+            if (rb.RigidBody.gameObject.tag != "IgnoreBone")
+            {
+                rb.RigidBody.isKinematic = false;
+            }            
+
+            // 親子関係を切る
+            rb.RigidBody.transform.SetParent(transform);
+            // Jointを力を加えると壊れる状態に
             if(rb.Joint!=null)
                 rb.Joint.breakForce = 1;
-            rb.RigidBody.AddForce((rb.Col.transform.position - transform.position) * 100
-                , ForceMode.Impulse);
-        }
+            // 爆発方向に力を加える
+            rb.RigidBody.AddExplosionForce(30f, transform.position, 0, .01f, ForceMode.Impulse);
+        }        
+        // 起き上がらないようにする
+        this.enabled = false;
     }
 
     //Declare a class that will hold useful information for each body part
