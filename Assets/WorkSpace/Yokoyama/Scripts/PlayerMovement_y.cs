@@ -5,31 +5,33 @@ using static InputManager_y;
 
 public class PlayerMovement_y : MonoBehaviour
 {
-    [SerializeField] private float VELOCITY = 2.0f;
-    [SerializeField] private float VELO_IN_AIR = 4.0f;
+    [SerializeField] private float VELOCITY = 30.0f;
+    [SerializeField] private float VELO_IN_AIR = 30.0f;
+    [SerializeField] private float JUMP_IMPACT = 5f;
     [SerializeField] private float JUMP_VELO = 5f;
     [SerializeField] private float MAX_VELO = 5f;
     [SerializeField] private float DOWN_FORCE = -9.8f;
     [SerializeField] private Rigidbody rb = null;
 
-    [SerializeField] private float RayLength = 0.675f;
+    [SerializeField] private float RayLength = 0.84f;
 
     private Ragdoll_enable RagdollCtrl = null;
     private Animator Anim = null;
     private bool bGround = true;
 
     private float JumpTimer = 0;
+    private float RemainingTime = 0;
     const float TIME_UNIT = 1.0f / 60f;
-    const float JUMP_FRAME_MIN = 5f;
-    const float JUMP_FRAME_MAX = 20f;
+    [SerializeField] private float JUMP_TIME_MIN = 0.1f;
+    [SerializeField] private float JUMP_TIME_MAX = 0.75f;
 
     private enum JumpState
     {
-        ChargePower,
-        Impact,
+        HoldBtn,
+        ReleaseBtn,
         InAir,
     }
-    private JumpState jumpState = JumpState.ChargePower;
+    private JumpState jumpState = JumpState.HoldBtn;
 
 
     // Start is called before the first frame update
@@ -47,7 +49,7 @@ public class PlayerMovement_y : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Debug.Log("Ragdoll:" + RagdollCtrl.IsRagdoll);
+        //Debug.Log("Ragdoll:" + RagdollCtrl.IsRagdoll);
 
         if (!RagdollCtrl.IsRagdoll)
         {
@@ -92,12 +94,14 @@ public class PlayerMovement_y : MonoBehaviour
         //transform.position += vecDelta_;
         rb.AddForce(vecDelta_, ForceMode.Acceleration);
 
+        //  X方向速度制限
         Vector3 currentVelocity = rb.velocity;
         if(Mathf.Abs(currentVelocity.x) >= MAX_VELO)
         {
             currentVelocity.x = Mathf.Sign(currentVelocity.x) * MAX_VELO;
             rb.velocity = currentVelocity;
         }
+
 
         Debug.DrawLine(transform.position, transform.position + Vector3.down * RayLength);
     }
@@ -109,7 +113,8 @@ public class PlayerMovement_y : MonoBehaviour
             if (IMIsButtonOn(IM_BUTTON.JUMP))
             {
                 JumpTimer = 0;
-                jumpState = JumpState.ChargePower;
+                jumpState = JumpState.HoldBtn;
+                rb.AddForce(Vector3.up * JUMP_IMPACT, ForceMode.Impulse);
                 bGround = false;
             }
         }
@@ -117,32 +122,42 @@ public class PlayerMovement_y : MonoBehaviour
         {
             switch (jumpState)
             {
-                case JumpState.ChargePower:
-                    if (IMKeepButtonOn(IM_BUTTON.JUMP))
-                        JumpTimer += Time.deltaTime;
-                    else
-                        jumpState = JumpState.Impact;
+                case JumpState.HoldBtn:
+                    rb.AddForce(Vector3.up * JUMP_VELO, ForceMode.Acceleration);
 
-                    if (JumpTimer >= TIME_UNIT * JUMP_FRAME_MAX)
-                        jumpState = JumpState.Impact;
+                    if (IMKeepButtonOn(IM_BUTTON.JUMP))
+                    {
+                        JumpTimer += Time.fixedDeltaTime;
+                        if(JumpTimer >= JUMP_TIME_MAX)
+                        {
+                            RemainingTime = 0;
+                            jumpState = JumpState.ReleaseBtn;
+                        }
+                    }
+                    else
+                    {
+                        float _intermediateTime = (JUMP_TIME_MIN + JUMP_TIME_MAX) * 0.5f;
+                        RemainingTime = (JumpTimer <= JUMP_TIME_MIN) ? JUMP_TIME_MIN - JumpTimer : (JumpTimer <= _intermediateTime) ? _intermediateTime - JumpTimer : JUMP_TIME_MAX - JumpTimer;
+                        jumpState = JumpState.ReleaseBtn;
+                    }
 
                     break;
-                case JumpState.Impact:
-                    float jumpPower = 0f;
-                    if (JumpTimer <= TIME_UNIT * JUMP_FRAME_MIN)
-                        jumpPower = JUMP_VELO * 0.5f;
-                    else if (JumpTimer <= TIME_UNIT * (JUMP_FRAME_MIN + JUMP_FRAME_MAX) * 0.5f)
-                        jumpPower = JUMP_VELO * 0.75f;
-                    else
-                        jumpPower = JUMP_VELO;
 
-                    rb.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
-                    jumpState = JumpState.InAir;
+                case JumpState.ReleaseBtn:
+                    if(RemainingTime <= 0)
+                    {
+                        jumpState = JumpState.InAir;
+                        break;
+                    }
+
+                    RemainingTime -= Time.fixedDeltaTime;
+                    rb.AddForce(Vector3.up * JUMP_VELO, ForceMode.Acceleration);
+
                     break;
                 case JumpState.InAir:
                     Ray ray_ = new Ray(transform.position, Vector3.down);
                     RaycastHit hitInfo_;
-                    int layerMask_ = ~(1 << 8);
+                    int layerMask_ = ~( (1 << 8) | (1 << 9));
 
                     if (Physics.Raycast(ray_, out hitInfo_, RayLength, layerMask_))
                     {
@@ -153,6 +168,14 @@ public class PlayerMovement_y : MonoBehaviour
                     }
                     break;
             }
+        }
+
+        //  Y方向速度制限
+        Vector3 currentVelocity = rb.velocity;
+        if(Mathf.Abs(currentVelocity.y) >= MAX_VELO)
+        {
+            currentVelocity.y = Mathf.Sign(currentVelocity.y) * MAX_VELO;
+            rb.velocity = currentVelocity;
         }
     }
 
