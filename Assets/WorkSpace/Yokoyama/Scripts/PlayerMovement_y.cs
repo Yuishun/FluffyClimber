@@ -12,10 +12,16 @@ public class PlayerMovement_y : MonoBehaviour
     [SerializeField] private float MAX_VELO = 5f;
     [SerializeField] private float DOWN_FORCE = -9.8f;
     [SerializeField] private Rigidbody rb = null;
+    [SerializeField] private Rigidbody rbL;
+    [SerializeField] private Rigidbody rbR;
+
 
     [SerializeField] private float RayLength = 0.84f;
+    [SerializeField] private float XRayLength = 0.2f;
 
     private Ragdoll_enable RagdollCtrl = null;
+    private bool bCrouch = false;
+
     private Animator Anim = null;
     private bool bGround = true;
 
@@ -44,7 +50,8 @@ public class PlayerMovement_y : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Debug.DrawLine(transform.position, transform.position + Vector3.down * RayLength);
+        Debug.DrawLine(transform.position, transform.position + Vector3.right * XRayLength);
     }
 
     private void FixedUpdate()
@@ -56,19 +63,38 @@ public class PlayerMovement_y : MonoBehaviour
             NormalUpdate();
             JumpUpdate();
         }
+
+        //  しゃがみ
+        if (Input.GetKey(KeyCode.LeftControl))
+        {
+            if (!bCrouch && bGround)
+            {
+                RagdollCtrl.canGetup = false;
+                RagdollCtrl.Squat();
+                bCrouch = true;
+            }
+        }
+        else
+        {
+            if (bCrouch)
+            {
+                RagdollCtrl.canGetup = true;
+                bCrouch = false;
+            }
+        }
+
+        //  腕上げ
+        if (Input.GetKey(KeyCode.UpArrow))
+        {
+            rbL.AddForce(Vector3.up * 100);
+            rbR.AddForce(Vector3.up * 100);
+        }
     }
 
 
     //  非ラグドール時の移動処理
     private void NormalUpdate()
     {
-        //  ラグドール化
-        if(Input.GetKeyDown(KeyCode.LeftControl))
-        {
-            RagdollCtrl.StartCoroutine(RagdollCtrl.Ragdoll(true));
-        }
-
-
         Vector3 vecDelta_ = Vector3.zero;
 
         //  左右移動
@@ -101,16 +127,22 @@ public class PlayerMovement_y : MonoBehaviour
             currentVelocity.x = Mathf.Sign(currentVelocity.x) * MAX_VELO;
             rb.velocity = currentVelocity;
         }
-
-
-        Debug.DrawLine(transform.position, transform.position + Vector3.down * RayLength);
     }
 
     private void JumpUpdate()
     {
         if (bGround)
         {
-            if (IMIsButtonOn(IM_BUTTON.JUMP))
+            Ray ray_ = new Ray(transform.position, Vector3.down);
+            RaycastHit hitInfo_;
+            int layerMask_ = ~((1 << 8) | (1 << 9));
+
+            if (!Physics.Raycast(ray_, out hitInfo_, RayLength, layerMask_))
+            {
+                jumpState = JumpState.InAir;
+                bGround = false;
+            }
+            else if (IMIsButtonOn(IM_BUTTON.JUMP))
             {
                 JumpTimer = 0;
                 jumpState = JumpState.HoldBtn;
@@ -155,17 +187,6 @@ public class PlayerMovement_y : MonoBehaviour
 
                     break;
                 case JumpState.InAir:
-                    Ray ray_ = new Ray(transform.position, Vector3.down);
-                    RaycastHit hitInfo_;
-                    int layerMask_ = ~( (1 << 8) | (1 << 9));
-
-                    if (Physics.Raycast(ray_, out hitInfo_, RayLength, layerMask_))
-                    {
-                        //if (rb.velocity.y < 0)
-                        //{
-                            bGround = true;
-                        //}
-                    }
                     break;
             }
         }
@@ -176,6 +197,56 @@ public class PlayerMovement_y : MonoBehaviour
         {
             currentVelocity.y = Mathf.Sign(currentVelocity.y) * MAX_VELO;
             rb.velocity = currentVelocity;
+        }
+    }
+
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(!bGround)
+        {
+            Ray ray_ = new Ray(transform.position, Vector3.down);
+            RaycastHit hitInfo_;
+            int layerMask_ = ~((1 << 8) | (1 << 9));
+
+            if (Physics.Raycast(ray_, out hitInfo_, RayLength, layerMask_))
+            {
+                bGround = true;
+                return;
+            }
+
+            float _veloX = rb.velocity.x;
+            if(_veloX < 0 || Input.GetKey(KeyCode.A))
+            {
+                ray_.direction = Vector3.right * -1;
+            }
+            else if(_veloX > 0 || Input.GetKey(KeyCode.D))
+            {
+                ray_.direction = Vector3.right;
+            }
+
+            if (Physics.Raycast(ray_, out hitInfo_, RayLength, layerMask_))
+            {
+                bGround = true;
+                RagdollCtrl.StartCoroutine(RagdollCtrl.Ragdoll(true));
+                return;
+            }
+        }
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if(!bGround)
+        {
+            Ray ray_ = new Ray(transform.position, Vector3.down);
+            RaycastHit hitInfo_;
+            int layerMask_ = ~((1 << 8) | (1 << 9));
+
+            if (Physics.Raycast(ray_, out hitInfo_, RayLength, layerMask_))
+            {
+                bGround = true;
+                return;
+            }
         }
     }
 
