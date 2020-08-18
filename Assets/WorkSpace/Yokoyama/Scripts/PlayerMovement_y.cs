@@ -17,6 +17,7 @@ public class PlayerMovement_y : MonoBehaviour
 
 
     [SerializeField] private float RayLength = 0.84f;
+    [SerializeField] private float XRayLength = 0.2f;
 
     private Ragdoll_enable RagdollCtrl = null;
     private bool bCrouch = false;
@@ -49,7 +50,8 @@ public class PlayerMovement_y : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Debug.DrawLine(transform.position, transform.position + Vector3.down * RayLength);
+        Debug.DrawLine(transform.position, transform.position + Vector3.right * XRayLength);
     }
 
     private void FixedUpdate()
@@ -125,9 +127,6 @@ public class PlayerMovement_y : MonoBehaviour
             currentVelocity.x = Mathf.Sign(currentVelocity.x) * MAX_VELO;
             rb.velocity = currentVelocity;
         }
-
-
-        Debug.DrawLine(transform.position, transform.position + Vector3.down * RayLength);
     }
 
     private void JumpUpdate()
@@ -188,17 +187,6 @@ public class PlayerMovement_y : MonoBehaviour
 
                     break;
                 case JumpState.InAir:
-                    Ray ray_ = new Ray(transform.position, Vector3.down);
-                    RaycastHit hitInfo_;
-                    int layerMask_ = ~( (1 << 8) | (1 << 9));
-
-                    if (Physics.Raycast(ray_, out hitInfo_, RayLength, layerMask_))
-                    {
-                        //if (rb.velocity.y < 0)
-                        //{
-                            bGround = true;
-                        //}
-                    }
                     break;
             }
         }
@@ -209,6 +197,56 @@ public class PlayerMovement_y : MonoBehaviour
         {
             currentVelocity.y = Mathf.Sign(currentVelocity.y) * MAX_VELO;
             rb.velocity = currentVelocity;
+        }
+    }
+
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(!bGround)
+        {
+            Ray ray_ = new Ray(transform.position, Vector3.down);
+            RaycastHit hitInfo_;
+            int layerMask_ = ~((1 << 8) | (1 << 9));
+
+            if (Physics.Raycast(ray_, out hitInfo_, RayLength, layerMask_))
+            {
+                bGround = true;
+                return;
+            }
+
+            float _veloX = rb.velocity.x;
+            if(_veloX < 0 || Input.GetKey(KeyCode.A))
+            {
+                ray_.direction = Vector3.right * -1;
+            }
+            else if(_veloX > 0 || Input.GetKey(KeyCode.D))
+            {
+                ray_.direction = Vector3.right;
+            }
+
+            if (Physics.Raycast(ray_, out hitInfo_, RayLength, layerMask_))
+            {
+                bGround = true;
+                RagdollCtrl.StartCoroutine(RagdollCtrl.Ragdoll(true));
+                return;
+            }
+        }
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if(!bGround)
+        {
+            Ray ray_ = new Ray(transform.position, Vector3.down);
+            RaycastHit hitInfo_;
+            int layerMask_ = ~((1 << 8) | (1 << 9));
+
+            if (Physics.Raycast(ray_, out hitInfo_, RayLength, layerMask_))
+            {
+                bGround = true;
+                return;
+            }
         }
     }
 
