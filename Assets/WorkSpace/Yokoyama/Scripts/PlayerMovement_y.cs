@@ -170,10 +170,10 @@ public class PlayerMovement_y : MonoBehaviour
 
                     if (Physics.Raycast(ray_, out hitInfo_, RayLength, layerMask_))
                     {
-                        if (rb.velocity.y < 0)
-                        {
+                        //if (rb.velocity.y < 0)
+                        //{
                             bGround = true;
-                        }
+                        //}
                     }
                     break;
             }
