@@ -19,6 +19,8 @@ public class PlayerMovement_y : MonoBehaviour
     [SerializeField] private float RayLength = 0.84f;
 
     private Ragdoll_enable RagdollCtrl = null;
+    private bool bCrouch = false;
+
     private Animator Anim = null;
     private bool bGround = true;
 
@@ -60,7 +62,27 @@ public class PlayerMovement_y : MonoBehaviour
             JumpUpdate();
         }
 
-        if(Input.GetKey(KeyCode.UpArrow))
+        //  しゃがみ
+        if (Input.GetKey(KeyCode.LeftControl))
+        {
+            if (!bCrouch)
+            {
+                RagdollCtrl.canGetup = false;
+                RagdollCtrl.StartCoroutine(RagdollCtrl.Ragdoll(true));
+                bCrouch = true;
+            }
+        }
+        else
+        {
+            if (bCrouch)
+            {
+                RagdollCtrl.canGetup = true;
+                bCrouch = false;
+            }
+        }
+
+        //  腕上げ
+        if (Input.GetKey(KeyCode.UpArrow))
         {
             rbL.AddForce(Vector3.up * 100);
             rbR.AddForce(Vector3.up * 100);
@@ -71,13 +93,6 @@ public class PlayerMovement_y : MonoBehaviour
     //  非ラグドール時の移動処理
     private void NormalUpdate()
     {
-        //  ラグドール化
-        if(Input.GetKeyDown(KeyCode.LeftControl))
-        {
-            RagdollCtrl.StartCoroutine(RagdollCtrl.Ragdoll(true));
-        }
-
-
         Vector3 vecDelta_ = Vector3.zero;
 
         //  左右移動
