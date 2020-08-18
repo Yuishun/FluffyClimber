@@ -65,10 +65,10 @@ public class PlayerMovement_y : MonoBehaviour
         //  しゃがみ
         if (Input.GetKey(KeyCode.LeftControl))
         {
-            if (!bCrouch)
+            if (!bCrouch && bGround)
             {
                 RagdollCtrl.canGetup = false;
-                RagdollCtrl.StartCoroutine(RagdollCtrl.Ragdoll(true));
+                RagdollCtrl.Squat();
                 bCrouch = true;
             }
         }
@@ -134,7 +134,16 @@ public class PlayerMovement_y : MonoBehaviour
     {
         if (bGround)
         {
-            if (IMIsButtonOn(IM_BUTTON.JUMP))
+            Ray ray_ = new Ray(transform.position, Vector3.down);
+            RaycastHit hitInfo_;
+            int layerMask_ = ~((1 << 8) | (1 << 9));
+
+            if (!Physics.Raycast(ray_, out hitInfo_, RayLength, layerMask_))
+            {
+                jumpState = JumpState.InAir;
+                bGround = false;
+            }
+            else if (IMIsButtonOn(IM_BUTTON.JUMP))
             {
                 JumpTimer = 0;
                 jumpState = JumpState.HoldBtn;
