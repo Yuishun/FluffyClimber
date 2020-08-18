@@ -14,6 +14,7 @@ public class Ragdoll_enable : MonoBehaviour
         get { return isRagdoll; }
     }
     RagdollState _state;
+    public bool canGetup = true;
 
     Animator _anim;
     Rigidbody _rb;
@@ -25,6 +26,10 @@ public class Ragdoll_enable : MonoBehaviour
     readonly List<TransformComponent> _transforms = new List<TransformComponent>();
 
 
+    private void Awake()
+    {
+        Application.targetFrameRate = 60;
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -47,10 +52,7 @@ public class Ragdoll_enable : MonoBehaviour
             }
 
             rb.isKinematic = !isRagdoll;
-            Collider col = rb.GetComponent<Collider>();
-            //if(col != null)
-            //    col.enabled = isRagdoll;
-            RigidComponent rC = new RigidComponent(rb, col);
+            RigidComponent rC = new RigidComponent(rb);
             _rigids.Add(rC);
         }
         foreach(Transform tra in transforms)
@@ -68,9 +70,9 @@ public class Ragdoll_enable : MonoBehaviour
 
     private void Update()
     {
-        // 現在Ragdoll状態かつ、速度が出ていない時かつ、
-        // 地面に設置しているとき　起き上がる
-        if (_state == RagdollState.Ragdolled
+        // 現在Ragdoll状態かつ、起き上がりフラグが立っているかつ、
+        // 速度が出ていない時かつ、地面に設置しているとき　起き上がる
+        if (_state == RagdollState.Ragdolled && canGetup
             && _rigids[0].RigidBody.velocity.magnitude < 0.05f
             && Physics.Raycast(_transforms[0].Transform.position,
             Vector3.down, 0.3f, ~LayerMask.GetMask("Player_Root","Player_Bone"))
@@ -80,21 +82,10 @@ public class Ragdoll_enable : MonoBehaviour
         }
 
         if (Input.GetKeyDown(KeyCode.L))
-            Explosion();
+            //Explosion();
+            Squat();
     }
 
-    //private void FixedUpdate()
-    //{
-    //    if(_rb.velocity.magnitude >= 0.001f)
-    //    {
-    //        foreach (RigidComponent rb in _rigids)
-    //        {
-    //            if (rb.RigidBody.gameObject.tag == "IgnoreBone")
-    //                rb.RigidBody.AddForce(-_rb.velocity * 5);
-    //                //rb.RigidBody.AddTorque(-_rb.velocity * 5);
-    //        }
-    //    }
-    //}
 
     private void LateUpdate()
     {
@@ -147,13 +138,16 @@ public class Ragdoll_enable : MonoBehaviour
 
         // ラグドール時、慣性をボーンに適用する
         if (active)
-        {
+        {            
             Vector3 velocity = _rb.velocity;
-            velocity.z = 0;
-            yield return  new WaitForEndOfFrame();
-            foreach (RigidComponent rb in _rigids)
+            if (velocity != Vector3.zero)   // ベクトルが 0 でないとき
             {
-                rb.RigidBody.velocity = velocity;
+                velocity.z = 0;
+                yield return new WaitForEndOfFrame();
+                foreach (RigidComponent rb in _rigids)
+                {
+                    rb.RigidBody.velocity = velocity;
+                }
             }
         }
 
@@ -182,6 +176,12 @@ public class Ragdoll_enable : MonoBehaviour
             child.position.y + _col.height / 2, 0);
 
         StartCoroutine(Ragdoll(false));
+    }
+
+    void Squat()
+    {
+        _rb.velocity = Vector3.zero;
+        StartCoroutine(Ragdoll(true));
     }
 
      void Explosion()
@@ -235,7 +235,7 @@ public class Ragdoll_enable : MonoBehaviour
         public readonly Vector3 ConnectedAnchorDefault;
         public readonly Collider Col;
 
-        public RigidComponent(Rigidbody rigid, Collider col)
+        public RigidComponent(Rigidbody rigid)
         {
             RigidBody = rigid;
             Joint = rigid.GetComponent<CharacterJoint>();
@@ -243,7 +243,7 @@ public class Ragdoll_enable : MonoBehaviour
                 ConnectedAnchorDefault = Joint.connectedAnchor;
             else
                 ConnectedAnchorDefault = Vector3.zero;
-            Col = col;
+            Col = rigid.GetComponent<Collider>();
         }
     }
 
