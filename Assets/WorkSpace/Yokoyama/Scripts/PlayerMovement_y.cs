@@ -12,6 +12,9 @@ public class PlayerMovement_y : MonoBehaviour
     [SerializeField] private float MAX_VELO = 5f;
     [SerializeField] private float DOWN_FORCE = -9.8f;
     [SerializeField] private Rigidbody rb = null;
+    [SerializeField] private Rigidbody rbL;
+    [SerializeField] private Rigidbody rbR;
+
 
     [SerializeField] private float RayLength = 0.84f;
 
@@ -55,6 +58,12 @@ public class PlayerMovement_y : MonoBehaviour
         {
             NormalUpdate();
             JumpUpdate();
+        }
+
+        if(Input.GetKey(KeyCode.UpArrow))
+        {
+            rbL.AddForce(Vector3.up * 100);
+            rbR.AddForce(Vector3.up * 100);
         }
     }
 
