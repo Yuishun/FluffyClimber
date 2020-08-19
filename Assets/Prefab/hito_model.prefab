@@ -426,10 +426,17 @@ MonoBehaviour:
   VELO_IN_AIR: 30
   JUMP_IMPACT: 5
   JUMP_VELO: 5
-  MAX_VELO: 5
+  MAX_VELO_X: 3
+  MAX_VELO_Y: 5
   DOWN_FORCE: -9.8
   rb: {fileID: 6722594807624580652}
+  rbL: {fileID: 6722594808673549941}
+  rbR: {fileID: 6722594808971280209}
   RayLength: 0.84
+  BoxXLength: 0.2
+  BoxYLength: 0.35
+  BoxZLength: 0.2
+  BoxYOffset: -0.2
   JUMP_TIME_MIN: 0.1
   JUMP_TIME_MAX: 0.75
 --- !u!114 &6722594807624580691
