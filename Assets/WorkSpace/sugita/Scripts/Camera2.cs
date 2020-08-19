@@ -13,7 +13,8 @@ public class Camera2 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _player = GameObject.Find("Sphere");
+        //_player = GameObject.Find("Sphere");
+        _player = GameObject.Find("hito_model");
         _wall = GameObject.Find("Cube");
 
         transform.position =
@@ -27,12 +28,12 @@ public class Camera2 : MonoBehaviour
     void Update()
     {
 
-        if (_player.transform.position.y >= 19 && flag3 == false)
+        if (_player.transform.position.y >= 18 && flag3 == false)
         {
             transform.position =
             new Vector3(transform.position.x,
             _player.transform.position.y + 8,
-            transform.position.z -4);
+            transform.position.z - 4);
             flag3 = true;
         }
 
