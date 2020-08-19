@@ -28,6 +28,7 @@ public class PlayerMovement_y : MonoBehaviour
 
     private Animator Anim = null;
     private bool bGround = true;
+    public bool bGrounded { get { return bGround; } }
 
     private float JumpTimer = 0;
     private float RemainingTime = 0;

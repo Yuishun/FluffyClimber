@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class MoveFloor : MonoBehaviour
 {
-    Vector3 
-
     [SerializeField]
     Vector3 B_Direction = Vector3.zero;
     [SerializeField]
