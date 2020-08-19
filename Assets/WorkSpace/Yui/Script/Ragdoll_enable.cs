@@ -20,6 +20,7 @@ public class Ragdoll_enable : MonoBehaviour
     Rigidbody _rb;
     CapsuleCollider _col;
     float _time;
+    Ray _ray;
 
     /* 自分の全ての子供のRigidbodyとColliderを操作 */
     readonly List<RigidComponent> _rigids = new List<RigidComponent>();
@@ -38,6 +39,7 @@ public class Ragdoll_enable : MonoBehaviour
         _col = GetComponent<CapsuleCollider>();
         _col.enabled = !isRagdoll;
         _state = BooltoState(isRagdoll);
+        _ray = new Ray(transform.position, Vector3.down);
 
         Rigidbody[] rigidbodies = GetComponentsInChildren<Rigidbody>();
         Transform[] transforms= GetComponentsInChildren<Transform>();
@@ -70,20 +72,21 @@ public class Ragdoll_enable : MonoBehaviour
 
     private void Update()
     {
+        _ray.origin = _transforms[0].Transform.position + Vector3.up * 0.2f;
         // 現在Ragdoll状態かつ、起き上がりフラグが立っているかつ、
         // 速度が出ていない時かつ、地面に設置しているとき　起き上がる
         if (_state == RagdollState.Ragdolled && canGetup
             && _rigids[0].RigidBody.velocity.magnitude < 0.05f
-            && Physics.Raycast(_transforms[0].Transform.position,
-            Vector3.down, 0.3f, ~LayerMask.GetMask("Player_Root","Player_Bone"))
+            && Physics.SphereCast(_ray, 0.2f,
+             0.3f, ~LayerMask.GetMask("Player_Root","Player_Bone"))
             )
         {
             Getup();
         }
 
         if (Input.GetKeyDown(KeyCode.L))
-            //Explosion();
-            Squat();
+            Explosion();
+            //Squat();
     }
 
 
@@ -119,7 +122,7 @@ public class Ragdoll_enable : MonoBehaviour
                     t.Transform.localRotation =
                         Quaternion.Slerp(t.StoredRotation, t.DefaultRot, _time);
                 }
-                _time += 0.0333f;  
+                _time += Time.deltaTime * 2;  
                 yield return null;
             }           
             yield return null;
@@ -178,13 +181,13 @@ public class Ragdoll_enable : MonoBehaviour
         StartCoroutine(Ragdoll(false));
     }
 
-    void Squat()
+    public void Squat()
     {
         _rb.velocity = Vector3.zero;
         StartCoroutine(Ragdoll(true));
     }
 
-     void Explosion()
+    public void Explosion()
     {
         // ボーンが制御されるのでアニメーターを切る
         _anim.enabled = false;
