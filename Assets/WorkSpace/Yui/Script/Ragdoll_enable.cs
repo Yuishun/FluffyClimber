@@ -122,7 +122,7 @@ public class Ragdoll_enable : MonoBehaviour
                     t.Transform.localRotation =
                         Quaternion.Slerp(t.StoredRotation, t.DefaultRot, _time);
                 }
-                _time += 0.0333f;  
+                _time += Time.deltaTime * 2;  
                 yield return null;
             }           
             yield return null;
@@ -187,7 +187,7 @@ public class Ragdoll_enable : MonoBehaviour
         StartCoroutine(Ragdoll(true));
     }
 
-     void Explosion()
+    public void Explosion()
     {
         // ボーンが制御されるのでアニメーターを切る
         _anim.enabled = false;
