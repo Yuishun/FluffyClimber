@@ -218,6 +218,21 @@ PrefabInstance:
       propertyPath: RayLength
       value: 0.84
       objectReference: {fileID: 0}
+    - target: {fileID: 6722594807624580688, guid: f99daa51a2a89e841bf20a06dcfcdbd6,
+        type: 3}
+      propertyPath: JUMP_VELO
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6722594807624580688, guid: f99daa51a2a89e841bf20a06dcfcdbd6,
+        type: 3}
+      propertyPath: VELO_IN_AIR
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6722594807624580688, guid: f99daa51a2a89e841bf20a06dcfcdbd6,
+        type: 3}
+      propertyPath: VELOCITY
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 6722594807624580691, guid: f99daa51a2a89e841bf20a06dcfcdbd6,
         type: 3}
       propertyPath: canGetup

@@ -24,7 +24,7 @@ public class PlayerMovement_y : MonoBehaviour
     [SerializeField] private float BoxYOffset = 0.2f;
 
     private Ragdoll_enable RagdollCtrl = null;
-    public Ragdoll_enable Ragdollctrl { get { return RagdollCtrl; } }
+    public bool bRagdolled { get { return RagdollCtrl.IsRagdoll; } }
     private bool bCrouch = false;
 
     private Animator Anim = null;
@@ -141,11 +141,7 @@ public class PlayerMovement_y : MonoBehaviour
     {
         if (bGround)
         {
-            Ray ray_ = new Ray(transform.position, Vector3.down);
-            RaycastHit hitInfo_;
-            int layerMask_ = ~((1 << 8) | (1 << 9));
-
-            if (!Physics.Raycast(ray_, out hitInfo_, RayLength, layerMask_))
+            if (!CheckGround())
             {
                 jumpState = JumpState.InAir;
                 bGround = false;
@@ -160,6 +156,17 @@ public class PlayerMovement_y : MonoBehaviour
         }
         else
         {
+            if(IMIsButtonOn(IM_BUTTON.JUMP))
+            {
+                if(CheckGround())
+                {
+                    JumpTimer = 0;
+                    jumpState = JumpState.HoldBtn;
+                    rb.AddForce(Vector3.up * JUMP_IMPACT, ForceMode.Impulse);
+                    bGround = false;
+                }
+            }
+
             switch (jumpState)
             {
                 case JumpState.HoldBtn:
@@ -213,16 +220,16 @@ public class PlayerMovement_y : MonoBehaviour
     {
         if(!bGround)
         {
-            Vector3 _rayOrigin = rb.position;
-            Ray ray_ = new Ray(_rayOrigin, Vector3.down);
-            RaycastHit hitInfo_;
-            int layerMask_ = ~((1 << 8) | (1 << 9));
-
-            if (Physics.Raycast(ray_, out hitInfo_, RayLength, layerMask_))
+            if(CheckGround())
             {
                 bGround = true;
                 return;
             }
+
+            Vector3 _rayOrigin = rb.position;
+            Ray ray_ = new Ray(_rayOrigin, Vector3.down);
+            RaycastHit hitInfo_;
+            int layerMask_ = ~((1 << 8) | (1 << 9));
 
             float _veloX = rb.velocity.x;
             if(_veloX < 0 || Input.GetKey(KeyCode.A))
@@ -255,15 +262,12 @@ public class PlayerMovement_y : MonoBehaviour
     {
         if(!bGround)
         {
-            Ray ray_ = new Ray(transform.position, Vector3.down);
-            RaycastHit hitInfo_;
-            int layerMask_ = ~((1 << 8) | (1 << 9));
-
-            if (Physics.Raycast(ray_, out hitInfo_, RayLength, layerMask_))
+            if (CheckGround())
             {
                 bGround = true;
                 return;
             }
+
         }
     }
 
@@ -272,5 +276,13 @@ public class PlayerMovement_y : MonoBehaviour
         Vector3 _pos = transform.position;
         _pos.y += BoxYOffset;
         Gizmos.DrawWireCube(_pos, new Vector3(BoxXLength*2, BoxYLength*2, BoxZLength*2));
+    }
+
+    private bool CheckGround()
+    {
+        Ray ray_ = new Ray(transform.position, Vector3.down);
+        int layerMask_ = ~((1 << 8) | (1 << 9));
+
+        return Physics.SphereCast(ray_, 0.2f, 0.64f, layerMask_, QueryTriggerInteraction.Ignore);
     }
 }
