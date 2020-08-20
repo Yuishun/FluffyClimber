@@ -24,6 +24,7 @@ public class PlayerMovement_y : MonoBehaviour
     [SerializeField] private float BoxYOffset = 0.2f;
 
     private Ragdoll_enable RagdollCtrl = null;
+    public Ragdoll_enable Ragdollctrl { get { return RagdollCtrl; } }
     public bool bRagdolled { get { return RagdollCtrl.IsRagdoll; } }
     private bool bCrouch = false;
 
