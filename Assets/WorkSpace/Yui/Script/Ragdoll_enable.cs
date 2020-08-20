@@ -18,6 +18,7 @@ public class Ragdoll_enable : MonoBehaviour
 
     Animator _anim;
     Rigidbody _rb;
+    public Rigidbody rb { get { return _rb; } }
     CapsuleCollider _col;
     float _time;
     Ray _ray;
@@ -181,10 +182,18 @@ public class Ragdoll_enable : MonoBehaviour
         StartCoroutine(Ragdoll(false));
     }
 
-    public void Squat()
+    public void Squat() // しゃがみ
     {
         _rb.velocity = Vector3.zero;
         StartCoroutine(Ragdoll(true));
+    }
+
+    public void AllRagdollPlusVelocity(Vector3 vel)
+    {
+        foreach(RigidComponent rb in _rigids)
+        {
+            rb.RigidBody.velocity += vel;
+        }
     }
 
     public void Explosion()
