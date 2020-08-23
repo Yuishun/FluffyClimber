@@ -37,8 +37,7 @@ public class Lift_Default : MonoBehaviour
         startPos = transform.position;
         DirPos.Insert(0, Vector3.zero); // 初期地点を加える
         if (useTrigger != null)         // Triggerを使うなら
-        {
-            useTrigger.lift = this;
+        {            
             dontChange = true;
         }
         Start2();
@@ -51,6 +50,12 @@ public class Lift_Default : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if(useTrigger!=null)
+        {
+            if (useTrigger.IsOnPlayer != isOnPlayer)
+                isOnPlayer = useTrigger.IsOnPlayer;
+        }
+
         if (!isOnPlayer)    // 通常時
         {
             if (Speed <= 0) // スピードが0なら処理を止める
@@ -152,6 +157,7 @@ public class Lift_Default : MonoBehaviour
             || collision.gameObject.layer == LayerMask.NameToLayer("Player_Bone"))
         {
             Onplayer = null;
+            isOnPlayer = false;
         }
     }
     // ***************************************************************************
