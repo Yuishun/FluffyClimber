@@ -15,7 +15,7 @@ public class Wallup : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _player = GameObject.Find("Sphere");
+        _player = GameObject.Find("hito_model");
         _wall = GameObject.Find("Cube");
         _Maincamera = GameObject.Find("Main Camera");
     }
@@ -36,7 +36,7 @@ public class Wallup : MonoBehaviour
 
         }
 
-        if (_player.transform.position.y - 10.5 >= transform.position.y)
+        if (_player.transform.position.y - 10.83 >= transform.position.y)
         {
             transform.position =
         new Vector3(transform.position.x,
