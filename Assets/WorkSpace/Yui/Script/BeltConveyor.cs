@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class BeltConveyor : MonoBehaviour
 {
-    [Header("初期の進む方向")]
+    [Header("通常時の進む方向とスピード")]
     public Vector3 DirVec;
-    [Header("通常時のスピード")]
-    public float Speed;
+    [Header("通常時のUVスピード")]
+    public Vector2 uvSpeed;
 
-    [Header("変化後の進む方向")]
+    [Header("一度変化したら戻らなくする")]
+    public bool onceChange = true;
+    [Header("変化後の進む方向とスピード")]
     public Vector3 DirVec_P;
-    [Header("変化後のスピード")]
-    public float Speed_P;
+    [Header("変化後のUVスピード")]
+    public Vector2 uvSpeed_P;
 
     [Header("変化させない場合")]
     public bool dontChange;
@@ -26,10 +28,7 @@ public class BeltConveyor : MonoBehaviour
     {
         mat = GetComponent<Renderer>().material;
         mat.SetTextureScale("_MainTex", new Vector2(transform.localScale.x * 2, 1));
-        DirVec.Normalize();
-        DirVec_P.Normalize();
-        mat.SetFloat("_DirX", DirVec.x * Speed);
-        mat.SetFloat("_DirY", DirVec.y * Speed);
+        SetisOnPlayer(false);
     }
 
     // Update is called once per frame
@@ -38,7 +37,7 @@ public class BeltConveyor : MonoBehaviour
         if (Onplayer != null)
         {
             // プレイヤーに加える力を取得
-            Vector3 vec = isOnPlayer ? DirVec_P * Speed_P : DirVec * Speed;
+            Vector3 vec = isOnPlayer ? DirVec_P : DirVec;
             if (!Onplayer.Ragdollctrl.IsRagdoll)
             {
                 // 速度に補正を加える
@@ -54,6 +53,24 @@ public class BeltConveyor : MonoBehaviour
         }
     }
 
+    void SetisOnPlayer(bool mode)
+    {
+        if (mode)
+        {
+            if (!dontChange)
+            {
+                isOnPlayer = true;
+                mat.SetFloat("_DirX", uvSpeed_P.x);
+                mat.SetFloat("_DirY", uvSpeed_P.y);
+            }
+        }
+        else
+        {
+            isOnPlayer = false;
+            mat.SetFloat("_DirX", uvSpeed.x);
+            mat.SetFloat("_DirY", uvSpeed.y);
+        }
+    }
 
     // ***********************************************************************
     // 接触判定
@@ -67,12 +84,7 @@ public class BeltConveyor : MonoBehaviour
             if (p.bGrounded && p.transform.position.y > transform.position.y)
             {
                 Onplayer = p;
-                if (!dontChange)
-                {
-                    isOnPlayer = true;
-                    mat.SetFloat("_DirX", DirVec_P.x * Speed_P);
-                    mat.SetFloat("_DirY", DirVec_P.y * Speed_P);
-                }
+                SetisOnPlayer(true);
             }
         }
         // ボーンに当たった時
@@ -83,12 +95,7 @@ public class BeltConveyor : MonoBehaviour
             if (p.Ragdollctrl.IsRagdoll)
             {
                 Onplayer = p;
-                if (!dontChange)
-                {
-                    isOnPlayer = true;
-                    mat.SetFloat("_DirX", DirVec_P.x * Speed_P);
-                    mat.SetFloat("_DirY", DirVec_P.y * Speed_P);
-                }
+                SetisOnPlayer(true);
             }
         }
     }
@@ -99,7 +106,8 @@ public class BeltConveyor : MonoBehaviour
             || collision.gameObject.layer == LayerMask.NameToLayer("Player_Bone"))
         {
             Onplayer = null;
-            isOnPlayer = false;
+            if(!onceChange)
+                SetisOnPlayer(false);
         }
     }
     // ***************************************************************************

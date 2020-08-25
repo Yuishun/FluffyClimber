@@ -77,7 +77,7 @@ public class Ragdoll_enable : MonoBehaviour
         // 現在Ragdoll状態かつ、起き上がりフラグが立っているかつ、
         // 速度が出ていない時かつ、地面に設置しているとき　起き上がる
         if (_state == RagdollState.Ragdolled && canGetup
-            && _rigids[0].RigidBody.velocity.magnitude < 0.05f
+            && _rigids[0].RigidBody.velocity.magnitude < 0.07f
             && Physics.SphereCast(_ray, 0.2f,
              0.3f, ~LayerMask.GetMask("Player_Root","Player_Bone"))
             )
@@ -192,7 +192,8 @@ public class Ragdoll_enable : MonoBehaviour
     {
         foreach(RigidComponent rb in _rigids)
         {
-            rb.RigidBody.velocity += vel;
+            if(!rb.RigidBody.isKinematic)
+                rb.RigidBody.velocity += vel;
         }
     }
 
