@@ -285,4 +285,11 @@ public class PlayerMovement_y : MonoBehaviour
 
         return Physics.SphereCast(ray_, 0.2f, 0.64f, layerMask_, QueryTriggerInteraction.Ignore);
     }
+    private bool CheckGround(float rayLength)
+    {
+        Ray ray_ = new Ray(transform.position, Vector3.down);
+        int layerMask_ = ~((1 << 8) | (1 << 9));
+
+        return Physics.SphereCast(ray_, 0.2f, rayLength, layerMask_, QueryTriggerInteraction.Ignore);
+    }
 }
