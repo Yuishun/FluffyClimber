@@ -62,7 +62,13 @@ public class Ugoku : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        S_flag = true;
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Player_Root"))
+        {
+            if(collision.transform.GetComponent<PlayerMovement_y>().bGrounded)
+            S_flag = true;
+
+
+        }
     }
 
 
