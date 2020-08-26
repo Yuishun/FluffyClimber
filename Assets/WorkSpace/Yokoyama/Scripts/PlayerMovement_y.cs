@@ -32,6 +32,9 @@ public class PlayerMovement_y : MonoBehaviour
     private bool bGround = true;
     public bool bGrounded { get { return bGround; } }
 
+    private bool m_bDead = false;
+    public bool bDead { get { return m_bDead; } }
+
     private float JumpTimer = 0;
     private float RemainingTime = 0;
     const float TIME_UNIT = 1.0f / 60f;
@@ -292,5 +295,12 @@ public class PlayerMovement_y : MonoBehaviour
         int layerMask_ = ~((1 << 8) | (1 << 9));
 
         return Physics.SphereCast(ray_, 0.2f, rayLength, layerMask_, QueryTriggerInteraction.Ignore);
+    }
+
+
+    public void Explosion()
+    {
+        m_bDead = true;
+        RagdollCtrl.Explosion();
     }
 }

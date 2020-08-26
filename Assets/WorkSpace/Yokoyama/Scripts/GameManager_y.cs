@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager_y : MonoBehaviour
 {
@@ -22,13 +23,14 @@ public class GameManager_y : MonoBehaviour
         else
         {
             instance = this;
-            //DontDestroyOnLoad(this.gameObject);
+            DontDestroyOnLoad(this.gameObject);
         }
     }
 
     private void OnDestroy()
     {
-        instance = null;
+        if (instance == this)
+            instance = null;
     }
 
 
@@ -39,7 +41,9 @@ public class GameManager_y : MonoBehaviour
     private PlayerMovement_y m_CurrentPlayer;
     private Vector3 m_RespawnPos;         //  リスポーン位置
 
-    private int m_DeathCount = 0;
+    private int m_DeathCount = 0;   //  死亡回数
+
+    private string m_PrevSceneName = "";
 
     //-------------------------
     //  Functions
@@ -64,5 +68,16 @@ public class GameManager_y : MonoBehaviour
         Destroy(m_CurrentPlayer.gameObject);
         GameObject _obj = Instantiate(m_PlayerPrefab, m_RespawnPos, Quaternion.identity);
         m_CurrentPlayer = _obj.GetComponent<PlayerMovement_y>();
+    }
+
+
+    static public void StoreCurrentSceneName()
+    {
+        instance.m_PrevSceneName = SceneManager.GetActiveScene().name;
+    }
+
+    static public string GetPrevSceneName()
+    {
+        return instance.m_PrevSceneName;
     }
 }
