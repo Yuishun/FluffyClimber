@@ -341,7 +341,7 @@ GameObject:
   - component: {fileID: 6722594807624580691}
   m_Layer: 8
   m_Name: hito_model
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -422,8 +422,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d85479e58224aed44938f07c0db6d587, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  VELOCITY: 30
-  VELO_IN_AIR: 30
+  VELOCITY: 15
+  VELO_IN_AIR: 15
   JUMP_IMPACT: 5
   JUMP_VELO: 5
   MAX_VELO_X: 3
