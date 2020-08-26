@@ -157,7 +157,7 @@ public class Lift_Default : MonoBehaviour
             || collision.gameObject.layer == LayerMask.NameToLayer("Player_Bone"))
         {
             Onplayer = null;
-            isOnPlayer = false;
+            //isOnPlayer = false;
         }
     }
     // ***************************************************************************

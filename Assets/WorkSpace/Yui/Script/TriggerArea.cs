@@ -11,12 +11,16 @@ public class TriggerArea : MonoBehaviour
     [Header("一度触れたら通常に戻らない場合はチェック")]
     public bool DontFalse = true;
 
+    PlayerMovement_y player = null;
+    public PlayerMovement_y Player { get { return player; } }
+
     private void OnTriggerEnter(Collider other)
     {
         if(0 < (other.gameObject.layer &
             ~LayerMask.GetMask("Player_Root", "Player_Bone")))
         {
             isOnPlayer = true;
+            player = other.transform.root.GetComponent<PlayerMovement_y>();
         }
     }
 
@@ -29,6 +33,12 @@ public class TriggerArea : MonoBehaviour
             ~LayerMask.GetMask("Player_Root", "Player_Bone")))
         {
             isOnPlayer = false;
+            Invoke("PlayerNull", 0.5f);
         }
+    }
+
+    void PlayerNull()
+    {
+        player = null;
     }
 }
