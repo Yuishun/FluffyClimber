@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Wallup : MonoBehaviour
 {  
@@ -11,6 +12,7 @@ public class Wallup : MonoBehaviour
 
     GameObject _Maincamera;
 
+    bool _stop_flag;
 
     // Start is called before the first frame update
     void Start()
@@ -18,6 +20,7 @@ public class Wallup : MonoBehaviour
         _player = GameObject.Find("hito_model");
         _wall = GameObject.Find("Cube");
         _Maincamera = GameObject.Find("Main Camera");
+        _stop_flag = false;
     }
 
     // Update is called once per frame
@@ -26,30 +29,30 @@ public class Wallup : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.R))
         {
-
-            _Maincamera.transform.position =
-                new Vector3(0f, -5f, -10f);
-            _wall.transform.position =
-                new Vector3(0f, -20f, 0f);
-            _player.transform.position = 
-                new Vector3(0f, -2.5f, 0f);
-
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
-        if (_player.transform.position.y - 10.83 >= transform.position.y)
+        if (_stop_flag == false)
         {
             transform.position =
         new Vector3(transform.position.x,
         transform.position.y + Time.deltaTime,
         transform.position.z);
-            
+        }
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            _stop_flag = true;
         }
 
-        else
-        {
-            _player.transform.position =
-                   new Vector3(0f, -2.5f, 0f);
+    }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Player_Root"))
+        {
+            if (collision.transform.GetComponent<PlayerMovement_y>().bGrounded)
+                _stop_flag = true;
+            collision.transform.GetComponent<Ragdoll_enable>().Explosion();
         }
     }
 }

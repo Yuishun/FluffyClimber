@@ -32,8 +32,8 @@ public class Camera2 : MonoBehaviour
         {
             transform.position =
             new Vector3(transform.position.x,
-            _player.transform.position.y + 8,
-            transform.position.z - 4);
+            _player.transform.position.y + 7,
+            transform.position.z - 1);
             flag3 = true;
         }
 
