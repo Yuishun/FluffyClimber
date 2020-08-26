@@ -2,65 +2,57 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet_Vec : MonoBehaviour
+public class Bullet_Vec : Bullet_Default
 {
+    [Header("重力")]
+    public float gravity = 0;
+    Vector3 vec;
+
     [Header("通常時の進む方向")]
     public Vector3 DirVec;
     [Header("通常時のスピード")]
     public float Speed = 1;
 
-    [Header("変化する距離")]
-    public float changeDis = 3f;
+    [Header("時間で変化する場合は数値を入れる(秒)")]
+    public float ChangeTime = 0;
+    float _time = 0;
+
     [Header("変化後の進む方向")]
     public Vector3 DirVec_P;
     [Header("変化後のスピード")]
     public float Speed_P;
-    [Header("変化させない場合")]
-    public bool dontChange;
-
-
-    [SerializeField, Header("必ずセットする")]
-    TriggerArea useTrigger = null;
-
-    bool isOnPlayer = false, changeVec = false;
-    Transform player = null;
-
-    Rigidbody rb;
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start2()
     {
-        rb = GetComponent<Rigidbody>();
         DirVec.Normalize();
         DirVec_P.Normalize();
-        if (useTrigger == null)
-            this.enabled = false;
+        vec = DirVec;
     }
 
-    // Update is called once per frame
-    void Update()
+    protected override void ShotMove()    
     {
-
-        if (useTrigger.IsOnPlayer != isOnPlayer)
+        if (ChangeTime > 0)
         {
-            isOnPlayer = useTrigger.IsOnPlayer;
-            if(isOnPlayer)
-                player = useTrigger.Player.transform;
-        }
-
-        if (isOnPlayer)
-        {            
-            if (!dontChange)
+            _time += Time.deltaTime;
+            if(_time>=ChangeTime)
             {
-                if (Vector3.Distance(player.position, transform.position)
-                < changeDis)
-                    changeVec = true;
+                changeVec = true;
+                ChangeTime = 0;
+                vec = DirVec_P;
             }
-
-            Vector3 pos = changeVec ? DirVec_P * Speed_P : DirVec * Speed;
-            rb.MovePosition(transform.position + pos * Time.deltaTime);
+        }
+        Vector3 pos = Vector3.zero;
+        if (gravity == 0)
+            pos = changeVec ? DirVec_P * Speed_P : DirVec * Speed;
+        else
+        {
+            vec += Vector3.up * gravity * Time.deltaTime;
+            pos = vec * (changeVec ? Speed_P : Speed);
         }
 
+        Rb.MovePosition(transform.position + pos * Time.deltaTime);
+        
     }
 
     private void OnDrawGizmosSelected()
