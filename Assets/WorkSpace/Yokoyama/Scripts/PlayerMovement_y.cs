@@ -74,6 +74,17 @@ public class PlayerMovement_y : MonoBehaviour
         {
             NormalUpdate();
             JumpUpdate();
+
+            //  腕上げ
+            if (Input.GetKey(KeyCode.UpArrow))
+            {
+                rbL.AddForce(Vector3.up * 100);
+                rbR.AddForce(Vector3.up * 100);
+            }
+        }
+        else
+        {
+            RagdollUpdate();
         }
 
         //  しゃがみ
@@ -95,12 +106,7 @@ public class PlayerMovement_y : MonoBehaviour
             }
         }
 
-        //  腕上げ
-        if (Input.GetKey(KeyCode.UpArrow))
-        {
-            rbL.AddForce(Vector3.up * 100);
-            rbR.AddForce(Vector3.up * 100);
-        }
+       
     }
 
 
@@ -139,6 +145,17 @@ public class PlayerMovement_y : MonoBehaviour
             currentVelocity.x = Mathf.Sign(currentVelocity.x) * MAX_VELO_X;
             rb.velocity = currentVelocity;
         }
+    }
+
+    private void RagdollUpdate()
+    {
+        Vector3 vecDelta_ = Vector3.zero;
+
+        //  左右移動
+        float horAxis_ = IMGetAxisValue(IM_AXIS.L_STICK_X);
+        vecDelta_ += horAxis_ * Vector3.right * (bGround ? VELOCITY : VELO_IN_AIR);
+
+        Ragdollctrl.AllRagdollPlusVelocity(vecDelta_ * 0.005f);
     }
 
     private void JumpUpdate()
