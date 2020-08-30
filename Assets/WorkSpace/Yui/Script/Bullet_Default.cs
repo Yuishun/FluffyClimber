@@ -64,4 +64,14 @@ public class Bullet_Default : MonoBehaviour
     protected virtual void ShotMove() { }
 
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(0 < (collision.gameObject.layer &
+            ~LayerMask.GetMask("Player_Root", "Player_Bone")))
+        {
+            var player = collision.transform.root.GetComponent<PlayerMovement_y>();
+            if (!player.bDead)
+                player.Explosion();
+        }
+    }
 }

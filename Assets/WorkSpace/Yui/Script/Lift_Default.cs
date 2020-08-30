@@ -118,12 +118,11 @@ public class Lift_Default : MonoBehaviour
     }
     // 変化後の処理を書く仮想関数
     protected virtual void ChangeMove()
-    {
-    }
+    {}
 
     // ***********************************************************************
     // 接触判定
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionStay(Collision collision)
     {
         // 本体に当たった時
         if (collision.gameObject.layer == LayerMask.NameToLayer("Player_Root"))
