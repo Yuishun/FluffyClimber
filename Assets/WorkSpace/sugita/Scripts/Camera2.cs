@@ -4,18 +4,20 @@ using UnityEngine;
 
 public class Camera2 : MonoBehaviour
 {
-    GameObject _player,_wall;
+    GameObject _player;
 
-   bool flag = false;
-   bool flag2 = false;
-   bool flag3 = false;
+    bool flag;
 
+    [SerializeField]
+    private Sou _up;
+  
     // Start is called before the first frame update
     void Start()
     {
         //_player = GameObject.Find("Sphere");
         _player = GameObject.Find("hito_model");
-        _wall = GameObject.Find("Cube");
+
+        flag = true;
 
         transform.position =
             new Vector3(transform.position.x,
@@ -28,38 +30,13 @@ public class Camera2 : MonoBehaviour
     void Update()
     {
 
-        if (_player.transform.position.y >= 18 && flag3 == false)
-        {
-            transform.position =
-            new Vector3(transform.position.x,
-            _player.transform.position.y + 7,
-            transform.position.z - 1);
-            flag3 = true;
-        }
-
-        if (_player.transform.position.x >= -6.5 && _player.transform.position.y >= 10 && flag2 == false)
+        if (_up.UpCamera()== flag)
         {
             transform.position =
             new Vector3(transform.position.x,
             _player.transform.position.y + 4,
             transform.position.z);
-            flag2 = true;
-        }
-
-        else if (_player.transform.position.x >= 3.5 && _player.transform.position.y >= 0 && flag == false)
-        {
-            transform.position =
-            new Vector3(transform.position.x,
-            _player.transform.position.y + 4,
-            transform.position.z);
-            flag = true;
-        }
-        else if (_player.transform.position.y < 0)
-        {
             flag = false;
-            flag2 = false;
         }
-        else;
     }
-
 }

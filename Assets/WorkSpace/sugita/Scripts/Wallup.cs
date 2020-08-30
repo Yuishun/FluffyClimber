@@ -14,6 +14,9 @@ public class Wallup : MonoBehaviour
 
     bool _stop_flag;
 
+    [SerializeField]
+    private Timer _timer;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,13 +35,14 @@ public class Wallup : MonoBehaviour
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
-        if (_stop_flag == false)
+        if (_stop_flag == false && _timer.IsTimerOver())
         {
-            transform.position =
+                transform.position =
         new Vector3(transform.position.x,
         transform.position.y + Time.deltaTime,
         transform.position.z);
         }
+
         if (Input.GetKeyDown(KeyCode.L))
         {
             _stop_flag = true;
@@ -46,13 +50,14 @@ public class Wallup : MonoBehaviour
 
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Player_Root"))
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Player_Root")||
+            collision.gameObject.layer == LayerMask.NameToLayer("Player_Bone"))
         {
-            if (collision.transform.GetComponent<PlayerMovement_y>().bGrounded)
+            if (collision.transform.root.GetComponent<PlayerMovement_y>().bGrounded)
                 _stop_flag = true;
-            collision.transform.GetComponent<Ragdoll_enable>().Explosion();
+            collision.transform.root.GetComponent<PlayerMovement_y>().Explosion();
         }
     }
 }
