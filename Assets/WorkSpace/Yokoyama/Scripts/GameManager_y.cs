@@ -39,6 +39,7 @@ public class GameManager_y : MonoBehaviour
     //-------------------------
     private GameObject m_PlayerPrefab;    //  プレハブへの参照
     private PlayerMovement_y m_CurrentPlayer;
+    public PlayerMovement_y CurrentPlayer { get { return m_CurrentPlayer; } }
     private Vector3 m_RespawnPos;         //  リスポーン位置
 
     private int m_DeathCount = 0;   //  死亡回数
@@ -58,26 +59,57 @@ public class GameManager_y : MonoBehaviour
     }
 
 
-    static public void RespawnPlayer()
+    static public void RestartGame()
     {
-        instance.RespawnPlayer_inst();
+        instance.StartCoroutine("IERestartGame");
     }
-    private void RespawnPlayer_inst()
+    private IEnumerator IERestartGame()
     {
-        m_DeathCount++;
-        Destroy(m_CurrentPlayer.gameObject);
-        GameObject _obj = Instantiate(m_PlayerPrefab, m_RespawnPos, Quaternion.identity);
-        m_CurrentPlayer = _obj.GetComponent<PlayerMovement_y>();
+        StoreCurrentSceneName();
+        IncreaseDeathCount();
+
+        float timer = 0;
+        while(timer < 2f)
+        {
+            timer += Time.deltaTime;
+            yield return 0;
+        }
+
+        SceneManager.LoadScene(m_PrevSceneName);
+
+        yield break;
     }
 
 
-    static public void StoreCurrentSceneName()
+    //static public void RespawnPlayer()
+    //{
+    //    instance.RespawnPlayer_inst();
+    //}
+    //private void RespawnPlayer_inst()
+    //{
+    //    m_DeathCount++;
+    //    Destroy(m_CurrentPlayer.gameObject);
+    //    GameObject _obj = Instantiate(m_PlayerPrefab, m_RespawnPos, Quaternion.identity);
+    //    m_CurrentPlayer = _obj.GetComponent<PlayerMovement_y>();
+    //}
+
+
+    private void StoreCurrentSceneName()
     {
-        instance.m_PrevSceneName = SceneManager.GetActiveScene().name;
+        m_PrevSceneName = SceneManager.GetActiveScene().name;
     }
 
     static public string GetPrevSceneName()
     {
         return instance.m_PrevSceneName;
+    }
+
+    static public int GetDeathCount()
+    {
+        return instance.m_DeathCount;
+    }
+    private void IncreaseDeathCount()
+    {
+        m_DeathCount++;
     }
 }
