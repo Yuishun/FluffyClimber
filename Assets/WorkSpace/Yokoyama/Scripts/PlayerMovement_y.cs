@@ -319,5 +319,6 @@ public class PlayerMovement_y : MonoBehaviour
     {
         m_bDead = true;
         RagdollCtrl.Explosion();
+        GameManager_y.RestartGame();
     }
 }
