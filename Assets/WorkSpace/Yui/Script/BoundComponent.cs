@@ -16,6 +16,9 @@ public class BoundComponent : MonoBehaviour
     [Header("上からのみ力を加える")]
     public bool onlyUp = true;
 
+    [Header("プレイヤーの設定を無視する(操作・速度制限等)")]
+    public bool ignorePlayer = false;
+
     [SerializeField, Header("Triggerを使う場合セットする")]
     TriggerArea useTrigger = null;
 
@@ -31,19 +34,28 @@ public class BoundComponent : MonoBehaviour
         if (useTrigger != null
             && useTrigger.IsOnPlayer)
         {
-            Bound(useTrigger.Player);
+            StartCoroutine(Bound(useTrigger.Player));
         }
     }
 
-    void Bound(PlayerMovement_y p)
+    IEnumerator Bound(PlayerMovement_y p)
     {
         if (!canBound)
-            return;
+            yield break;
 
         StartCoroutine(p.Ragdollctrl.Ragdoll(true));
         p.Ragdollctrl.AllRagdollChangeVelocity(PowerVec * Power);
         if (isOnce)
             canBound = false;
+
+        if (!ignorePlayer)
+            yield break;
+
+        var rag = p.Ragdollctrl;
+        p.enabled = false;
+        while (rag.IsRagdoll)
+            yield return null;
+        p.enabled = true;
     }
 
     // ***********************************************************************
@@ -58,7 +70,7 @@ public class BoundComponent : MonoBehaviour
             if (p.bGrounded && p.transform.position.y > transform.position.y
                 || !onlyUp)
             {
-                Bound(p);
+                StartCoroutine(Bound(p));
             }
         }
     }

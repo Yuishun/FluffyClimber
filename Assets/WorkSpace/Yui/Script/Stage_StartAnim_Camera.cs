@@ -17,6 +17,9 @@ public class Stage_StartAnim_Camera : MonoBehaviour
     [SerializeField]
     Transform maincamera;
 
+    [SerializeField]
+    AudioClip dosa;
+
     bool islook = false;
     Transform bone;
 
@@ -38,7 +41,10 @@ public class Stage_StartAnim_Camera : MonoBehaviour
         yield return new WaitForSeconds(0.4f);
         player.AllRagdollChangeVelocity(vec);
         player.canGetup = true;
-        islook = true;
+        islook = true;        
+        AudioManager.PlaySE(AudioManager.SE.koke, 0.5f, 0);
+        yield return new WaitForSeconds(0.4f);
+        GetComponent<AudioSource>().PlayOneShot(dosa, 0.25f);
     }
 
     // Update is called once per frame

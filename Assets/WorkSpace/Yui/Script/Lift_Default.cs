@@ -124,13 +124,17 @@ public class Lift_Default : MonoBehaviour
     // 接触判定
     private void OnCollisionStay(Collision collision)
     {
+        if (useTrigger != null)
+            return;
+
         // 本体に当たった時
         if (collision.gameObject.layer == LayerMask.NameToLayer("Player_Root"))
         {
             PlayerMovement_y p = collision.transform.GetComponent<PlayerMovement_y>();
             // 地面についているかつポジションが上にある場合乗っている
             if (p.bGrounded && p.transform.position.y > transform.position.y)
-            {
+            {                                    
+
                 Onplayer = p;
                 if (!dontChange)
                     isOnPlayer = true;
@@ -152,6 +156,9 @@ public class Lift_Default : MonoBehaviour
 
     private void OnCollisionExit(Collision collision)
     {
+        if (useTrigger != null)
+            return;
+
         if (collision.gameObject.layer == LayerMask.NameToLayer("Player_Root")
             || collision.gameObject.layer == LayerMask.NameToLayer("Player_Bone"))
         {
