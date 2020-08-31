@@ -16,29 +16,43 @@ public class Strange : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        int z = Random.Range(0, 6);
+        int a = Random.Range(0, 7);
 
-        if (z > 4)
-            _text.color
-                = new Color(255f, 0f, 0f);
+        switch (a) {
+            case 0:
+                _text.color
+                    = new Color(255f, 0f, 0f);
+                break;
 
-        else if ((5 > z) && (z > 3))
-            _text.color
-                = new Color(0f, 255f, 0f);
+            case 1:
+                _text.color
+                    = new Color(0f, 255f, 0f);
+                break;
 
-        else if ((4 > z) && (z > 2))
-            _text.color
-                = new Color(0f, 0f, 255f);
+            case 2:
+                _text.color
+                    = new Color(0f, 0f, 255f);
+                break;
 
-        else if ((3 > z) && (z > 1))
-            _text.color
-                 = new Color(255f, 255f, 0f);
+            case 3:
+                _text.color
+                    = new Color(255f, 255f, 0f);
+                break;
 
-        else if ((2 > z) && (z > 0))
-            _text.color
-                = new Color(255f, 0f, 255f);
-        else
-            _text.color
-                = new Color(0f, 255f, 255f);
+            case 4:
+                _text.color
+                    = new Color(255f, 0f, 255f);
+                break;
+
+            case 5:
+                _text.color
+                    = new Color(0f, 255f, 255f);
+                break;
+
+            default:
+                _text.color
+                    = new Color(255f, 255f, 255f);
+                break;
+        }
     }
 }
