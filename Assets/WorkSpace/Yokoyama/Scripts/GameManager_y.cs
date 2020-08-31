@@ -81,6 +81,7 @@ public class GameManager_y : MonoBehaviour
             yield return 0;
         }
 
+        GameOverImage.color = new Color(1, 1, 1, 0);
         SceneManager.LoadScene(m_PrevSceneName);
 
         yield break;
