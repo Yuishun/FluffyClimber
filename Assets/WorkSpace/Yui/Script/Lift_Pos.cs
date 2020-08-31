@@ -29,7 +29,7 @@ public class Lift_Pos : Lift_Default
             OnPlayerMove();
         }
         else    // 着いたらとりあえず消す
-            gameObject.SetActive(false);
+            isOnPlayer = false;
     }
 
     protected override void DrawGizmosChild()   

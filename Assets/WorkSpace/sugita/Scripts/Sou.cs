@@ -25,6 +25,9 @@ public class Sou : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
+        if (m_flag)
+            return;
+
         if (collision.gameObject.layer == LayerMask.NameToLayer("Player_Root")||
             collision.gameObject.layer == LayerMask.NameToLayer("Player_Bone"))
         {
