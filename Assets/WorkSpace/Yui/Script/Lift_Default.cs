@@ -170,5 +170,8 @@ public class Lift_Default : MonoBehaviour
             Gizmos.DrawLine(pos + DirPos[i - 1], pos + DirPos[i]);
         }
 
+        DrawGizmosChild();
     }
+
+    protected virtual void DrawGizmosChild() { }
 }
