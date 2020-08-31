@@ -43,6 +43,13 @@ public class SceneContller: MonoBehaviour
         Debug.Log("押された!");  // ログを出力 
         SceneManager.LoadScene("Option");
     }
+
+    public void TitleBack()
+    {
+        // タイトルへ移動
+        Debug.Log("押された!");  // ログを出力 
+        SceneManager.LoadScene("Title");
+    }
     //　ゲーム終了ボタンを押したら実行する
     public void EndGame()
     {
