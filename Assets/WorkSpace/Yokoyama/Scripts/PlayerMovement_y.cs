@@ -325,6 +325,9 @@ public class PlayerMovement_y : MonoBehaviour
         m_bDead = true;
         RagdollCtrl.Explosion();
         AudioManager.PlaySE(AudioManager.SE.death, 0.5f, 3);
+
+        AudioManager.StopBGM(true, 0.5f, () => AudioManager.PlayBGM(AudioManager.BGM.death, 0.5f) );
+
         GameManager_y.RestartGame();
     }
 }

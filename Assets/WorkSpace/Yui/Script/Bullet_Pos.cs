@@ -62,9 +62,11 @@ public class Bullet_Pos : Bullet_Default
             }
             else
             {
+                int i = nowIndex;
                 //更新
                 nowIndex = nextIndex;
                 // PingPong(いったり来たりさせる)
+                if(i != -1)
                 if (PingPong && (nowIndex == DirPos_P.Count - 1 || nowIndex == 0))
                     isReturn = !isReturn;
             }

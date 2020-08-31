@@ -8,6 +8,10 @@ public class Bullet_Default : MonoBehaviour
     public float changeDis = 3f;
     [Header("変化させない場合")]
     public bool dontChange;
+    [Header("生存時間")]
+    public float LifeTime = 5;
+    [Header("発射まで隠しておくか")]
+    public bool HideFlag = true;
 
 
     [SerializeField, Header("必ずセットする")]
@@ -24,8 +28,8 @@ public class Bullet_Default : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        GetComponent<SpriteRenderer>().enabled = false;
-        GetComponent<Collider>().enabled = false;
+        GetComponent<SpriteRenderer>().enabled = !HideFlag;
+        GetComponent<Collider>().enabled = !HideFlag;
         if (useTrigger == null)
             this.enabled = false;
         Start2();
@@ -58,6 +62,10 @@ public class Bullet_Default : MonoBehaviour
             }
 
             ShotMove();
+
+            LifeTime -= Time.deltaTime;
+            if (LifeTime < 0)
+                gameObject.SetActive(false);
         }
     }
 
