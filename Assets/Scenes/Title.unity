@@ -208,6 +208,7 @@ GameObject:
   - component: {fileID: 331609364}
   - component: {fileID: 331609363}
   - component: {fileID: 331609366}
+  - component: {fileID: 331609367}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -278,8 +279,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1216173399}
-        m_MethodName: Title
+      - m_Target: {fileID: 331609367}
+        m_MethodName: Clicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -345,6 +346,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &331609367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 331609361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 850ac2eb4cc7e4c458985a1903bf211b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &407106983
 GameObject:
   m_ObjectHideFlags: 0
