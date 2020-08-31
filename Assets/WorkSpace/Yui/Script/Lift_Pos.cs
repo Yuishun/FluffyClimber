@@ -32,7 +32,7 @@ public class Lift_Pos : Lift_Default
             gameObject.SetActive(false);
     }
 
-    private void OnDrawGizmosSelected()
+    protected override void DrawGizmosChild()   
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position + DirPos_P, 0.1f);

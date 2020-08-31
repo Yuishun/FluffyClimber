@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager_y : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class GameManager_y : MonoBehaviour
     //-------------------------
     static private GameManager_y instance = null;
     static public GameManager_y Instance { get { return instance; } }
+
+    [SerializeField] private MaskableGraphic GameOverImage;
 
     /// <summary>
     /// 生成時処理
@@ -56,6 +59,7 @@ public class GameManager_y : MonoBehaviour
         {
             m_CurrentPlayer = _obj.GetComponent<PlayerMovement_y>();
         }
+        GameOverImage.color = new Color(1, 1, 1, 0);
     }
 
 
@@ -67,11 +71,13 @@ public class GameManager_y : MonoBehaviour
     {
         StoreCurrentSceneName();
         IncreaseDeathCount();
+        GameOverImage.color = new Color(1, 1, 1, 1);
 
-        float timer = 0;
-        while(timer < 2f)
+        while(true)
         {
-            timer += Time.deltaTime;
+            if (Input.GetKeyDown(KeyCode.R))
+                break;
+
             yield return 0;
         }
 
