@@ -4528,6 +4528,11 @@ PrefabInstance:
       propertyPath: Speed
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9007839755954153275, guid: 31d544883fd2eb14c92025d13eb18fa1,
+        type: 3}
+      propertyPath: DirRot_P.z
+      value: -180
+      objectReference: {fileID: 0}
     - target: {fileID: 9007839755954153280, guid: 31d544883fd2eb14c92025d13eb18fa1,
         type: 3}
       propertyPath: m_LocalPosition.x
