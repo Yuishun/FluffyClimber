@@ -2145,6 +2145,7 @@ MonoBehaviour:
   player: {fileID: 1107451209}
   vec: {x: 10, y: 3, z: 0}
   time: 1
+  maincamera: {fileID: 394310488}
 --- !u!20 &977134271
 Camera:
   m_ObjectHideFlags: 0
