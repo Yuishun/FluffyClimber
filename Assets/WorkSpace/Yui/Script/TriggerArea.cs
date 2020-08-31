@@ -19,6 +19,9 @@ public class TriggerArea : MonoBehaviour
         if(0 < (other.gameObject.layer &
             ~LayerMask.GetMask("Player_Root", "Player_Bone")))
         {
+            var p = other.transform.root.GetComponent<PlayerMovement_y>();
+            if (p == null || p.bDead)   // 死亡確認
+                return;
             isOnPlayer = true;
             player = other.transform.root.GetComponent<PlayerMovement_y>();
         }
