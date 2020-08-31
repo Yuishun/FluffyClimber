@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GameOver.unity
     guid: 652e0e2f5688c134a8a3a8f563a139a8
+  - enabled: 1
+    path: Assets/WorkSpace/sugita/Scene/DemoScene.unity
+    guid: febdc0bdd7baa6443aa829291df4de6c
   m_configObjects: {}
