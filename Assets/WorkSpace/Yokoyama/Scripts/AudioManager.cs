@@ -57,7 +57,7 @@ public class AudioManager : MonoBehaviour
     {
         "のんびりタイム",
         "情動カタルシスL",
-        "bass_slap",
+        "bass_slap1",
     };
     private string[] seNames = new string[] {
         "kokeru",
@@ -173,8 +173,8 @@ public class AudioManager : MonoBehaviour
     /// <param name="endAct">終了処理</param>
     public static void StopBGM(bool isFading = true, float fadeTime = 0.5f, UnityAction endAct = null, int channel = 0)
     {
-        if (!instance.isPlayingBGM)
-            return;
+        //if (!instance.isPlayingBGM)
+        //    return;
 
         instance.StartCoroutine(instance.IEStopBGM(isFading, fadeTime, endAct, channel));
     }

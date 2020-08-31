@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using static InputManager_y;
 
 public class PlayerMovement_y : MonoBehaviour
@@ -324,12 +325,22 @@ public class PlayerMovement_y : MonoBehaviour
 
     public void Explosion()
     {
+        if (m_bDead)
+            return;
+
         m_bDead = true;
         RagdollCtrl.Explosion();
         AudioManager.PlaySE(AudioManager.SE.death, 0.5f, 3);
 
-        AudioManager.StopBGM(true, 0.5f, () => AudioManager.PlayBGM(AudioManager.BGM.death, 0.5f) );
+        UnityAction act_ = this.PlayDeathBGM;
+
+        AudioManager.StopBGM(true, 0.5f, act_);
 
         GameManager_y.RestartGame();
+    }
+
+    private void PlayDeathBGM()
+    {
+        AudioManager.PlayBGM(AudioManager.BGM.death, 0.5f);
     }
 }
