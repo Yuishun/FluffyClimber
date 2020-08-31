@@ -129,7 +129,7 @@ public class Ragdoll_enable : MonoBehaviour
             yield return null;
         }
 
-        //_rigids[0].Col.enabled = active;
+        
         foreach (RigidComponent rb in _rigids)
         {
             if (rb.RigidBody.gameObject.tag != "IgnoreBone")
@@ -148,10 +148,7 @@ public class Ragdoll_enable : MonoBehaviour
             {
                 velocity.z = 0;
                 yield return new WaitForEndOfFrame();
-                foreach (RigidComponent rb in _rigids)
-                {
-                    rb.RigidBody.velocity = velocity;
-                }
+                AllRagdollChangeVelocity(velocity);
             }
         }
 
@@ -188,12 +185,30 @@ public class Ragdoll_enable : MonoBehaviour
         StartCoroutine(Ragdoll(true));
     }
 
-    public void AllRagdollPlusVelocity(Vector3 vel)
+    public void AllRagdollPlusVelocity(Vector3 vel) 
     {
-        foreach(RigidComponent rb in _rigids)
+        //全てのラグドールに速度を足す
+        foreach (RigidComponent rb in _rigids)
+        {
+            if (!rb.RigidBody.isKinematic)
+            {
+                Vector3 now = rb.RigidBody.velocity + vel;
+                if (Mathf.Abs(now.x) > 5f)      // X速度制限
+                    now.x = 5 * Mathf.Sign(now.x);
+                if (Mathf.Abs(now.y) > 5f)      // Y速度制限
+                    now.y = 5 * Mathf.Sign(now.y);
+                rb.RigidBody.velocity = now;
+            }
+        }
+    }
+
+    public void AllRagdollChangeVelocity(Vector3 vel)   
+    {
+        // 全てのラグドールに速度を代入
+        foreach (RigidComponent rb in _rigids)
         {
             if(!rb.RigidBody.isKinematic)
-                rb.RigidBody.velocity += vel;
+                rb.RigidBody.velocity = vel;
         }
     }
 
@@ -212,12 +227,13 @@ public class Ragdoll_enable : MonoBehaviour
             // 親子関係を切る
             rb.RigidBody.transform.SetParent(transform);
             // Jointを力を加えると壊れる状態に
-            if(rb.Joint!=null)
+            if(rb.Joint != null)
                 rb.Joint.breakForce = 1;
             // 爆発方向に力を加える
-            rb.RigidBody.AddExplosionForce(30f, _transforms[0].Transform.position,
-                0, .01f, ForceMode.Impulse);
-        }        
+            rb.RigidBody.AddExplosionForce(40f, _transforms[0].Transform.position,
+                0, 0.0f, ForceMode.Impulse);
+        }
+        
         // 起き上がらないようにする
         this.enabled = false;
     }
