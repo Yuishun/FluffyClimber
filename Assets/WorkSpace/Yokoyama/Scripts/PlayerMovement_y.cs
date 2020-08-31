@@ -69,6 +69,8 @@ public class PlayerMovement_y : MonoBehaviour
     private void FixedUpdate()
     {
         //Debug.Log("Ragdoll:" + RagdollCtrl.IsRagdoll);
+        if (m_bDead)
+            return;
 
         if (!RagdollCtrl.IsRagdoll)
         {

@@ -48,17 +48,18 @@ public class GameManager_y : MonoBehaviour
     private int m_DeathCount = 0;   //  死亡回数
 
     private string m_PrevSceneName = "";
+    private string m_NextStageName = "";
 
     //-------------------------
     //  Functions
     //-------------------------
     private void Start()
     {
-        GameObject _obj = GameObject.FindGameObjectWithTag("Player");
-        if(_obj)
-        {
-            m_CurrentPlayer = _obj.GetComponent<PlayerMovement_y>();
-        }
+        //GameObject _obj = GameObject.FindGameObjectWithTag("Player");
+        //if(_obj)
+        //{
+        //    m_CurrentPlayer = _obj.GetComponent<PlayerMovement_y>();
+        //}
         GameOverImage.color = new Color(1, 1, 1, 0);
     }
 
@@ -72,6 +73,7 @@ public class GameManager_y : MonoBehaviour
         StoreCurrentSceneName();
         IncreaseDeathCount();
         GameOverImage.color = new Color(1, 1, 1, 1);
+        m_CurrentPlayer = null;
 
         while(true)
         {
@@ -118,5 +120,15 @@ public class GameManager_y : MonoBehaviour
     private void IncreaseDeathCount()
     {
         m_DeathCount++;
+    }
+
+    static public void SetNextStageName(string name)
+    {
+        instance.m_NextStageName = name;
+    }
+
+    static public void LoadNextStage()
+    {
+        SceneManager.LoadScene(instance.m_NextStageName);
     }
 }
