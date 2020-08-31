@@ -231,7 +231,7 @@ public class Ragdoll_enable : MonoBehaviour
                 rb.Joint.breakForce = 1;
             // 爆発方向に力を加える
             rb.RigidBody.AddExplosionForce(40f, _transforms[0].Transform.position,
-                0, 0.01f, ForceMode.Impulse);
+                0, 0.0f, ForceMode.Impulse);
         }
         
         // 起き上がらないようにする

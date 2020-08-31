@@ -6,6 +6,7 @@ public class Stage_StartAnim_Camera : MonoBehaviour
 {
     [SerializeField]
     Ragdoll_enable player;
+    PlayerMovement_y P;
 
     [SerializeField]
     Vector3 vec;
@@ -13,12 +14,17 @@ public class Stage_StartAnim_Camera : MonoBehaviour
     [SerializeField]
     float time = 1f;
 
+    [SerializeField]
+    Transform maincamera;
+
     bool islook = false;
     Transform bone;
 
     // Start is called before the first frame update
     void Start()
     {
+        P = player.GetComponent<PlayerMovement_y>();
+        P.enabled = false;
         StartCoroutine(PlayAnim(time));
     }
 
@@ -43,6 +49,27 @@ public class Stage_StartAnim_Camera : MonoBehaviour
 
         transform.LookAt(bone);
         if (!player.IsRagdoll)
-            gameObject.SetActive(false);
+        {
+            P.enabled = true;
+            StartCoroutine(MoveCamera());
+        }
+    }
+
+    IEnumerator MoveCamera()
+    {
+        float time = 0;
+        Vector3 pos = transform.position;
+        Quaternion rot = transform.localRotation;
+        while (time <= 1)
+        {
+            transform.position =
+                Vector3.Slerp(pos, maincamera.transform.position, time);
+            transform.localRotation =
+                Quaternion.Slerp(rot, maincamera.transform.localRotation, time);
+
+            time += Time.deltaTime * 2;
+            yield return null;
+        }
+        gameObject.SetActive(false);
     }
 }
