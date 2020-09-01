@@ -41,10 +41,10 @@ public class TitleScript : MonoBehaviour
             GameObject obj_ = Instantiate(hito, new Vector3((Random.value * 2f - 1f) * 2f, 7, -6), Quaternion.Euler(Random.value * 360f, Random.value * 360f, Random.value * 360f)) as GameObject;
             if(obj_)
             {
-                Rigidbody rb_ = obj_.GetComponent<Rigidbody>();
+                Rigidbody rb_ = obj_.transform.GetChild(0).GetComponent<Rigidbody>();
                 if(rb_)
                 {
-                    rb_.AddTorque(new Vector3(Random.value, Random.value, Random.value) * 10f);
+                    rb_.AddTorque(new Vector3(Random.value, Random.value, Random.value) * 100f, ForceMode.VelocityChange);
                     prevObj = obj_;
                 }
             }
