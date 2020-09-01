@@ -346,6 +346,6 @@ public class PlayerMovement_y : MonoBehaviour
 
     private void PlayDeathBGM()
     {
-        AudioManager.PlayBGM(AudioManager.BGM.death, 0.5f);
+        AudioManager.PlayBGM(AudioManager.BGM.death, 2.5f);
     }
 }

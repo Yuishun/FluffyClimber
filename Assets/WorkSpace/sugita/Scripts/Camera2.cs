@@ -68,6 +68,6 @@ public class Camera2 : MonoBehaviour
 
     private void ChangeBGM()
     {
-        AudioManager.PlayBGM(AudioManager.BGM.game, 0.25f);
+        AudioManager.PlayBGM(AudioManager.BGM.game, 0.13f);
     }
 }
