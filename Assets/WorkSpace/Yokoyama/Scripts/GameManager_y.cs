@@ -13,6 +13,7 @@ public class GameManager_y : MonoBehaviour
     static public GameManager_y Instance { get { return instance; } }
 
     [SerializeField] private MaskableGraphic GameOverImage;
+    [SerializeField] private MaskableGraphic ClearImage;
 
     /// <summary>
     /// 生成時処理
@@ -50,6 +51,8 @@ public class GameManager_y : MonoBehaviour
     private string m_PrevSceneName = "";
     private string m_NextStageName = "";
 
+    private bool bProcessing = false;
+
     //-------------------------
     //  Functions
     //-------------------------
@@ -61,11 +64,16 @@ public class GameManager_y : MonoBehaviour
         //    m_CurrentPlayer = _obj.GetComponent<PlayerMovement_y>();
         //}
         GameOverImage.color = new Color(1, 1, 1, 0);
+        ClearImage.color = new Color(1, 1, 1, 0);
     }
 
 
     static public void RestartGame()
     {
+        if (instance.bProcessing)
+            return;
+
+        instance.bProcessing = true;
         instance.StartCoroutine("IERestartGame");
     }
     private IEnumerator IERestartGame()
@@ -84,6 +92,7 @@ public class GameManager_y : MonoBehaviour
         }
 
         GameOverImage.color = new Color(1, 1, 1, 0);
+        bProcessing = false;
         SceneManager.LoadScene(m_PrevSceneName);
 
         yield break;
@@ -130,5 +139,33 @@ public class GameManager_y : MonoBehaviour
     static public void LoadNextStage()
     {
         SceneManager.LoadScene(instance.m_NextStageName);
+    }
+
+    static public void ClearGame()
+    {
+        if (instance.bProcessing)
+            return;
+
+        instance.bProcessing = true;
+        instance.StartCoroutine("IEClearGame");
+    }
+    private IEnumerator IEClearGame()
+    {
+        ClearImage.color = new Color(1, 1, 1, 1);
+        m_CurrentPlayer = null;
+
+        while (true)
+        {
+            if (Input.GetKeyDown(KeyCode.R))
+                break;
+
+            yield return 0;
+        }
+
+        ClearImage.color = new Color(1, 1, 1, 0);
+        bProcessing = false;
+        SceneManager.LoadScene("Title");
+
+        yield break;
     }
 }

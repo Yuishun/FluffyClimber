@@ -19,7 +19,17 @@ public class Clear : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        SceneManager.LoadScene("Clear");
+        if(other.gameObject.layer == LayerMask.NameToLayer("Player_Root") || other.gameObject.layer == LayerMask.NameToLayer("Player_Bone"))
+        {
+            PlayerMovement_y p_ = other.transform.root.GetComponent<PlayerMovement_y>();
+            if(p_)
+            {
+                if(!p_.bDead)
+                GameManager_y.ClearGame();
+            }
+        }
+
+        //SceneManager.LoadScene("Clear");
     }
 
 }
