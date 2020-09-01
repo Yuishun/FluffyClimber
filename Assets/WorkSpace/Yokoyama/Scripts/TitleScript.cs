@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class TitleScript : MonoBehaviour
 {
@@ -21,7 +22,8 @@ public class TitleScript : MonoBehaviour
             yield return 0;
         }
 
-        AudioManager.PlayBGM(AudioManager.BGM.title);
+        UnityAction act_ = this.TitleBGM;
+        AudioManager.StopBGM(true, 0.5f, act_);
 
         yield break;
     }
@@ -49,5 +51,10 @@ public class TitleScript : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void TitleBGM()
+    {
+        AudioManager.PlayBGM(AudioManager.BGM.title);
     }
 }

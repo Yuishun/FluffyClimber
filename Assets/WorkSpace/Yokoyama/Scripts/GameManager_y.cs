@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class GameManager_y : MonoBehaviour
 {
@@ -147,6 +148,8 @@ public class GameManager_y : MonoBehaviour
             return;
 
         instance.bProcessing = true;
+        UnityAction act_ = instance.ClearBGM;
+        AudioManager.StopBGM(true, 0.5f, act_);
         instance.StartCoroutine("IEClearGame");
     }
     private IEnumerator IEClearGame()
@@ -167,5 +170,10 @@ public class GameManager_y : MonoBehaviour
         SceneManager.LoadScene("Title");
 
         yield break;
+    }
+
+    private void ClearBGM()
+    {
+        AudioManager.PlayBGM(AudioManager.BGM.clear, 0.25f);
     }
 }
