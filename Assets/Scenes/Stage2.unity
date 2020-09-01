@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 108439dadb2779342a587577318fdc60, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -694,6 +694,12 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2, y: 2, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &194865645 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 683128036669396532, guid: 23a0309937adb264fab21867d1faf6be,
+    type: 3}
+  m_PrefabInstance: {fileID: 8197695}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &200856567
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2297,6 +2303,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &783103097 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7926738626049901053, guid: 5515215aeea21ae4a93351d19e393ca2,
+    type: 3}
+  m_PrefabInstance: {fileID: 1230728063}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &793427809
 GameObject:
   m_ObjectHideFlags: 0
@@ -3065,6 +3083,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c3fe8b7488c84148aab3505ecb2c771, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _player: {fileID: 194865645}
   upArea:
   - {fileID: 495900087}
   - {fileID: 2098909460}
@@ -3899,6 +3918,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2538385551186604008, guid: 5515215aeea21ae4a93351d19e393ca2,
+        type: 3}
+      propertyPath: ClearImage
+      value: 
+      objectReference: {fileID: 783103097}
     - target: {fileID: 2538385551186604011, guid: 5515215aeea21ae4a93351d19e393ca2,
         type: 3}
       propertyPath: m_LocalPosition.x

@@ -5,6 +5,7 @@ using UnityEngine;
 public class Sou : MonoBehaviour
 {
     bool m_flag;
+    public bool Flag{set{ m_flag = value; }}
 
     // Start is called before the first frame update
     void Start()
