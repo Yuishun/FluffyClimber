@@ -159,6 +159,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GameOverImage: {fileID: 2538385551866851720}
+  ClearImage: {fileID: 7926738626049901053}
 --- !u!114 &3101971699925628827
 MonoBehaviour:
   m_ObjectHideFlags: 0

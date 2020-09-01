@@ -129,7 +129,7 @@ public class PlayerMovement_y : MonoBehaviour
         if(bRunning)
         {
             if(bGround)
-                AudioManager.PlaySE(AudioManager.SE.walk, 0.25f, 0);
+                AudioManager.PlaySE(AudioManager.SE.walk, 0.75f, 0);
 
             if(Mathf.Sign(horAxis_) > 0)
             {
@@ -274,7 +274,7 @@ public class PlayerMovement_y : MonoBehaviour
             {
                 bGround = true;
                 RagdollCtrl.StartCoroutine(RagdollCtrl.Ragdoll(true));
-                AudioManager.PlaySE(AudioManager.SE.koke, 0.5f, 2);
+                AudioManager.PlaySE(AudioManager.SE.koke, 0.75f, 2);
                 return;
             }
 
@@ -330,7 +330,7 @@ public class PlayerMovement_y : MonoBehaviour
 
         m_bDead = true;
         RagdollCtrl.Explosion();
-        AudioManager.PlaySE(AudioManager.SE.death, 0.5f, 3);
+        AudioManager.PlaySE(AudioManager.SE.death, 0.75f, 3);
 
         UnityAction act_ = this.PlayDeathBGM;
 

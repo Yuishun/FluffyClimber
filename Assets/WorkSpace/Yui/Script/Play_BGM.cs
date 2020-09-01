@@ -13,7 +13,7 @@ public class Play_BGM : MonoBehaviour
     {
         UnityAction act_ = this.BGM_Play;
 
-        AudioManager.StopBGM(true, 0.5f, act_);
+        AudioManager.StopBGM(true, 0.25f, act_);
     }
 
     void BGM_Play()
