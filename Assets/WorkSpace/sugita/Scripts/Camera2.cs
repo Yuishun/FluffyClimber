@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Camera2 : MonoBehaviour
 {
@@ -17,6 +18,9 @@ public class Camera2 : MonoBehaviour
         //_player = GameObject.Find("Sphere");
         _player = GameObject.Find("hito_model");
 
+        UnityAction act_ = this.ChangeBGM;
+
+        AudioManager.StopBGM(true, 0.5f, act_);
     }
 
     // Update is called once per frame
@@ -33,5 +37,10 @@ public class Camera2 : MonoBehaviour
             upArea.RemoveAt(0);
             cameraY.RemoveAt(0);
         }
+    }
+
+    private void ChangeBGM()
+    {
+        AudioManager.PlayBGM(AudioManager.BGM.game);
     }
 }
