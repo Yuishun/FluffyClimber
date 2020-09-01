@@ -2192,6 +2192,7 @@ MonoBehaviour:
   BoxYLength: 0.2
   BoxZLength: 0.2
   BoxYOffset: 0.2
+  bGround: 1
   JUMP_TIME_MIN: 0.1
   JUMP_TIME_MAX: 0.75
 --- !u!95 &580133184
@@ -2613,6 +2614,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TriggerArea (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6656976435335143251, guid: 87fdfa8672de8f349b98a87bfa5e25b7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6656976435335143253, guid: 87fdfa8672de8f349b98a87bfa5e25b7,
         type: 3}
@@ -4311,7 +4317,7 @@ PrefabInstance:
     - target: {fileID: 1003829190143978014, guid: 19b44ef0831ea3548b2224c18ae915ac,
         type: 3}
       propertyPath: DirPos_P.y
-      value: 11
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 1003829190143978014, guid: 19b44ef0831ea3548b2224c18ae915ac,
         type: 3}
@@ -5018,6 +5024,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TriggerArea (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6656976435335143251, guid: 87fdfa8672de8f349b98a87bfa5e25b7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6656976435335143253, guid: 87fdfa8672de8f349b98a87bfa5e25b7,
         type: 3}
@@ -6914,6 +6925,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TriggerArea (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6656976435335143251, guid: 87fdfa8672de8f349b98a87bfa5e25b7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6656976435335143253, guid: 87fdfa8672de8f349b98a87bfa5e25b7,
         type: 3}
