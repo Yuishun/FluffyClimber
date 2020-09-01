@@ -91,7 +91,7 @@ public class PlayerMovement_y : MonoBehaviour
         }
 
         //  しゃがみ
-        if (Input.GetKey(KeyCode.LeftControl))
+        if (IMIsButtonOn(IM_BUTTON.DOWN))
         {
             if (!bCrouch && bGround)
             {
