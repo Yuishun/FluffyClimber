@@ -16,6 +16,8 @@ public class Wallup : MonoBehaviour
 
     [SerializeField]
     private Timer _timer;
+    [SerializeField]
+    private float _borderspeed;
 
     // Start is called before the first frame update
     void Start()
@@ -39,7 +41,7 @@ public class Wallup : MonoBehaviour
         {
                 transform.position =
         new Vector3(transform.position.x,
-        transform.position.y + Time.deltaTime,
+        transform.position.y + _borderspeed *Time.deltaTime,
         transform.position.z);
         }
 

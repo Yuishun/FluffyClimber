@@ -12,13 +12,10 @@ public class Timer : MonoBehaviour
     [SerializeField]
     private float MAX_TIME;
 
-    Text _text;
-
     // Start is called before the first frame update
     void Start()
     {
         _time = MAX_TIME;
-        _text = GetComponent<Text>();
         s_flag = false;
 
     }
@@ -29,14 +26,11 @@ public class Timer : MonoBehaviour
 
         if (_time < 0)
         {
-            //_text.text = _time.ToString("Game Over");
             s_flag = true;
-            _text.text = _time.ToString("作動");
         }
         else
         {
             _time -= Time.deltaTime;
-            _text.text = _time.ToString("作動まで残り : 000");
         }
     }
 
