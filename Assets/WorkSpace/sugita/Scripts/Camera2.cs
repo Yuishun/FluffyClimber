@@ -59,6 +59,8 @@ public class Camera2 : MonoBehaviour
             transform.position.z);
 
             Index++;
+            if (Index >= upArea.Count)
+                Index -= 1;
         }
         
 
