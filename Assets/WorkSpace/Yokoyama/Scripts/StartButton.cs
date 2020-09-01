@@ -7,6 +7,7 @@ public class StartButton : MonoBehaviour
 {
     public void Clicked()
     {
+        AudioManager.PlaySE(AudioManager.SE.button);
         StartCoroutine("StartLoad");
     }
 
@@ -20,7 +21,7 @@ public class StartButton : MonoBehaviour
             yield return 0;
         }
 
-        SceneManager.LoadScene("DemoScene");
+        SceneManager.LoadScene("Stage2");
         yield break;
     }
 }

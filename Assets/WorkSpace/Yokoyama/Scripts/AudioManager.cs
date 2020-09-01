@@ -41,6 +41,7 @@ public class AudioManager : MonoBehaviour
         title = 0,
         game,
         death,
+        clear,
         BGM_MAX,
     };
     public enum SE : int
@@ -49,6 +50,7 @@ public class AudioManager : MonoBehaviour
         jump,
         walk,
         death,
+        button,
         SE_MAX,
     };
 
@@ -58,12 +60,14 @@ public class AudioManager : MonoBehaviour
         "のんびりタイム",
         "情動カタルシスL",
         "bass_slap1",
+        "clearBGM",
     };
     private string[] seNames = new string[] {
         "kokeru",
         "jump",
         "walk3",
         "si",
+        "buttonSE",
     };
 
     //=============================================================================================

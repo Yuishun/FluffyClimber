@@ -6,7 +6,7 @@ public class TitleScript : MonoBehaviour
 {
     [SerializeField] private GameObject hito;
 
-    private float timer = 0;
+    private float timer = 5;
     GameObject prevObj = null;
 
     // Start is called before the first frame update
@@ -31,20 +31,21 @@ public class TitleScript : MonoBehaviour
     {
         timer += Time.deltaTime;
 
-        if(timer >= 3f)
+        if(timer >= 5f)
         {
             if (prevObj)
                 Destroy(prevObj);
 
             timer = 0;
 
-            GameObject obj_ = Instantiate(hito, new Vector3(Random.value * 0.5f - 1f, 2, 1), Quaternion.identity) as GameObject;
+            GameObject obj_ = Instantiate(hito, new Vector3((Random.value * 2f - 1f) * 2f, 7, -6), Quaternion.Euler(Random.value * 360f, Random.value * 360f, Random.value * 360f)) as GameObject;
             if(obj_)
             {
                 Rigidbody rb_ = obj_.GetComponent<Rigidbody>();
                 if(rb_)
                 {
-                    rb_.AddTorque(new Vector3(Random.value, Random.value, Random.value));
+                    rb_.AddTorque(new Vector3(Random.value, Random.value, Random.value) * 10f);
+                    prevObj = obj_;
                 }
             }
         }
