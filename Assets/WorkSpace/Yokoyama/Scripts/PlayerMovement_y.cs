@@ -30,7 +30,7 @@ public class PlayerMovement_y : MonoBehaviour
     private bool bCrouch = false;
 
     private Animator Anim = null;
-    private bool bGround = true;
+    [SerializeField] private bool bGround = true;
     public bool bGrounded { get { return bGround; } }
 
     private bool m_bDead = false;
@@ -62,6 +62,11 @@ public class PlayerMovement_y : MonoBehaviour
     void Update()
     {
         Vector3 _pos = transform.position;
+
+        if( Mathf.Abs(Input.GetAxis("LRTrigger")) > 0.5f)
+        {
+            Explosion();
+        }
 
         Debug.DrawLine(_pos, transform.position + Vector3.down * RayLength);
         //Debug.DrawLine(_pos, transform.position + Vector3.right * XRayLength);
@@ -173,7 +178,7 @@ public class PlayerMovement_y : MonoBehaviour
                 jumpState = JumpState.InAir;
                 bGround = false;
             }
-            else if (IMIsButtonOn(IM_BUTTON.JUMP))
+            if (IMIsButtonOn(IM_BUTTON.JUMP))
             {
                 JumpTimer = 0;
                 jumpState = JumpState.HoldBtn;
@@ -184,7 +189,7 @@ public class PlayerMovement_y : MonoBehaviour
         }
         else
         {
-            if(IMIsButtonOn(IM_BUTTON.JUMP))
+            if(IMKeepButtonOn(IM_BUTTON.JUMP))
             {
                 if(CheckGround())
                 {
@@ -330,7 +335,7 @@ public class PlayerMovement_y : MonoBehaviour
 
         m_bDead = true;
         RagdollCtrl.Explosion();
-        AudioManager.PlaySE(AudioManager.SE.death, 0.75f, 3);
+        AudioManager.PlaySE(AudioManager.SE.death, 1f, 3);
 
         UnityAction act_ = this.PlayDeathBGM;
 
