@@ -50,6 +50,8 @@ public class PlayerMovement_y : MonoBehaviour
     }
     private JumpState jumpState = JumpState.HoldBtn;
 
+    [SerializeField] int m_iJumpCount = 0;
+
 
     // Start is called before the first frame update
     void Start()
@@ -66,6 +68,15 @@ public class PlayerMovement_y : MonoBehaviour
         if( Mathf.Abs(Input.GetAxis("LRTrigger")) > 0.5f)
         {
             Explosion();
+        }
+
+        if(IMKeepButtonOn(IM_BUTTON.JUMP))
+        {
+            m_iJumpCount++;
+        }
+        else
+        {
+            m_iJumpCount = 0;
         }
 
         Debug.DrawLine(_pos, transform.position + Vector3.down * RayLength);
@@ -178,7 +189,7 @@ public class PlayerMovement_y : MonoBehaviour
                 jumpState = JumpState.InAir;
                 bGround = false;
             }
-            if (IMIsButtonOn(IM_BUTTON.JUMP))
+            if (m_iJumpCount > 0)
             {
                 JumpTimer = 0;
                 jumpState = JumpState.HoldBtn;
@@ -189,7 +200,7 @@ public class PlayerMovement_y : MonoBehaviour
         }
         else
         {
-            if(IMKeepButtonOn(IM_BUTTON.JUMP))
+            if(m_iJumpCount > 0)
             {
                 if(CheckGround())
                 {
@@ -205,7 +216,7 @@ public class PlayerMovement_y : MonoBehaviour
                 case JumpState.HoldBtn:
                     rb.AddForce(Vector3.up * JUMP_VELO, ForceMode.Acceleration);
 
-                    if (IMKeepButtonOn(IM_BUTTON.JUMP))
+                    if (m_iJumpCount > 0)
                     {
                         JumpTimer += Time.fixedDeltaTime;
                         if(JumpTimer >= JUMP_TIME_MAX)
@@ -317,14 +328,32 @@ public class PlayerMovement_y : MonoBehaviour
         Ray ray_ = new Ray(transform.position, Vector3.down);
         int layerMask_ = ~((1 << 8) | (1 << 9));
 
-        return Physics.SphereCast(ray_, 0.2f, 0.64f, layerMask_, QueryTriggerInteraction.Ignore);
+        bool retVal = Physics.SphereCast(ray_, 0.2f, 0.64f, layerMask_, QueryTriggerInteraction.Ignore);
+
+        if (retVal)
+        {
+            Vector3 _velo = rb.velocity;
+            _velo.y = 0;
+            rb.velocity = _velo;
+        }
+
+        return retVal;
     }
     private bool CheckGround(float rayLength)
     {
         Ray ray_ = new Ray(transform.position, Vector3.down);
         int layerMask_ = ~((1 << 8) | (1 << 9));
 
-        return Physics.SphereCast(ray_, 0.2f, rayLength, layerMask_, QueryTriggerInteraction.Ignore);
+        bool retVal = Physics.SphereCast(ray_, 0.2f, rayLength, layerMask_, QueryTriggerInteraction.Ignore);
+
+        if(retVal)
+        {
+            Vector3 _velo = rb.velocity;
+            _velo.y = 0;
+            rb.velocity = _velo;
+        }
+
+        return retVal;
     }
 
 
