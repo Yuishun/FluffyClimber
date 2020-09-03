@@ -93,6 +93,7 @@ public class Lift_Default : MonoBehaviour
         oldvel = rb.velocity;
     }
 
+
     // プレイヤーが乗っても落ちないようにする
     protected void OnPlayerMove()
     {
@@ -132,7 +133,8 @@ public class Lift_Default : MonoBehaviour
         {
             PlayerMovement_y p = collision.transform.GetComponent<PlayerMovement_y>();
             // 地面についているかつポジションが上にある場合乗っている
-            if (p.bGrounded && p.transform.position.y > transform.position.y)
+            if (p.bGrounded && p.transform.position.y > transform.position.y
+                && Mathf.Abs(p.transform.position.x-transform.position.x)<transform.localScale.x/2)
             {                                    
 
                 Onplayer = p;

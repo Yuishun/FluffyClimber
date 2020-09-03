@@ -2195,6 +2195,7 @@ MonoBehaviour:
   bGround: 1
   JUMP_TIME_MIN: 0.1
   JUMP_TIME_MAX: 0.75
+  m_iJumpCount: 0
 --- !u!95 &580133184
 Animator:
   serializedVersion: 3
@@ -4234,6 +4235,12 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: f235a9cd29e022a4e99d9b16a0086fd3, type: 2}
+    - target: {fileID: 1003829190143978001, guid: 19b44ef0831ea3548b2224c18ae915ac,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: b1eb9a4f9a86f2c4fa644349c4b9cf84,
+        type: 2}
     - target: {fileID: 1003829190143978002, guid: 19b44ef0831ea3548b2224c18ae915ac,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4302,7 +4309,7 @@ PrefabInstance:
     - target: {fileID: 1003829190143978014, guid: 19b44ef0831ea3548b2224c18ae915ac,
         type: 3}
       propertyPath: DirPos.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1003829190143978014, guid: 19b44ef0831ea3548b2224c18ae915ac,
         type: 3}
@@ -4312,7 +4319,7 @@ PrefabInstance:
     - target: {fileID: 1003829190143978014, guid: 19b44ef0831ea3548b2224c18ae915ac,
         type: 3}
       propertyPath: Speed_P
-      value: 10
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1003829190143978014, guid: 19b44ef0831ea3548b2224c18ae915ac,
         type: 3}
@@ -4323,10 +4330,20 @@ PrefabInstance:
         type: 3}
       propertyPath: useTrigger
       value: 
-      objectReference: {fileID: 1541569919}
+      objectReference: {fileID: 0}
     - target: {fileID: 1003829190143978014, guid: 19b44ef0831ea3548b2224c18ae915ac,
         type: 3}
       propertyPath: DirPos.Array.data[0].x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1003829190143978014, guid: 19b44ef0831ea3548b2224c18ae915ac,
+        type: 3}
+      propertyPath: dontChange
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1003829190143978014, guid: 19b44ef0831ea3548b2224c18ae915ac,
+        type: 3}
+      propertyPath: DirPos.Array.data[0].y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1003829190143978015, guid: 19b44ef0831ea3548b2224c18ae915ac,
@@ -5236,18 +5253,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1235276242}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1541569919 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1235000985545959309, guid: 87fdfa8672de8f349b98a87bfa5e25b7,
-    type: 3}
-  m_PrefabInstance: {fileID: 1235276242}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1541569918}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c17d20cbee2e994bb6bdc2ed13abb29, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &1541569920
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7049,6 +7054,11 @@ PrefabInstance:
         type: 3}
       propertyPath: BoxYOffset
       value: -0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1717031194834644870, guid: 23a0309937adb264fab21867d1faf6be,
+        type: 3}
+      propertyPath: MAX_VELO_X
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1717031195470954761, guid: 23a0309937adb264fab21867d1faf6be,
         type: 3}

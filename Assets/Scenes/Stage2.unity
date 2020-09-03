@@ -717,6 +717,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: TriggerArea (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 6656976435335143251, guid: 87fdfa8672de8f349b98a87bfa5e25b7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6656976435335143253, guid: 87fdfa8672de8f349b98a87bfa5e25b7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -789,18 +794,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 87fdfa8672de8f349b98a87bfa5e25b7, type: 3}
---- !u!114 &200856568 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1235000985545959309, guid: 87fdfa8672de8f349b98a87bfa5e25b7,
-    type: 3}
-  m_PrefabInstance: {fileID: 200856567}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 200856569}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c17d20cbee2e994bb6bdc2ed13abb29, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &200856569 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6656976435335143251, guid: 87fdfa8672de8f349b98a87bfa5e25b7,
@@ -3269,6 +3262,12 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: f235a9cd29e022a4e99d9b16a0086fd3, type: 2}
+    - target: {fileID: 1003829190143978001, guid: 19b44ef0831ea3548b2224c18ae915ac,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: b1eb9a4f9a86f2c4fa644349c4b9cf84,
+        type: 2}
     - target: {fileID: 1003829190143978002, guid: 19b44ef0831ea3548b2224c18ae915ac,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3358,7 +3357,7 @@ PrefabInstance:
         type: 3}
       propertyPath: useTrigger
       value: 
-      objectReference: {fileID: 200856568}
+      objectReference: {fileID: 0}
     - target: {fileID: 1003829190143978014, guid: 19b44ef0831ea3548b2224c18ae915ac,
         type: 3}
       propertyPath: DirPos.Array.data[0].x
