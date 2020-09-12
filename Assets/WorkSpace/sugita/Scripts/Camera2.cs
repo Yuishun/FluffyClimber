@@ -38,7 +38,8 @@ public class Camera2 : MonoBehaviour
             _player.position.y < transform.position.y)
         {
             upArea[--Index].Flag = false;
-            Index--;
+            if(Index!=upArea.Count-1)
+                Index--;
             if (Index < 0)
                 Index = 0;
             transform.position =
@@ -50,8 +51,8 @@ public class Camera2 : MonoBehaviour
                 Index = 1;
         }
 
-
-        if (upArea[Index].UpCamera())
+        if (Index < upArea.Count &&
+            upArea[Index].UpCamera())
         {
             transform.position =
             new Vector3(transform.position.x,
@@ -59,8 +60,6 @@ public class Camera2 : MonoBehaviour
             transform.position.z);
 
             Index++;
-            if (Index >= upArea.Count)
-                Index -= 1;
         }
         
 
