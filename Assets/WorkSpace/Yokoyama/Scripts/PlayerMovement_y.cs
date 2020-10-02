@@ -7,6 +7,8 @@ using static InputManager_y;
 public class PlayerMovement_y : MonoBehaviour
 {
     [SerializeField] private float VELOCITY = 30.0f;
+    [SerializeField] private bool bDecline = false;
+    [SerializeField] private float DECLINE = 15.0f;
     [SerializeField] private float VELO_IN_AIR = 30.0f;
     [SerializeField] private float JUMP_IMPACT = 5f;
     [SerializeField] private float JUMP_VELO = 5f;
@@ -51,6 +53,7 @@ public class PlayerMovement_y : MonoBehaviour
     private JumpState jumpState = JumpState.HoldBtn;
 
     [SerializeField] int m_iJumpCount = 0;
+    private float m_fHorAxisInput = 0;
 
 
     // Start is called before the first frame update
@@ -78,6 +81,8 @@ public class PlayerMovement_y : MonoBehaviour
         {
             m_iJumpCount = 0;
         }
+
+        m_fHorAxisInput = IMGetAxisValue(IM_AXIS.L_STICK_X);
 
         Debug.DrawLine(_pos, transform.position + Vector3.down * RayLength);
         //Debug.DrawLine(_pos, transform.position + Vector3.right * XRayLength);
@@ -135,11 +140,11 @@ public class PlayerMovement_y : MonoBehaviour
         Vector3 vecDelta_ = Vector3.zero;
 
         //  左右移動
-        float horAxis_ = IMGetAxisValue(IM_AXIS.L_STICK_X);
-        vecDelta_ += horAxis_ * Vector3.right * (bGround ? VELOCITY : VELO_IN_AIR);
+        //float horAxis_ = IMGetAxisValue(IM_AXIS.L_STICK_X);
+        vecDelta_ += m_fHorAxisInput * Vector3.right * (bGround ? VELOCITY : VELO_IN_AIR);
 
         //  animation
-        bool bRunning = Mathf.Abs(horAxis_) > 0.001f;
+        bool bRunning = Mathf.Abs(m_fHorAxisInput) > 0.001f;
         Anim.SetBool("bRunning", bRunning);
 
         if(bRunning)
@@ -147,7 +152,7 @@ public class PlayerMovement_y : MonoBehaviour
             if(bGround)
                 AudioManager.PlaySE(AudioManager.SE.walk, 0.75f, 0);
 
-            if(Mathf.Sign(horAxis_) > 0)
+            if(Mathf.Sign(m_fHorAxisInput) > 0)
             {
                 transform.rotation = Quaternion.Euler(0, 0, 0);
             }
@@ -160,12 +165,29 @@ public class PlayerMovement_y : MonoBehaviour
         //transform.position += vecDelta_;
         rb.AddForce(vecDelta_, ForceMode.Acceleration);
 
-        //  X方向速度制限
         Vector3 currentVelocity = rb.velocity;
+        //  X方向速度制限
+        
         if(Mathf.Abs(currentVelocity.x) >= MAX_VELO_X)
         {
             currentVelocity.x = Mathf.Sign(currentVelocity.x) * MAX_VELO_X;
             rb.velocity = currentVelocity;
+        }
+
+        if (bDecline)
+        {
+            if (!bRunning)
+            {
+                if (Mathf.Abs(currentVelocity.x) > 0.001f)
+                {
+                    rb.AddForce(-1f * Mathf.Sign(currentVelocity.x) * Vector3.right * DECLINE);
+                    if(Mathf.Sign(rb.velocity.x) != Mathf.Sign(currentVelocity.x))
+                    {
+                        currentVelocity.x = 0;
+                        rb.velocity = currentVelocity;
+                    }
+                }
+            }
         }
     }
 
