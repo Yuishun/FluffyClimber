@@ -30,6 +30,8 @@ public class Lift_Default : MonoBehaviour
 
     Vector3 oldvel;
 
+    float Ragtime = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -110,11 +112,23 @@ public class Lift_Default : MonoBehaviour
             }
             else
             {
-                // Ragdoll時は全体に補正を加える。(いずれ落ちる)
-                Onplayer.Ragdollctrl.AllRagdollPlusVelocity(rb.velocity * Time.deltaTime);
+                Ragtime += Time.deltaTime;
+                if (Ragtime < 1)
+                {
+                    // Ragdoll時は全体に補正を加える。(いずれ落ちる)
+                    Onplayer.Ragdollctrl.AllRagdollPlusVelocity(rb.velocity * Time.deltaTime);
+                }
+                else
+                {
+                    Onplayer.Ragdollctrl.Getup();
+                    Ragtime = 0;
+                }
             }
             if (!Onplayer.bGrounded)    //とりあえず離れたらやめる
+            {
                 Onplayer = null;
+                //Ragtime = 0;
+            }
         }
     }
     // 変化後の処理を書く仮想関数
@@ -167,6 +181,7 @@ public class Lift_Default : MonoBehaviour
         {
             Onplayer = null;
             //isOnPlayer = false;
+            Ragtime = 0;
         }
     }
     // ***************************************************************************

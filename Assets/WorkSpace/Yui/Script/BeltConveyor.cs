@@ -76,6 +76,9 @@ public class BeltConveyor : MonoBehaviour
     // 接触判定
     private void OnCollisionStay(Collision collision)
     {
+        if (Onplayer != null)
+            return;
+
         // 本体に当たった時
         if (collision.gameObject.layer == LayerMask.NameToLayer("Player_Root"))
         {
