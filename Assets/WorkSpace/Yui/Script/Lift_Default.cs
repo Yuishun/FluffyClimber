@@ -113,15 +113,16 @@ public class Lift_Default : MonoBehaviour
             else
             {
                 Ragtime += Time.deltaTime;
-                if (Ragtime < 1)
-                {
-                    // Ragdoll時は全体に補正を加える。(いずれ落ちる)
-                    Onplayer.Ragdollctrl.AllRagdollPlusVelocity(rb.velocity * Time.deltaTime);
-                }
-                else
+                if (Ragtime >= 1 && rb.velocity.magnitude <= 3)
                 {
                     Onplayer.Ragdollctrl.Getup();
                     Ragtime = 0;
+                }
+                else
+                {
+                    // Ragdoll時は全体に補正を加える。(いずれ落ちる)
+                    Onplayer.Ragdollctrl.AllRagdollPlusVelocity(rb.velocity * Time.deltaTime);
+
                 }
             }
             if (!Onplayer.bGrounded)    //とりあえず離れたらやめる
@@ -188,11 +189,14 @@ public class Lift_Default : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        Vector3 pos = transform.position;
-        Gizmos.DrawLine(pos, pos + DirPos[0]);
-        for (int i = 1; i < DirPos.Count; i++)
+        if (DirPos.Count > 0)
         {
-            Gizmos.DrawLine(pos + DirPos[i - 1], pos + DirPos[i]);
+            Vector3 pos = transform.position;
+            Gizmos.DrawLine(pos, pos + DirPos[0]);
+            for (int i = 1; i < DirPos.Count; i++)
+            {
+                Gizmos.DrawLine(pos + DirPos[i - 1], pos + DirPos[i]);
+            }
         }
 
         DrawGizmosChild();

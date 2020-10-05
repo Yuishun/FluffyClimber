@@ -33,13 +33,15 @@ public class Camera2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // プレイヤーの座標をビュー座標に変換
         var viewPos=Camera.main.WorldToViewportPoint(_player.position);
+
+        // プレイヤーが画面外かつカメラより下方向の場合（落ちた時用）
         if (!rect.Contains(viewPos) &&
-            _player.position.y < transform.position.y)
+            _player.position.y < transform.position.y - 3)
         {
             upArea[--Index].Flag = false;
-            if(Index!=upArea.Count-1)
-                Index--;
+            Index--;
             if (Index < 0)
                 Index = 0;
             transform.position =
@@ -49,8 +51,10 @@ public class Camera2 : MonoBehaviour
 
             if (Index == 0)
                 Index = 1;
+            
         }
 
+        // 指定エリアに入っていたらカメラの位置を上げる
         if (Index < upArea.Count &&
             upArea[Index].UpCamera())
         {

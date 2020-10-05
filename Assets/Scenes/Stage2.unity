@@ -354,7 +354,7 @@ PrefabInstance:
     - target: {fileID: 6656976435335143253, guid: 87fdfa8672de8f349b98a87bfa5e25b7,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6656976435335143253, guid: 87fdfa8672de8f349b98a87bfa5e25b7,
         type: 3}
@@ -2618,7 +2618,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 934330696}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 16, y: 0, z: 0}
+  m_LocalPosition: {x: 15, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 106439130}
@@ -2644,9 +2644,9 @@ MonoBehaviour:
   DirPos: {x: 1, y: 0, z: 0}
   Speed: 15
   DirPos_P:
-  - {x: 0, y: 3, z: 0}
-  - {x: -6, y: 3, z: 0}
-  - {x: -6, y: -4, z: 0}
+  - {x: -1, y: 3, z: 0}
+  - {x: -7, y: 3, z: 0}
+  - {x: -7, y: -4, z: 0}
   Speed_P:
   - 15
   - 5
