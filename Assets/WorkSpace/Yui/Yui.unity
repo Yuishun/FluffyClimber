@@ -1125,7 +1125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c3fe8b7488c84148aab3505ecb2c771, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _player: {fileID: 0}
+  _player: {fileID: 1717031194107852092}
   upArea:
   - {fileID: 1046408009}
   - {fileID: 1682652590}
@@ -2199,6 +2199,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d85479e58224aed44938f07c0db6d587, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bInvincible: 1
   VELOCITY: 30
   bDecline: 0
   DECLINE: 15
@@ -7064,6 +7065,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 23a0309937adb264fab21867d1faf6be, type: 3}
+--- !u!4 &1717031194107852092 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 683128036669396532, guid: 23a0309937adb264fab21867d1faf6be,
+    type: 3}
+  m_PrefabInstance: {fileID: 1717031194107852091}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4008409800759658984
 PrefabInstance:
   m_ObjectHideFlags: 0

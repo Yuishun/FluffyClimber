@@ -22,7 +22,7 @@ public class Camera2 : MonoBehaviour
     {
         //_player = GameObject.Find("Sphere");
         //_player = GameObject.Find("hito_model").transform.GetChild(0);
-        p_Y = _player.GetComponent<PlayerMovement_y>();
+        p_Y = _player.root.GetComponent<PlayerMovement_y>();
 
         UnityAction act_ = this.ChangeBGM;
 
