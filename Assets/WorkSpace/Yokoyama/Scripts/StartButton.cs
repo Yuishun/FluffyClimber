@@ -21,7 +21,7 @@ public class StartButton : MonoBehaviour
             yield return 0;
         }
 
-        SceneManager.LoadScene("Stage2");
+        SceneManager.LoadScene("StageSelect");
         yield break;
     }
 }
