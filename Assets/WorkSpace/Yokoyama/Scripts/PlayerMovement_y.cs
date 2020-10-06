@@ -6,6 +6,10 @@ using static InputManager_y;
 
 public class PlayerMovement_y : MonoBehaviour
 {
+    [Header("Debug用の設定です"), Space(3)]
+    [SerializeField] private bool bInvincible = true;
+
+    [Header("各種設定"), Space(3)]
     [SerializeField] private float VELOCITY = 30.0f;
     [SerializeField] private bool bDecline = false;
     [SerializeField] private float DECLINE = 15.0f;
@@ -381,6 +385,9 @@ public class PlayerMovement_y : MonoBehaviour
 
     public void Explosion()
     {
+        if (bInvincible)
+            return;
+
         if (m_bDead)
             return;
 
@@ -388,7 +395,8 @@ public class PlayerMovement_y : MonoBehaviour
         RagdollCtrl.Explosion();
         AudioManager.PlaySE(AudioManager.SE.death, 1f, 3);
 
-        UnityAction act_ = this.PlayDeathBGM;
+        //UnityAction act_ = this.PlayDeathBGM;
+        UnityAction act_ = () => { AudioManager.PlayBGM(AudioManager.BGM.death, 2.5f); };
 
         AudioManager.StopBGM(true, 0.5f, act_);
 
