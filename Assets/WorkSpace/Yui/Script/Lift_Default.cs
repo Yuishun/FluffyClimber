@@ -18,6 +18,8 @@ public class Lift_Default : MonoBehaviour
     [SerializeField, Header("Triggerを使う場合セットする")]
     TriggerArea useTrigger = null;
 
+    [Header("目的地に着いたら元の位置に戻るまで変化しない")]
+    public bool ChangeDontChange;
 
     [HideInInspector] public bool isOnPlayer = false;
 
@@ -84,6 +86,9 @@ public class Lift_Default : MonoBehaviour
                 // PingPong(いったり来たりさせる)
                 if (PingPong && (nowIndex == DirPos.Count - 1 || nowIndex == 0))
                     isReturn = !isReturn;
+
+                if (ChangeDontChange && dontChange)
+                    dontChange = false;
             }
         }
         else   // 変化後

@@ -3097,6 +3097,11 @@ PrefabInstance:
       propertyPath: DirPos.Array.data[0].x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1003829190143978014, guid: 19b44ef0831ea3548b2224c18ae915ac,
+        type: 3}
+      propertyPath: ChangeDontChange
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1003829190143978015, guid: 19b44ef0831ea3548b2224c18ae915ac,
         type: 3}
       propertyPath: m_Name

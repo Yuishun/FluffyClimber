@@ -10,9 +10,6 @@ public class Lift_Pos : Lift_Default
     [Header("変化後のスピード")]
     public float Speed_P;
 
-    [Header("目的地に着いたら元の位置に戻るまで変化しない")]
-    public bool ChangeDontChange;
-
     //override protected void Start2()
     //{
     //    
@@ -31,7 +28,11 @@ public class Lift_Pos : Lift_Default
             OnPlayerMove();
         }
         else    // 着いたらとりあえず消す
+        {
             isOnPlayer = false;
+            if (ChangeDontChange)
+                dontChange = true;
+        }
     }
 
     protected override void DrawGizmosChild()   
