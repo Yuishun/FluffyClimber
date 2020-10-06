@@ -13,7 +13,7 @@ public class Camera2 : MonoBehaviour
     public List<Sou> upArea = new List<Sou>();
     public List<float> cameraY = new List<float>();
 
-    int Index = 1;
+    int Index = 1, D_Index = -1;
 
     Rect rect = new Rect(0, 0, 1, 1); // 画面内か判定するためのRect
 
@@ -35,6 +35,14 @@ public class Camera2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            D_ChangeCamera();
+            return;
+        }
+        else
+            D_Index = -1;
+
         // プレイヤーの座標をビュー座標に変換
         var viewPos=Camera.main.WorldToViewportPoint(_player.position);
 
@@ -53,8 +61,7 @@ public class Camera2 : MonoBehaviour
                         transform.position.z);            
 
             if (Index == 0)
-                Index = 1;
-            
+                Index = 1;            
         }
 
         // 指定エリアに入っていたらカメラの位置を上げる
@@ -75,5 +82,29 @@ public class Camera2 : MonoBehaviour
     private void ChangeBGM()
     {
         AudioManager.PlayBGM(AudioManager.BGM.game, 0.13f);
+    }
+
+    void D_ChangeCamera()
+    {
+        if (Input.GetKeyDown(KeyCode.UpArrow) &&
+            Index + D_Index < upArea.Count - 1)
+        {
+            D_Index++;
+
+            transform.position =
+               new Vector3(transform.position.x,
+               cameraY[Index + D_Index],
+               transform.position.z);
+        }
+        else if(Input.GetKeyDown(KeyCode.DownArrow) &&
+            Index + D_Index > 0)
+        {
+            D_Index--;
+
+            transform.position =
+               new Vector3(transform.position.x,
+               cameraY[Index + D_Index],
+               transform.position.z);
+        }
     }
 }
