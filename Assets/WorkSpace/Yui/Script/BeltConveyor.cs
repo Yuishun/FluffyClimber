@@ -60,15 +60,56 @@ public class BeltConveyor : MonoBehaviour
             if (!dontChange)
             {
                 isOnPlayer = true;
-                mat.SetFloat("_DirX", uvSpeed_P.x);
-                mat.SetFloat("_DirY", uvSpeed_P.y);
+                float rot = TexRot(uvSpeed_P);
+                mat.SetFloat("_RotType", rot);
+                Vector2 v = RotVec(uvSpeed_P, rot);
+                mat.SetFloat("_DirX", v.x);
+                mat.SetFloat("_DirY", v.y);
             }
         }
         else
         {
             isOnPlayer = false;
-            mat.SetFloat("_DirX", uvSpeed.x);
-            mat.SetFloat("_DirY", uvSpeed.y);
+            float rot = TexRot(uvSpeed);
+            mat.SetFloat("_RotType", rot);
+            Vector2 v = RotVec(uvSpeed, rot);
+            mat.SetFloat("_DirX", v.x);
+            mat.SetFloat("_DirY", v.y);
+        }
+    }
+
+    float TexRot(Vector2 vec)
+    {
+        if(Mathf.Abs(vec.x) > Mathf.Abs(vec.y))
+        {
+            if (vec.x > 0)
+                return 3;   // 右
+            else
+                return 1;   // 左
+        }
+        else
+        {
+            if (vec.y > 0)
+                return 2;   // 上
+            else
+                return 0;   // 下
+        }
+    }
+
+    Vector2 RotVec(Vector2 vec, float rot)  // ベクトルを回転
+    {
+        switch (rot)
+        {
+            case 0:
+                return vec;
+            case 2:
+                return -vec;
+            case 1: // 左
+                return new Vector2(-vec.y, vec.x);
+            case 3: // 右
+                return new Vector2(vec.y, -vec.x);
+            default:
+                return Vector2.zero;
         }
     }
 
