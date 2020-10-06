@@ -5,7 +5,7 @@
         _MainTex ("Texture", 2D) = "white" {}
 		_DirX ("DirVec_X",Float) = 0
 		_DirY ("DirVec_Y",Float) = 0
-
+		[Enum(0deg,0,90deg,1, 180deg,2, 270deg,3)] _RotType("Rotate Type", Float) = 0
     }
     SubShader
     {
@@ -40,11 +40,19 @@
 
 			float _DirX, _DirY;
 
+			float _RotType;
+
             v2f vert (appdata v)
             {
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
-                o.uv = TRANSFORM_TEX(v.uv, _MainTex);
+				float2 edtuv = TRANSFORM_TEX(v.uv, _MainTex);
+				float tmp;
+				if (_RotType == 0) {}
+				else if (_RotType == 1) { tmp = edtuv.x; edtuv.x = 1 - edtuv.y; edtuv.y = tmp; }
+				else if (_RotType == 2) { edtuv.x = 1 - edtuv.x; edtuv.y = 1 - edtuv.y; }
+				else if (_RotType == 3) { tmp = edtuv.x; edtuv.x = edtuv.y; edtuv.y = 1 - tmp; }
+				o.uv = edtuv;
                 UNITY_TRANSFER_FOG(o,o.vertex);
                 return o;
             }
