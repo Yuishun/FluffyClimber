@@ -21,7 +21,7 @@ public class AnimationButton : MonoBehaviour
 
     public void Clicked()
     {
-        AudioManager.PlaySE(AudioManager.SE.button);
+        AudioManager.PlaySE(AudioManager.SE.button, 1f);
         StartCoroutine("StartLoad");
     }
 
