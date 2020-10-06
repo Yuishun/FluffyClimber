@@ -7,6 +7,7 @@ public class Camera2 : MonoBehaviour
 {
     [SerializeField]
     Transform _player;
+    PlayerMovement_y p_Y;
 
 
     public List<Sou> upArea = new List<Sou>();
@@ -21,6 +22,7 @@ public class Camera2 : MonoBehaviour
     {
         //_player = GameObject.Find("Sphere");
         //_player = GameObject.Find("hito_model").transform.GetChild(0);
+        p_Y = _player.GetComponent<PlayerMovement_y>();
 
         UnityAction act_ = this.ChangeBGM;
 
@@ -38,7 +40,8 @@ public class Camera2 : MonoBehaviour
 
         // プレイヤーが画面外かつカメラより下方向の場合（落ちた時用）
         if (!rect.Contains(viewPos) &&
-            _player.position.y < transform.position.y - 3)
+            _player.position.y < transform.position.y - 3 &&
+            p_Y.Ragdollctrl.State != Ragdoll_enable.RagdollState.RagdolltoAnim1)
         {
             upArea[--Index].Flag = false;
             Index--;

@@ -14,6 +14,7 @@ public class Ragdoll_enable : MonoBehaviour
         get { return isRagdoll; }
     }
     RagdollState _state;
+    public RagdollState State { get { return _state; } }
     public bool canGetup = true;
 
     Animator _anim;

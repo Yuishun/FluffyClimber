@@ -1040,6 +1040,7 @@ GameObject:
   - component: {fileID: 394310488}
   - component: {fileID: 394310487}
   - component: {fileID: 394310486}
+  - component: {fileID: 394310489}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1112,6 +1113,27 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &394310489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 394310485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c3fe8b7488c84148aab3505ecb2c771, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _player: {fileID: 0}
+  upArea:
+  - {fileID: 1046408009}
+  - {fileID: 1682652590}
+  - {fileID: 1767458330}
+  cameraY:
+  - 8.7
+  - 15
+  - 24
 --- !u!1 &414237390 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6656976435335143251, guid: 87fdfa8672de8f349b98a87bfa5e25b7,
@@ -7117,26 +7139,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 4008409800759658984}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &4008409800759658986 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5462933545754036866, guid: 57d206649fd5e0343b4d63323b57c2f8,
-    type: 3}
-  m_PrefabInstance: {fileID: 4008409800759658984}
-  m_PrefabAsset: {fileID: 0}
---- !u!64 &4008409800759658987
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4008409800759658986}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
 --- !u!1001 &9007839755835635584
 PrefabInstance:
   m_ObjectHideFlags: 0
