@@ -87,7 +87,7 @@ public class Ragdoll_enable : MonoBehaviour
         }
 
         if (Input.GetKeyDown(KeyCode.L))
-            Explosion();
+            GetComponent<PlayerMovement_y>().Explosion();
             //Squat();
     }
 
@@ -114,8 +114,11 @@ public class Ragdoll_enable : MonoBehaviour
                 t.StoredRotation = t.Transform.localRotation;
             }
             _time = 0;
-            while (_time <= 1f)
+            while (_time < 1f)
             {
+                _time += Time.deltaTime * 2;
+                if (_time > 1f)
+                    _time = 1;
                 // 円形補完で位置と回転を戻していく
                 foreach (TransformComponent t in _transforms)
                 {
@@ -124,9 +127,8 @@ public class Ragdoll_enable : MonoBehaviour
                     t.Transform.localRotation =
                         Quaternion.Slerp(t.StoredRotation, t.DefaultRot, _time);
                 }
-                _time += Time.deltaTime * 2;  
                 yield return null;
-            }           
+            }
             yield return null;
         }
 
@@ -215,6 +217,12 @@ public class Ragdoll_enable : MonoBehaviour
 
     public void Explosion()
     {
+        Camera.main.GetComponent<DeathCamera>().Death(_transforms[0].Transform);
+        StartCoroutine(Dead());
+    }
+    IEnumerator Dead()
+    {
+        yield return new WaitForSecondsRealtime(0.1f);
         // ボーンが制御されるのでアニメーターを切る
         _anim.enabled = false;
         foreach (RigidComponent rb in _rigids)
@@ -223,20 +231,21 @@ public class Ragdoll_enable : MonoBehaviour
             if (rb.RigidBody.gameObject.tag != "IgnoreBone")
             {
                 rb.RigidBody.isKinematic = false;
-            }            
+            }
 
             // 親子関係を切る
             rb.RigidBody.transform.SetParent(transform);
             // Jointを力を加えると壊れる状態に
-            if(rb.Joint != null)
+            if (rb.Joint != null)
                 rb.Joint.breakForce = 1;
             // 爆発方向に力を加える
             rb.RigidBody.AddExplosionForce(40f, _transforms[0].Transform.position,
                 0, 0.0f, ForceMode.Impulse);
         }
-        
+
         // 起き上がらないようにする
         this.enabled = false;
+
     }
 
     //Declare a class that will hold useful information for each body part

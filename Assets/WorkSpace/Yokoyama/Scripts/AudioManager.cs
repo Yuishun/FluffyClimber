@@ -231,13 +231,14 @@ public class AudioManager : MonoBehaviour
     //  SE
     //  -----------------------------------------
     #region SE
-    public static void PlaySE(SE seNumber, float volume = 0.25f, int channel = 0)
+    public static void PlaySE(SE seNumber, float volume = 0.25f, int channel = 0, float pitch = 1f)
     {
         if (instance.seSources[channel].isPlaying)
             return;
 
         instance.seSources[channel].volume = volume;
         instance.seSources[channel].loop = false;
+        instance.seSources[channel].pitch = pitch;
         instance.seSources[channel].clip = instance.seClips[(int)seNumber];
         instance.seSources[channel].PlayOneShot(instance.seSources[channel].clip, volume);
     }
