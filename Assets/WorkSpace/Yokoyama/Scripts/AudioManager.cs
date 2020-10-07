@@ -35,6 +35,24 @@ public class AudioManager : MonoBehaviour
     private bool isPlayingBGM = false;
     private BGM currentBGM = BGM.BGM_MAX;
 
+    //  コルーチンの重複時処理
+    private struct StopBGMCoroutineArguments{
+        public bool        isFading;
+        public float       fadeTime;
+        public UnityAction endAct;
+        public int         channel;
+
+        public StopBGMCoroutineArguments(bool b, float f, UnityAction a, int c)
+        {
+            isFading = b;
+            fadeTime = f;
+            endAct = a;
+            channel = c;
+        }
+    }
+    private Queue<StopBGMCoroutineArguments> remainStopBGMCoroutines = null;
+    private bool isStoppingBGM = false;
+
     //  enum
     public enum BGM : int
     {
@@ -109,6 +127,8 @@ public class AudioManager : MonoBehaviour
         }
         seClips = new List<AudioClip>((int)SE.SE_MAX);
 
+        remainStopBGMCoroutines = new Queue<StopBGMCoroutineArguments>(2);
+
         yield return StartCoroutine("IELoadAudioSources");
         isInit = true;
     }
@@ -177,8 +197,19 @@ public class AudioManager : MonoBehaviour
     /// <param name="endAct">終了処理</param>
     public static void StopBGM(bool isFading = true, float fadeTime = 0.5f, UnityAction endAct = null, int channel = 0)
     {
-        //if (!instance.isPlayingBGM)
-        //    return;
+        //  すでにIEStopBGMが実行中か順番待ちがあるなら処理をストックして待機
+        if(instance.isStoppingBGM || (instance.remainStopBGMCoroutines.Count != 0))
+        {
+            StopBGMCoroutineArguments _arg = new StopBGMCoroutineArguments(isFading, fadeTime, endAct, channel);
+            instance.remainStopBGMCoroutines.Enqueue(_arg);
+            Debug.Log("Enqueue!");
+            //  待機コルーチンが未起動なら起動する
+            if(instance.remainStopBGMCoroutines.Count == 1)
+            {
+                instance.StartCoroutine(instance.IEWaitForEndingStopBGM());
+            }
+            return;
+        }
 
         instance.StartCoroutine(instance.IEStopBGM(isFading, fadeTime, endAct, channel));
     }
@@ -192,6 +223,8 @@ public class AudioManager : MonoBehaviour
     /// <returns></returns>
     private IEnumerator IEStopBGM(bool isFading, float fadeTime, UnityAction endAct, int channel)
     {
+        isStoppingBGM = true;
+
         if (isFading)
         {
             yield return StartCoroutine(IEFadeBGM(fadeTime, channel));
@@ -202,6 +235,8 @@ public class AudioManager : MonoBehaviour
         instance.isPlayingBGM = false;
         if (endAct != null)
             endAct();
+
+        isStoppingBGM = false;
     }
 
     /// <summary>
@@ -211,19 +246,43 @@ public class AudioManager : MonoBehaviour
     /// <returns></returns>
     private IEnumerator IEFadeBGM(float fadeTime, int channel)
     {
+        Debug.Log("IEFadeBGM Start!");
         float baseVolume = instance.bgmSources[channel].volume;
-        float startTime = Time.timeSinceLevelLoad;
+        Debug.Log("Base Volume:" + baseVolume);
         float time = 0f;
 
         while (time < fadeTime)
         {
             float volume = baseVolume * (1f - (time / fadeTime));
             instance.bgmSources[channel].volume = volume;
-            time = Time.timeSinceLevelLoad - startTime;
+            time += Time.deltaTime;
+            Debug.Log("Current Volume:" + volume);
             yield return 0;
         }
 
         instance.bgmSources[channel].volume = 0;
+        Debug.Log("IEFadeBGM End!");
+    }
+
+    private IEnumerator IEWaitForEndingStopBGM()
+    {
+        var _cachedWait = new WaitForSeconds(0.01f);
+
+        //  キューに残りがあるなら引き続き待機
+        while (remainStopBGMCoroutines.Count != 0)
+        {
+            //  実行中のIEStopBGMの終了待ち
+            while (isStoppingBGM)
+            {
+                yield return _cachedWait;
+            }
+
+            //  順番待ちのStopBGMを実行
+            StopBGMCoroutineArguments _args = remainStopBGMCoroutines.Dequeue();
+            StartCoroutine(IEStopBGM(_args.isFading, _args.fadeTime, _args.endAct, _args.channel));
+        }
+
+        yield break;
     }
     #endregion
 
