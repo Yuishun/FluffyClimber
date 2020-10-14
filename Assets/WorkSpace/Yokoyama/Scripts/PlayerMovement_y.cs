@@ -65,6 +65,7 @@ public class PlayerMovement_y : MonoBehaviour
     {
         RagdollCtrl = GetComponent<Ragdoll_enable>();
         Anim = GetComponent<Animator>();
+        GameManager_y.SetCurrentPlayer(this);
     }
 
     // Update is called once per frame
@@ -153,6 +154,7 @@ public class PlayerMovement_y : MonoBehaviour
 
         if(bRunning)
         {
+            //  SE
             if(bGround)
                 AudioManager.PlaySE(AudioManager.SE.walk, 0.75f, 0);
 
@@ -164,6 +166,11 @@ public class PlayerMovement_y : MonoBehaviour
             {
                 transform.rotation = Quaternion.Euler(0, 180, 0);
             }
+
+            //  VFX
+            Vector3 _pos = transform.position;
+            _pos.y -= 1f;
+            EffectManager.ParticleInit(0, _pos);
         }
 
         //transform.position += vecDelta_;

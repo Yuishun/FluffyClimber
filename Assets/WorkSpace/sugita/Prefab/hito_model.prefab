@@ -344,7 +344,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.34963906, y: -0.000000029802322, z: 0}
+  m_ConnectedAnchor: {x: -0.34963894, y: -0.000000029802322, z: 0}
   serializedVersion: 2
   m_SwingAxis: {x: 1, y: 1, z: 0}
   m_TwistLimitSpring:
@@ -1017,7 +1017,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d85479e58224aed44938f07c0db6d587, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bInvincible: 1
+  psRunPrefab: {fileID: 2003619157219985157, guid: 4433011bb64e95a4381229409bd8e8aa,
+    type: 3}
+  psRun: {fileID: 0}
   VELOCITY: 30
+  bDecline: 0
+  DECLINE: 15
   VELO_IN_AIR: 30
   JUMP_IMPACT: 5
   JUMP_VELO: 5
