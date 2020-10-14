@@ -35,9 +35,12 @@ public class EffectManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameObject _obj = Instantiate(prefabPSRun) as GameObject;
-        _obj.transform.SetParent(this.transform);
-        psRun = _obj.GetComponent<ParticleSystem>();
+        if(prefabPSRun)
+        {
+            GameObject _obj = Instantiate(prefabPSRun) as GameObject;
+            _obj.transform.SetParent(this.transform);
+            psRun = _obj.GetComponent<ParticleSystem>();
+        }
     }
 
     //  VFX Init
@@ -46,7 +49,8 @@ public class EffectManager : MonoBehaviour
         switch(id)
         {
             case 0:
-                instance.ParticleInitFunc(instance.psRun, pos);
+                if(instance.psRun)
+                    instance.ParticleInitFunc(instance.psRun, pos);
                 break;
             default:
                 break;
