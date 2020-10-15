@@ -469,6 +469,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hito: {fileID: 7274988849450179694, guid: 23a0309937adb264fab21867d1faf6be, type: 3}
+  MaxModelNum: 20
+  models: []
+  CurrentModelNum: 1
 --- !u!1 &756698403
 GameObject:
   m_ObjectHideFlags: 0
@@ -668,7 +671,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u30B2\u30FC\u30E0"
+  m_Text: 
 --- !u!222 &1037876680
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -746,7 +749,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u30B2\u30FC\u30E0\u3092\u7D42\u308F\u308B"
+  m_Text: 
 --- !u!222 &1132553819
 CanvasRenderer:
   m_ObjectHideFlags: 0
