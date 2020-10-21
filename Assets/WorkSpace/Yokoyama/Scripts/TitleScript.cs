@@ -12,8 +12,18 @@ public class TitleScript : MonoBehaviour
     [SerializeField] private int CurrentModelNum = 1;
 
     private float timer = 5;
-    private double incTimer = 0;
-    GameObject prevObj = null;
+    private double modelIncTimer = 0;
+
+    private bool bProcessing = false;
+
+    private enum TitleMode
+    {
+        Fall = 0,
+        Launch,
+        Max,
+    }
+    private TitleMode titleMode;
+
 
     // Start is called before the first frame update
     void Start()
@@ -39,17 +49,30 @@ public class TitleScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timer += Time.deltaTime;
-        incTimer += Time.deltaTime;
-        if(incTimer >= 5f)
-        {
-            if (++CurrentModelNum > MaxModelNum)
-                CurrentModelNum = MaxModelNum;
-            incTimer = 0;
+        //  モデル数増加
+        if (CurrentModelNum < MaxModelNum)
+        { 
+            modelIncTimer += Time.deltaTime;
+            if (modelIncTimer >= 5f)
+            {
+                if (++CurrentModelNum > MaxModelNum)
+                    CurrentModelNum = MaxModelNum;
+                modelIncTimer = 0;
+            }
         }
-        
 
-        if(timer >= 5f)
+        //  モデル落下周期処理
+        if(!bProcessing)
+        {
+            timer += Time.deltaTime;
+            if(timer >= 5f)
+            {
+                bProcessing = true;
+                titleMode = (TitleMode)Random.Range((int)TitleMode.Fall, (int)TitleMode.Max - 1);
+                timer = 0f;
+            }
+        }
+        if(bProcessing)
         {
             if(CurrentModelNum > models.Count)
             {
@@ -57,27 +80,45 @@ public class TitleScript : MonoBehaviour
                 models.Add(_obj);
             }
 
-            timer = 0;
-
-            for(int i = 0; i < models.Count; ++i)
+            switch(titleMode)
             {
-                Rigidbody _rb = models[i].transform.GetChild(0).GetComponent<Rigidbody>();
-                if(_rb)
-                {
-                    _rb.velocity = Vector3.zero;
-                    _rb.transform.position = GetRandomStartPos();
-                    _rb.transform.rotation = GetRandomQuat();
-                    _rb.AddTorque(GetRandomTorque(), ForceMode.VelocityChange);
-                }
+                case TitleMode.Fall:
+                    Fall();
+                    break;
+                default:
+                    Fall();
+                    break;
+            }
+
+            bProcessing = false;
+        }
+
+    }
+
+    //  function
+    private void Fall()
+    {
+        for (int i = 0; i < models.Count; ++i)
+        {
+            Rigidbody _rb = models[i].transform.GetChild(0).GetComponent<Rigidbody>();
+            if (_rb)
+            {
+                _rb.velocity = Vector3.zero;
+                _rb.transform.position = GetRandomStartPos();
+                _rb.transform.rotation = GetRandomQuat();
+                _rb.AddTorque(GetRandomTorque(), ForceMode.VelocityChange);
             }
         }
     }
 
+
+
+
+    //  sub function
     private void TitleBGM()
     {
         AudioManager.PlayBGM(AudioManager.BGM.title);
     }
-
     private Vector3 GetRandomStartPos()
     {
         return new Vector3((Random.value * 2f - 1f) * 3.5f, 5.25f, Random.value * -3f + -4f);
