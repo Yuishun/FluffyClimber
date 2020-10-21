@@ -14,6 +14,8 @@ public class Wallup : MonoBehaviour
 
     bool _stop_flag;
 
+    bool w_flag;
+
     [SerializeField]
     private Timer _timer;
     [SerializeField]
@@ -26,6 +28,7 @@ public class Wallup : MonoBehaviour
         _wall = GameObject.Find("Cube");
         _Maincamera = GameObject.Find("Main Camera");
         _stop_flag = false;
+        w_flag = false;
     }
 
     // Update is called once per frame
@@ -50,6 +53,31 @@ public class Wallup : MonoBehaviour
             _stop_flag = true;
         }
 
+        //人と壁の中心の距離
+        float distance;
+        //プレイヤーの座標
+        Transform playerTransform
+            = GameObject.Find("hito_model").GetComponent<Transform>();
+        //GameObject.Find("player").transform;
+        Vector3 playerPosition = playerTransform.position;
+        //当たり判定の半径の合計
+        float r;
+
+        r = 12.5f;
+
+        distance = Mathf.Sqrt(((transform.position.x) - (playerPosition.x))
+            * ((transform.position.x) - (playerPosition.x))//2乗
+            + ((transform.position.y) - (playerPosition.y))
+            * ((transform.position.y) - (playerPosition.y)));
+
+        if (distance < r)
+        {
+            w_flag = true;
+        }
+        else
+        {
+            w_flag = false;
+        }
     }
 
     private void OnTriggerEnter(Collider collision)
@@ -61,5 +89,10 @@ public class Wallup : MonoBehaviour
                 _stop_flag = true;
             collision.transform.root.GetComponent<PlayerMovement_y>().Explosion();
         }
+    }
+
+    public bool Warning()
+    {
+        return w_flag;
     }
 }
