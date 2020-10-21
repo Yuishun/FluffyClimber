@@ -16,6 +16,9 @@ public class GameManager_y : MonoBehaviour
     [SerializeField] private MaskableGraphic GameOverImage;
     [SerializeField] private MaskableGraphic ClearImage;
 
+    //  メニュー
+    [SerializeField] private CanvasGroup MenuCanvas;
+
     /// <summary>
     /// 生成時処理
     /// </summary>
@@ -38,12 +41,33 @@ public class GameManager_y : MonoBehaviour
             instance = null;
     }
 
+    void Update()
+    {
+        if(!bProcessing)
+        {
+            string sceneName = SceneManager.GetActiveScene().name;
+            if(sceneName != "Title" && sceneName != "StageSelect")
+            {
+                if(m_CurrentPlayer && !m_CurrentPlayer.bDead)
+                {
+                    if(InputManager_y.IMIsButtonOn(InputManager_y.IM_BUTTON.ESCAPE))
+                    {
+                        if (bMenuVisible)
+                            HideMenu();
+                        else
+                            ShowMenu();
+                    }
+                }
+            }
+        }
+    }
+
 
     //-------------------------
     //  Variants
     //-------------------------
     private GameObject m_PlayerPrefab;    //  プレハブへの参照
-    private PlayerMovement_y m_CurrentPlayer;
+    private PlayerMovement_y m_CurrentPlayer = null;
     public PlayerMovement_y CurrentPlayer { get { return m_CurrentPlayer; } }
     private Vector3 m_RespawnPos;         //  リスポーン位置
 
@@ -53,22 +77,25 @@ public class GameManager_y : MonoBehaviour
     private string m_NextStageName = "";
 
     private bool bProcessing = false;
+    private bool bMenuVisible = false;
 
     //-------------------------
     //  Functions
     //-------------------------
     private void Start()
     {
-        //GameObject _obj = GameObject.FindGameObjectWithTag("Player");
-        //if(_obj)
-        //{
-        //    m_CurrentPlayer = _obj.GetComponent<PlayerMovement_y>();
-        //}
+        
         GameOverImage.color = new Color(1, 1, 1, 0);
         ClearImage.color = new Color(1, 1, 1, 0);
+        HideMenu();
     }
 
+    static public void SetCurrentPlayer(PlayerMovement_y p)
+    {
+        instance.m_CurrentPlayer = p;
+    }
 
+    //  リスタート
     static public void RestartGame()
     {
         if (instance.bProcessing)
@@ -99,20 +126,6 @@ public class GameManager_y : MonoBehaviour
         yield break;
     }
 
-
-    //static public void RespawnPlayer()
-    //{
-    //    instance.RespawnPlayer_inst();
-    //}
-    //private void RespawnPlayer_inst()
-    //{
-    //    m_DeathCount++;
-    //    Destroy(m_CurrentPlayer.gameObject);
-    //    GameObject _obj = Instantiate(m_PlayerPrefab, m_RespawnPos, Quaternion.identity);
-    //    m_CurrentPlayer = _obj.GetComponent<PlayerMovement_y>();
-    //}
-
-
     private void StoreCurrentSceneName()
     {
         m_PrevSceneName = SceneManager.GetActiveScene().name;
@@ -142,6 +155,7 @@ public class GameManager_y : MonoBehaviour
         SceneManager.LoadScene(instance.m_NextStageName);
     }
 
+    //  クリア
     static public void ClearGame()
     {
         if (instance.bProcessing)
@@ -175,5 +189,23 @@ public class GameManager_y : MonoBehaviour
     private void ClearBGM()
     {
         AudioManager.PlayBGM(AudioManager.BGM.clear, 0.25f);
+    }
+
+    //  メニュー
+    static public void ShowMenu()
+    {
+        Time.timeScale = 0;
+        instance.MenuCanvas.gameObject.SetActive(true);
+        instance.MenuCanvas.interactable = true;
+        instance.MenuCanvas.blocksRaycasts = true;
+        instance.bMenuVisible = true;
+    }
+    static public void HideMenu()
+    {
+        Time.timeScale = 1;
+        instance.MenuCanvas.interactable = false;
+        instance.MenuCanvas.blocksRaycasts = false;
+        instance.MenuCanvas.gameObject.SetActive(false);
+        instance.bMenuVisible = false;
     }
 }
