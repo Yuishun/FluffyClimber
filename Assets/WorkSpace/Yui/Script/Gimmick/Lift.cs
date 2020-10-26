@@ -73,8 +73,8 @@ public class Lift : MonoBehaviour
         }
         else   // 変化後
         {
-
-            isOnPlayer = moveComponents[0].Move();
+            if(!moveComponents[0].Move())
+                isOnPlayer = false;
         }
 
         OnPlayerMove();
@@ -101,7 +101,6 @@ public class Lift : MonoBehaviour
 
             rb.MovePosition(ToVec); // 動かす
 
-            OnPlayerMove();
         }
         else    // 目的地に着いたら
         {

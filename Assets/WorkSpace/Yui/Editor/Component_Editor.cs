@@ -4,6 +4,7 @@ using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
 using C_G = Component_Gimmick;
+using C_;
 
 
 [CustomEditor(typeof(Component_Gimmick))]
@@ -22,27 +23,32 @@ public class Component_Editor : Editor
     {        
         serializedObject.Update();
         EditorGUI.BeginChangeCheck();
-        //SerializedProperty list = serializedObject.FindProperty("_Comp");
+        SerializedProperty list = serializedObject.FindProperty("_Comp");
         
 
         for (int i = 0; i < _target.Comp.Count; i++)
         {
             if (_target.Comp[i] == null)
-               _target.Comp[i] = NumToComponent_(C_.Component_Kind.Pos);
-            
-            C_.Component_ comp = NumToComponent_(_target.Comp[i].type);
-            if(_target.Comp[i].GetType() != comp.GetType())
-            {                
-                _target.Comp[i] = comp;                
+            {
+                _target.Comp[i] = NumToComponent_(Component_Kind.Pos);                
+                var prop = list.GetArrayElementAtIndex(i);
+                prop.managedReferenceValue = _target.Comp[i];
             }
-            //var prop = list.GetArrayElementAtIndex(i);            
+            
+            var comp = NumToComponent_(_target.Comp[i].type);
+            if(_target.Comp[i].GetType() != comp.GetType())
+            {
+                _target.Comp[i] = comp;                
+                var prop = list.GetArrayElementAtIndex(i);
+                prop.managedReferenceValue = comp;                
+            }
             //EditorGUILayout.EnumPopup("モード" ,_target.Comp[i].type);
             //EditorGUILayout.PropertyField(prop);
         }
 
         //EditorGUILayout.PropertyField(serializedObject.FindProperty("_Comp"));
-        EditorGUILayout.PropertyField(serializedObject.FindProperty("useDefaultPos"));
-        if (!_target.useDefaultPos)
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("usebasisDefault"));
+        if (!_target.usebasisDefault)
             EditorGUILayout.PropertyField(serializedObject.FindProperty("basisPos"));        
         EditorGUILayout.PropertyField(serializedObject.FindProperty("I_movement"));        
         CustomEditorUtility.DrawList(serializedObject.FindProperty("_Comp"), _target);
@@ -55,23 +61,29 @@ public class Component_Editor : Editor
         }
     }
 
-    C_.Component_ NumToComponent_(C_.Component_Kind kind)
+    Component_ NumToComponent_(Component_Kind kind)
     {
-        C_.Component_ cp;
+        Component_ cp;
         switch(kind)
         {
-            case C_.Component_Kind.Pos:
-                cp = new C_.Component_Pos();
+            case Component_Kind.Pos:
+                cp = new Component_Pos();
                 break;
-            case C_.Component_Kind.Vec:
-                cp = new C_.Component_Vec();
+            case Component_Kind.Vec:
+                cp = new Component_Vec();
                 break;
-            case C_.Component_Kind.Rot:
-                cp = new C_.Component_Rot();
+            case Component_Kind.Rot:
+                cp = new Component_Rot();
+                break;
+            case Component_Kind.Move:
+                cp = new Component_Move();
+                break;
+            case Component_Kind.Time:
+                cp = new Component_Time();
                 break;
 
             default:
-                cp = new C_.Component_Pos();
+                cp = new Component_Pos();
                 break;
         }
         return cp;

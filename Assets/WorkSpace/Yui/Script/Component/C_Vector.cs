@@ -9,7 +9,7 @@ public class C_Vector : MonoBehaviour
     public static Vector3 Move(C_G gm, int i, out bool isEnd)
     {
         C_.Component_Vec c_v = (C_.Component_Vec)gm.Comp[i];
-        if (c_v.sVec == Vector3.zero)   // 初回のみ
+        if (c_v.sVec == Vector3.forward * 1000)   // 初回のみ
             c_v.sVec = c_v.vec.normalized * c_v.pow;
 
         // 重力が働く場合
@@ -24,7 +24,7 @@ public class C_Vector : MonoBehaviour
         isEnd = c_v.sTime >= c_v.lifetime;  // isEnd
         if (isEnd) 
         {
-            c_v.sVec = Vector3.zero;
+            c_v.sVec = Vector3.forward * 1000;
             c_v.sTime = 0;
         }
 

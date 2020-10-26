@@ -37,7 +37,8 @@ public class Bullet : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        GetComponent<SpriteRenderer>().enabled = !HideFlag;
+        //GetComponent<SpriteRenderer>().enabled = !HideFlag;
+        GetComponentInChildren<SpriteRenderer>().enabled = !HideFlag;
         GetComponent<Collider>().enabled = !HideFlag;
         if (useTrigger == null)
             this.enabled = false;
@@ -51,7 +52,7 @@ public class Bullet : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (useTrigger.IsOnPlayer != isOnPlayer)
         {
@@ -59,7 +60,8 @@ public class Bullet : MonoBehaviour
             if (isOnPlayer)
             {
                 player = useTrigger.Player.transform;
-                GetComponent<SpriteRenderer>().enabled = true;
+                GetComponentInChildren<SpriteRenderer>().enabled = true;
+                //GetComponent<SpriteRenderer>().enabled = true;
                 GetComponent<Collider>().enabled = true;
             }
         }

@@ -4,13 +4,14 @@ using UnityEngine;
 using System;
 using C_;
 
+[RequireComponent(typeof(Rigidbody))]
 public class Component_Gimmick : MonoBehaviour
 {
     [SerializeReference]
     List<Component_> _Comp = new List<Component_>();
     public List<Component_> Comp { get { return _Comp; } }
 
-    public bool useDefaultPos;
+    public bool usebasisDefault;
     public Vector3 basisPos;
 
     public IndexMovement I_movement;
@@ -20,7 +21,7 @@ public class Component_Gimmick : MonoBehaviour
         Once,
         PingPong,
     }
-    private int moveIdx = 0;    // Compの指数
+    private int moveIdx = 0;    // Compのインデックス
     private int plusIdx = 1;    // moveIdxに足す数
     private Rigidbody rb;
 
@@ -35,8 +36,20 @@ public class Component_Gimmick : MonoBehaviour
     public void Init(Rigidbody Rb)
     {
         rb = Rb;
-        if (useDefaultPos)
-            basisPos = transform.root.position;
+        if (usebasisDefault)
+            basisPos = transform.position;
+        if (Comp.Count > 0)
+            Comp[0].Init();
+    }
+    public void Init()
+    {
+        if (rb != null)
+            return;
+        rb = GetComponent<Rigidbody>();
+        if (usebasisDefault)
+            basisPos = transform.position;
+        if (Comp.Count > 0)
+            Comp[0].Init();
     }
 
     public bool Move()
@@ -70,9 +83,13 @@ public class Component_Gimmick : MonoBehaviour
                 break;
             case IndexMovement.PingPong:
                 if (moveIdx == Comp.Count - 1 || moveIdx == 0)
-                    moveIdx *= -1;
+                    plusIdx *= -1;
                 break;
         }
+
+        // 初期設定をしておく
+        if (Comp.Count > 0)
+            Comp[moveIdx].Init();
         return true;
     }
 
@@ -94,6 +111,13 @@ public class Component_Gimmick : MonoBehaviour
             case Component_Kind.Rot:
                 DoGimmick<Quaternion>(C_Rotation.Move, out isEnd);
                 break;
+            case Component_Kind.Move:
+                DoGimmick<bool>(C_Move.Move, out isEnd);
+                break;
+            case Component_Kind.Time:
+                DoGimmick<bool>(C_Timer.Move, out isEnd);
+                break;
+                
         }
 
         return isEnd;
@@ -119,6 +143,16 @@ public class Component_Gimmick : MonoBehaviour
         }
     }
 
+    public IEnumerator IndependentMove(float maxTime)
+    {
+        float time = 0;        
+        while(time < maxTime && Move())
+        {
+            time += Time.deltaTime;
+            yield return new WaitForFixedUpdate();
+        }
+    }
+
     #region Gizumo
     private void OnDrawGizmosSelected()
     {
@@ -126,7 +160,7 @@ public class Component_Gimmick : MonoBehaviour
             return;
         Gizmos.color = Color.red;
         Vector3 pos = transform.position;
-        Vector3 bpos = useDefaultPos ? transform.root.position : basisPos;
+        Vector3 bpos = usebasisDefault ? transform.position : basisPos;
         switch (Comp[0].type)   // 初回
         {
             case Component_Kind.Pos:
