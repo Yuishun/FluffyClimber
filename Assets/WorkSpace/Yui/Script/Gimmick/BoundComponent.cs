@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.ParticleSystemJobs;
 
 public class BoundComponent : MonoBehaviour
 {
@@ -38,7 +39,8 @@ public class BoundComponent : MonoBehaviour
     [SerializeField, Header("スプライトを使う場合")]
     private bool useSprite = false;
     [SerializeField, Header("力を加えた時の画像")]
-    private Sprite sprite1 = null;
+    //private Sprite sprite1 = null;
+    ParticleSystem par;
     private Sprite sprite0;
 
     SpriteRenderer spRend;
@@ -74,7 +76,9 @@ public class BoundComponent : MonoBehaviour
         p.Ragdollctrl.AllRagdollChangeVelocity(vec);
         if (useSprite)
         {
-            spRend.sprite = sprite1;
+            spRend.sprite = null;
+            par.Play();
+            AudioManager.PlaySE(AudioManager.SE.death, 1f, 3);
             StartCoroutine(ReturnSprite(1));
         }
         if (isOnce)
@@ -93,7 +97,7 @@ public class BoundComponent : MonoBehaviour
     IEnumerator ReturnSprite(float time)
     {
         float t = 0;
-        while (t >= time)
+        while (t <= time)
         {
             t += Time.deltaTime;
             yield return null;
