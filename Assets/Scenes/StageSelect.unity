@@ -296,6 +296,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hito: {fileID: 7274988849450179694, guid: 23a0309937adb264fab21867d1faf6be, type: 3}
+  MaxModelNum: 20
+  models: []
+  CurrentModelNum: 1
 --- !u!1 &772319569
 GameObject:
   m_ObjectHideFlags: 0
@@ -459,7 +462,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7709544b62a63c844a1419a95b04f023, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LoadSceneName: Stage2
+  LoadSceneName: Stage1
 --- !u!1 &1002127862
 GameObject:
   m_ObjectHideFlags: 0
@@ -591,7 +594,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7709544b62a63c844a1419a95b04f023, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LoadSceneName: Stage2
+  LoadSceneName: Stage3
 --- !u!95 &1095163936
 Animator:
   serializedVersion: 3

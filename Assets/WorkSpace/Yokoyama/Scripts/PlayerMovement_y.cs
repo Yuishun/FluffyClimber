@@ -65,6 +65,12 @@ public class PlayerMovement_y : MonoBehaviour
     {
         RagdollCtrl = GetComponent<Ragdoll_enable>();
         Anim = GetComponent<Animator>();
+        if(GameManager_y.Instance)
+            GameManager_y.SetCurrentPlayer(this);
+    }
+
+    private void Start()
+    {
         GameManager_y.SetCurrentPlayer(this);
     }
 
@@ -323,6 +329,7 @@ public class PlayerMovement_y : MonoBehaviour
             {
                 bGround = true;
                 RagdollCtrl.StartCoroutine(RagdollCtrl.Ragdoll(true));
+                //Debug.Log("Ragdoll!");
                 AudioManager.PlaySE(AudioManager.SE.koke, 0.75f, 2);
                 return;
             }
