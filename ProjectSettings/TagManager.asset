@@ -6,6 +6,7 @@ TagManager:
   tags:
   - IgnoreBone
   - IgnoreTransform
+  - Lift_Move
   layers:
   - Default
   - TransparentFX
