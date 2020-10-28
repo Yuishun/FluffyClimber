@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.ParticleSystemJobs;
 
 public class BoundComponent : MonoBehaviour
 {
@@ -53,7 +52,7 @@ public class BoundComponent : MonoBehaviour
         if (useSprite)
         {
             spRend = GetComponentInChildren<SpriteRenderer>();
-            sprite0 = spRend.sprite;
+            sprite0 = spRend.sprite;            
         }
     }
 

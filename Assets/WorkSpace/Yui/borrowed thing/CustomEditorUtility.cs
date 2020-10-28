@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+#if UNITY_EDITOR
 using UnityEditor;
 using UnityEngine;
 public static class CustomEditorUtility
@@ -90,3 +91,4 @@ public static class CustomEditorUtility
         }
     }
 }
+#endif
