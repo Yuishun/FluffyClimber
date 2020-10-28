@@ -63,3 +63,5 @@ MonoBehaviour:
   m_useOpenAngle: 0
   m_openAngle: 45
   m_numVertices: 32
+  m_offset: {x: 0, y: 0, z: 0}
+  dir: 1

@@ -22,6 +22,15 @@ namespace CustomPrimitiveColliders
         private int m_openAngle = 45;
         [SerializeField]
         private int m_numVertices = 32;
+        [SerializeField]
+        private Vector3 m_offset = Vector3.zero;
+
+        [SerializeField]
+        private LengthDir dir = LengthDir.Y;
+        enum LengthDir
+        {
+            X,Y,Z
+        }
 
         private void Awake()
         {
@@ -125,9 +134,14 @@ namespace CustomPrimitiveColliders
                 float angleHalfSin = Mathf.Sin(angleHalf);
                 float angleHalfCos = Mathf.Cos(angleHalf);
 
-                vertices[i] = Vector3.zero;
-                vertices[i + numVertices] = new Vector3(radius * angleCos, radius * angleSin, length);
-                vertices[i + numVertices * 2] = new Vector3(0, 0, length);
+                //vertices[i] = Vector3.zero;
+                //vertices[i + numVertices] = new Vector3(radius * angleCos, radius * angleSin, length);
+                //vertices[i + numVertices * 2] = new Vector3(0, 0, length);
+                // Y軸にするため変更
+                vertices[i] = Vector3.zero + m_offset;
+                vertices[i + numVertices] = LengthVector1(dir, angleCos,angleSin) + m_offset;
+                vertices[i + numVertices * 2] = LengthVector2(dir) + m_offset;
+
 
                 normals[i] = new Vector3(angleHalfCos * slopeCos, angleHalfSin * slopeCos, -slopeSin);
                 normals[i + numVertices] = new Vector3(angleHalfCos * slopeCos, angleHalfSin * slopeCos, -slopeSin);
@@ -153,5 +167,40 @@ namespace CustomPrimitiveColliders
 
             return mesh;
         }
-    }
+
+        Vector3 LengthVector1(LengthDir dir, float angleCos, float angleSin)
+        {
+            switch (dir)
+            {
+                case LengthDir.X:
+                    return
+                        new Vector3(-m_length, m_radius * angleSin, m_radius * angleCos);
+                case LengthDir.Y:
+                    return
+                        new Vector3(m_radius * angleCos, -m_length, m_radius * angleSin);
+                case LengthDir.Z:
+                    return
+                        new Vector3(m_radius * angleCos, m_radius * angleSin, m_length);
+                default:
+                    return Vector3.zero;
+            }
+        }
+        Vector3 LengthVector2(LengthDir dir)
+        {
+            switch (dir)
+            {
+                case LengthDir.X:
+                    return
+                        new Vector3(-m_length, 0, 0);
+                case LengthDir.Y:
+                    return
+                        new Vector3(0, -m_length, 0);
+                case LengthDir.Z:
+                    return
+                        new Vector3(0, 0, m_length);
+                default:
+                    return Vector3.zero;
+            }
+        }
+    }    
 }

@@ -27,7 +27,7 @@ public class TimeManager : MonoBehaviour
 
     private float _timer = 0;
 
-
+    // slowの速度でlimit秒スローにする
     public void SlowTimer(float slow, float limit)
     {
         Time.timeScale = slow;
