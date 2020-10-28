@@ -18,14 +18,15 @@ public class Ragdoll_enable : MonoBehaviour
     public bool canGetup = true;
 
     Animator _anim;
-    Rigidbody _rb;
+    Rigidbody _rb, _cRb;
     public Rigidbody rb { get { return _rb; } }
+    public Rigidbody cRb { get { return _cRb; } }
     CapsuleCollider _col;
     float _time;
     Ray _ray;
 
     /* 自分の全ての子供のRigidbodyとColliderを操作 */
-    readonly List<RigidComponent> _rigids = new List<RigidComponent>();
+    readonly List<RigidComponent> _rigids = new List<RigidComponent>();    
     readonly List<TransformComponent> _transforms = new List<TransformComponent>();
 
 
@@ -53,6 +54,10 @@ public class Ragdoll_enable : MonoBehaviour
                 rb.isKinematic = isRagdoll;
                 _rb = rb;
                 continue;
+            }
+            else if (rb.name == "Bone001")
+            {
+                _cRb = rb;
             }
 
             rb.isKinematic = !isRagdoll;
