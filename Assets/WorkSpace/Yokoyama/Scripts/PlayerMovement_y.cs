@@ -44,6 +44,7 @@ public class PlayerMovement_y : MonoBehaviour
 
     private float JumpTimer = 0;
     private float RemainingTime = 0;
+    private float JumpElapsedTime = 0;
     const float TIME_UNIT = 1.0f / 60f;
     [SerializeField] private float JUMP_TIME_MIN = 0.1f;
     [SerializeField] private float JUMP_TIME_MAX = 0.75f;
@@ -226,11 +227,13 @@ public class PlayerMovement_y : MonoBehaviour
             if (!CheckGround())
             {
                 jumpState = JumpState.InAir;
+                JumpElapsedTime = 0;
                 bGround = false;
             }
             if (m_iJumpCount > 0)
             {
                 JumpTimer = 0;
+                JumpElapsedTime = 0;
                 jumpState = JumpState.HoldBtn;
                 rb.AddForce(Vector3.up * JUMP_IMPACT, ForceMode.Impulse);
                 AudioManager.PlaySE(AudioManager.SE.jump, 0.75f, 1);
@@ -244,6 +247,7 @@ public class PlayerMovement_y : MonoBehaviour
                 if(CheckGround())
                 {
                     JumpTimer = 0;
+                    JumpElapsedTime = 0;
                     jumpState = JumpState.HoldBtn;
                     rb.AddForce(Vector3.up * JUMP_IMPACT, ForceMode.Impulse);
                     bGround = false;
@@ -254,7 +258,7 @@ public class PlayerMovement_y : MonoBehaviour
             {
                 case JumpState.HoldBtn:
                     rb.AddForce(Vector3.up * JUMP_VELO, ForceMode.Acceleration);
-
+                    JumpElapsedTime += Time.deltaTime;
                     if (m_iJumpCount > 0)
                     {
                         JumpTimer += Time.fixedDeltaTime;
@@ -274,6 +278,7 @@ public class PlayerMovement_y : MonoBehaviour
                     break;
 
                 case JumpState.ReleaseBtn:
+                    JumpElapsedTime += Time.deltaTime;
                     if(RemainingTime <= 0)
                     {
                         jumpState = JumpState.InAir;
@@ -285,6 +290,7 @@ public class PlayerMovement_y : MonoBehaviour
 
                     break;
                 case JumpState.InAir:
+                    JumpElapsedTime += Time.deltaTime;
                     break;
             }
         }
@@ -308,6 +314,9 @@ public class PlayerMovement_y : MonoBehaviour
                 bGround = true;
                 return;
             }
+
+            if (JumpElapsedTime < 0.1f)
+                return;
 
             Vector3 _rayOrigin = rb.position;
             Ray ray_ = new Ray(_rayOrigin, Vector3.down);
