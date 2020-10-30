@@ -37,9 +37,11 @@ public class Bullet : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        //GetComponent<SpriteRenderer>().enabled = !HideFlag;
-        GetComponentInChildren<SpriteRenderer>().enabled = !HideFlag;
-        GetComponent<Collider>().enabled = !HideFlag;
+        if (HideFlag)
+        {
+            GetComponentInChildren<SpriteRenderer>().enabled = false;
+            GetComponent<Collider>().enabled = false;
+        }
         if (useTrigger == null)
             this.enabled = false;
         for (int i = 0; i < 2; i++)

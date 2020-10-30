@@ -35,12 +35,12 @@ public class BoundComponent : MonoBehaviour
     [SerializeField, Header("Triggerを使う場合セットする")]
     TriggerArea useTrigger = null;
 
-    [SerializeField, Header("スプライトを使う場合")]
-    private bool useSprite = false;
+    [SerializeField, Header("エフェクトを使う場合")]
+    private bool useEffect = false;
     [SerializeField, Header("力を加えた時の画像")]
     //private Sprite sprite1 = null;
     ParticleSystem par;
-    private Sprite sprite0;
+    //private Sprite sprite0;
 
     SpriteRenderer spRend;
     bool canBound = true;
@@ -49,10 +49,10 @@ public class BoundComponent : MonoBehaviour
     {
         if (!ToPosition)
             PowerVec.Normalize();
-        if (useSprite)
+        if (useEffect)
         {
             spRend = GetComponentInChildren<SpriteRenderer>();
-            sprite0 = spRend.sprite;            
+            //sprite0 = spRend.sprite;            
         }
     }
 
@@ -73,11 +73,11 @@ public class BoundComponent : MonoBehaviour
         StartCoroutine(p.Ragdollctrl.Ragdoll(true));
         Vector3 vec = ToPosition ? PosToVec(p.transform) : PowerVec * Power;
         p.Ragdollctrl.AllRagdollChangeVelocity(vec);
-        if (useSprite)
+        if (useEffect)
         {
-            spRend.sprite = null;
+            spRend.enabled = false;
             par.Play();
-            AudioManager.PlaySE(AudioManager.SE.death, 1f, 3);
+            AudioManager.PlaySE(AudioManager.SE.death, 0.7f, 3);
             StartCoroutine(ReturnSprite(1));
         }
         if (isOnce)
@@ -101,7 +101,7 @@ public class BoundComponent : MonoBehaviour
             t += Time.deltaTime;
             yield return null;
         }
-        spRend.sprite = sprite0;
+        spRend.enabled = true;
     }
 
     Vector3 PosToVec(Transform p)

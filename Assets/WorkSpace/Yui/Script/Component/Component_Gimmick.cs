@@ -19,8 +19,11 @@ public class Component_Gimmick : MonoBehaviour
     {
         Loop,
         Once,
+        N_Count,
         PingPong,
     }
+    public int maxCount = 1;
+    private int nCount = 0;
     private int moveIdx = 0;    // Compのインデックス
     private int plusIdx = 1;    // moveIdxに足す数
     private Rigidbody rb;
@@ -36,6 +39,7 @@ public class Component_Gimmick : MonoBehaviour
     public void Init(Rigidbody Rb)
     {
         rb = Rb;
+        rb.isKinematic = true;
         if (usebasisDefault)
             basisPos = transform.position;
         if (Comp.Count > 0)
@@ -46,6 +50,7 @@ public class Component_Gimmick : MonoBehaviour
         if (rb != null)
             return;
         rb = GetComponent<Rigidbody>();
+        rb.isKinematic = true;
         if (usebasisDefault)
             basisPos = transform.position;
         if (Comp.Count > 0)
@@ -79,6 +84,18 @@ public class Component_Gimmick : MonoBehaviour
                 {
                     moveIdx = 0;
                     return false;
+                }
+                break;
+            case IndexMovement.N_Count:
+                if (moveIdx >= Comp.Count)
+                {
+                    moveIdx = 0;
+                    nCount++;
+                    if (nCount >= maxCount)
+                    {
+                        nCount = 0;
+                        return false;
+                    }
                 }
                 break;
             case IndexMovement.PingPong:

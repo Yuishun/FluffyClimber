@@ -9,7 +9,16 @@ public class C_Rotation : MonoBehaviour
     {
         C_.Component_Rot c_r = (C_.Component_Rot)gm.Comp[i];
         if (c_r.sRot.normalized == Quaternion.identity)
-            c_r.sRot = Quaternion.Euler(c_r.rot + gm.transform.rotation.eulerAngles);
+        {
+            var sr = Quaternion.Euler(c_r.rot + gm.transform.rotation.eulerAngles);
+            if (c_r.warp)   // ワープ時はすぐに返す
+            {
+                isEnd = true;
+                gm.transform.rotation = sr;
+                return sr;
+            }
+            c_r.sRot = sr;
+        }
 
         // 目的角度に進んだ角度を取得
         Quaternion rot = Quaternion.RotateTowards(gm.transform.rotation, c_r.sRot

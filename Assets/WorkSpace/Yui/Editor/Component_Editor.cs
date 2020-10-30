@@ -50,7 +50,9 @@ public class Component_Editor : Editor
         EditorGUILayout.PropertyField(serializedObject.FindProperty("usebasisDefault"));
         if (!_target.usebasisDefault)
             EditorGUILayout.PropertyField(serializedObject.FindProperty("basisPos"));        
-        EditorGUILayout.PropertyField(serializedObject.FindProperty("I_movement"));        
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("I_movement"));
+        if (_target.I_movement == C_G.IndexMovement.N_Count)
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("maxCount"));
         CustomEditorUtility.DrawList(serializedObject.FindProperty("_Comp"), _target);
 
         // GUIの更新があったら実行
