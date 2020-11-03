@@ -63,7 +63,6 @@ public class Bullet : MonoBehaviour
             {
                 player = useTrigger.Player.transform;
                 GetComponentInChildren<SpriteRenderer>().enabled = true;
-                //GetComponent<SpriteRenderer>().enabled = true;
                 GetComponent<Collider>().enabled = true;
             }
         }

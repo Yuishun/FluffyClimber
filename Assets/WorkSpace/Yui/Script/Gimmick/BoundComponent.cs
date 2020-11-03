@@ -21,7 +21,7 @@ public class BoundComponent : MonoBehaviour
     
     [HideInInspector]
     public CanPowerFlag PowFlag;
-    public enum CanPowerFlag   // ビットフラグ
+    public enum CanPowerFlag   // ビットフラグ Bound_Editorでinspectorに描画
     {
         Up = 1,
         Down = 2,

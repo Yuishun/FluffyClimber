@@ -12,7 +12,7 @@ public class Stage_StartAnim_Camera : MonoBehaviour
     Vector3 vec;
 
     [SerializeField]
-    float time = 1f;
+    float time = 1f, dosaTime = 0.4f;
 
     [SerializeField]
     Transform maincamera;
@@ -43,7 +43,7 @@ public class Stage_StartAnim_Camera : MonoBehaviour
         player.canGetup = true;
         islook = true;        
         AudioManager.PlaySE(AudioManager.SE.koke, 0.5f, 0);
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(dosaTime);
         GetComponent<AudioSource>().PlayOneShot(dosa, 0.25f);
     }
 
