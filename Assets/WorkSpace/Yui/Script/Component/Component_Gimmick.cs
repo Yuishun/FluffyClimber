@@ -7,23 +7,24 @@ using C_;
 [RequireComponent(typeof(Rigidbody))]
 public class Component_Gimmick : MonoBehaviour
 {
+    // 各コンポーネントを入れるリスト
     [SerializeReference]
     List<Component_> _Comp = new List<Component_>();
     public List<Component_> Comp { get { return _Comp; } }
 
-    public bool usebasisDefault;
-    public Vector3 basisPos;
+    public bool usebasisDefault;    // 基準点を現在位置にするか
+    public Vector3 basisPos;        // 基準点
 
     public IndexMovement I_movement;
-    public enum IndexMovement
+    public enum IndexMovement    // インデックスの動き方
     {
         Loop,
         Once,
         N_Count,
         PingPong,
     }
-    public int maxCount = 1;
-    private int nCount = 0;
+    public int maxCount = 1;    // N_Count時何回ループするか
+    private int nCount = 0;     // N_Count時の現在のループ回数
     private int moveIdx = 0;    // Compのインデックス
     private int plusIdx = 1;    // moveIdxに足す数
     private Rigidbody rb;
@@ -36,27 +37,22 @@ public class Component_Gimmick : MonoBehaviour
     {
         Move();
     }*/
-    public void Init(Rigidbody Rb)
+    public void Init(Rigidbody Rb = null)  // 初期設定
     {
+        if(Rb == null && rb == null) // どちらもnullなら自力で
+            rb = GetComponent<Rigidbody>();
+        else
         rb = Rb;
-        rb.isKinematic = true;
-        if (usebasisDefault)
-            basisPos = transform.position;
-        if (Comp.Count > 0)
-            Comp[0].Init();
-    }
-    public void Init()
-    {
-        if (rb != null)
-            return;
-        rb = GetComponent<Rigidbody>();
-        rb.isKinematic = true;
+
+        rb.isKinematic = true;  // 勝手に動かれると面倒なので
         if (usebasisDefault)
             basisPos = transform.position;
         if (Comp.Count > 0)
             Comp[0].Init();
     }
 
+    // 動かすときに呼ばれる
+    // 終わったらfalseを返す
     public bool Move()
     {
         bool mo = true;
@@ -68,6 +64,7 @@ public class Component_Gimmick : MonoBehaviour
         return mo;
     }
 
+    // インデックスを各設定に応じて進める
     public bool NextMoveIdx()
     {
         moveIdx += plusIdx;
@@ -76,17 +73,17 @@ public class Component_Gimmick : MonoBehaviour
 
         switch (I_movement)
         {
-            case IndexMovement.Loop:
+            case IndexMovement.Loop:    // 永遠に終わらない
                 moveIdx %= Comp.Count;
                 break;
-            case IndexMovement.Once:
+            case IndexMovement.Once:    // 一回だけ
                 if (moveIdx >= Comp.Count)
                 {
                     moveIdx = 0;
                     return false;
                 }
                 break;
-            case IndexMovement.N_Count:
+            case IndexMovement.N_Count: // maxCount分だけ
                 if (moveIdx >= Comp.Count)
                 {
                     moveIdx = 0;
@@ -98,7 +95,7 @@ public class Component_Gimmick : MonoBehaviour
                     }
                 }
                 break;
-            case IndexMovement.PingPong:
+            case IndexMovement.PingPong:    // 行ったり来たり
                 if (moveIdx == Comp.Count - 1 || moveIdx == 0)
                     plusIdx *= -1;
                 break;
@@ -113,6 +110,7 @@ public class Component_Gimmick : MonoBehaviour
     // 各コンポーネントのMove関数を入れるデリゲート
     delegate T C_Move<T>(Component_Gimmick gm, int i, out bool isEnd);
 
+    // 各種類に応じて動かす
     bool MoveGimmick(Component_Kind kind)
     {
 
@@ -140,6 +138,7 @@ public class Component_Gimmick : MonoBehaviour
         return isEnd;
     }
 
+    // 各コンポーネントを動かす
     void DoGimmick<T>(C_Move<T> move, out bool isEnd)
     {
         //bool isEnd;
@@ -160,8 +159,17 @@ public class Component_Gimmick : MonoBehaviour
         }
     }
 
-    public IEnumerator IndependentMove(float maxTime)
+    // 指定時間の間勝手にうごく
+    public IEnumerator IndependentMove(float maxTime = 10)
     {
+        if (maxTime < 0)    // 時間指定なし
+        {
+            while (Move())
+                yield return new WaitForFixedUpdate();
+            yield break;
+        }
+
+        // 時間指定あり
         float time = 0;        
         while(time < maxTime && Move())
         {

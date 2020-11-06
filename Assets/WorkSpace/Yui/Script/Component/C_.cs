@@ -4,18 +4,19 @@ using UnityEngine;
 
 /**
  * コンポーネントのクラスと種類を置いている
+ * 各動きの概要はComponent_Kindに記載
  **/
 namespace C_
 {
     #region Component_Class
     [System.Serializable]
-    public abstract class Component_
+    public abstract class Component_    // コンポーネントの親クラス
     {
         public Component_Kind type;
         public virtual void Init() { }
     }
     [System.Serializable]
-    public class Component_Pos : Component_
+    public class Component_Pos : Component_ 
     {
         public Component_Pos() { type = Component_Kind.Pos; }
         public Vector3 pos;
@@ -37,7 +38,7 @@ namespace C_
         public Vector3 gravity;
     }
     [System.Serializable]
-    public class Component_Rot : Component_
+    public class Component_Rot : Component_ 
     {
         public Component_Rot() { type = Component_Kind.Rot; }
         public override void Init() { srot = Quaternion.identity; }
@@ -49,15 +50,15 @@ namespace C_
         public bool warp;
     }
     [System.Serializable]
-    public class Component_Move : Component_
+    public class Component_Move : Component_    
     {
         public Component_Move() { type = Component_Kind.Move; }
         public Component_Gimmick MoveGimmick;
-        public bool stoping = true;
+        public bool stoping = true; // 他のギミックを動かしているとき止まるか
         public float maxTime = 0;
     }
     [System.Serializable]
-    public class Component_Time : Component_
+    public class Component_Time : Component_    
     {
         public Component_Time() { type = Component_Kind.Time; }
         public float Timer;
@@ -72,11 +73,11 @@ namespace C_
     #region Component_Kind
     public enum Component_Kind
     {
-        Pos,
-        Vec,
-        Rot,
-        Move,
-        Time,
+        Pos,    // 直線的な動き
+        Vec,    // 物理的な動き
+        Rot,    // 回転
+        Move,   // 他のギミックを動かす
+        Time,   // n秒待つ
     }
 
     #endregion
