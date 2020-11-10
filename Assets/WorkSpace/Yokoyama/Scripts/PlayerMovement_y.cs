@@ -321,7 +321,7 @@ public class PlayerMovement_y : MonoBehaviour
             Vector3 _rayOrigin = rb.position;
             Ray ray_ = new Ray(_rayOrigin, Vector3.down);
             RaycastHit hitInfo_;
-            int layerMask_ = ~((1 << 8) | (1 << 9));
+            int layerMask_ = ~((1 << 8) | (1 << 9) | (1 << 10));
 
             float _veloX = rb.velocity.x;
             if(_veloX < 0 || Input.GetKey(KeyCode.A))
