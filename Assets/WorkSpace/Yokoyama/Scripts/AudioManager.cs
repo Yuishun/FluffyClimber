@@ -84,7 +84,7 @@ public class AudioManager : MonoBehaviour
         "kokeru",
         "jump",
         "walk3",
-        "si",
+        "shinu",
         "buttonSE",
     };
 

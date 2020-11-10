@@ -416,7 +416,7 @@ public class PlayerMovement_y : MonoBehaviour
 
         m_bDead = true;
         RagdollCtrl.Explosion();
-        AudioManager.PlaySE(AudioManager.SE.death, 1f, 3, 0.3f);
+        AudioManager.PlaySE(AudioManager.SE.death, 1f, 3);
 
         //UnityAction act_ = this.PlayDeathBGM;
         UnityAction act_ = () => { AudioManager.PlayBGM(AudioManager.BGM.death, 2.5f); };
