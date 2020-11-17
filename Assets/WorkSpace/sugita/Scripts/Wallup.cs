@@ -56,22 +56,9 @@ public class Wallup : MonoBehaviour
         //人と壁の中心の距離
         float distance;
         distance = 12.5f;
-        //プレイヤーの座標
-        Transform playerTransform
-            = GameObject.Find("hito_model").GetComponent<Transform>();
-        //GameObject.Find("player").transform;
-        Vector3 playerPosition = playerTransform.position;
-        /*//当たり判定の半径の合計
-        float r;
+        
 
-        r = 12.5f;
-
-        distance = Mathf.Sqrt(((transform.position.x) - (playerPosition.x))
-            * ((transform.position.x) - (playerPosition.x))//2乗
-            + ((transform.position.y) - (playerPosition.y))
-            * ((transform.position.y) - (playerPosition.y)));*/
-
-        if (distance >= playerPosition.y - transform.position.y)
+        if (distance >= _player.transform.position.y - transform.position.y)
         {
             w_flag = true;
         }
