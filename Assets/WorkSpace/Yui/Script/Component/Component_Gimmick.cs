@@ -22,6 +22,7 @@ public class Component_Gimmick : MonoBehaviour
         Once,
         N_Count,
         PingPong,
+        OneByOne,
     }
     public int maxCount = 1;    // N_Count時何回ループするか
     private int nCount = 0;     // N_Count時の現在のループ回数
@@ -48,7 +49,8 @@ public class Component_Gimmick : MonoBehaviour
         if (usebasisDefault)
             basisPos = transform.position;
         if (Comp.Count > 0)
-            Comp[0].Init();
+            foreach (Component_ c in Comp)
+                c.Init();
     }
 
     // 動かすときに呼ばれる
@@ -71,6 +73,7 @@ public class Component_Gimmick : MonoBehaviour
         if (moveIdx < 0)
             moveIdx = 0;
 
+        bool re = true;
         switch (I_movement)
         {
             case IndexMovement.Loop:    // 永遠に終わらない
@@ -80,7 +83,7 @@ public class Component_Gimmick : MonoBehaviour
                 if (moveIdx >= Comp.Count)
                 {
                     moveIdx = 0;
-                    return false;
+                    re = false;
                 }
                 break;
             case IndexMovement.N_Count: // maxCount分だけ
@@ -91,7 +94,7 @@ public class Component_Gimmick : MonoBehaviour
                     if (nCount >= maxCount)
                     {
                         nCount = 0;
-                        return false;
+                        re = false;
                     }
                 }
                 break;
@@ -99,18 +102,25 @@ public class Component_Gimmick : MonoBehaviour
                 if (moveIdx == Comp.Count - 1 || moveIdx == 0)
                     plusIdx *= -1;
                 break;
+            case IndexMovement.OneByOne:    // 一つづつ
+                if (moveIdx >= Comp.Count)
+                {
+                    moveIdx = 0;
+                }
+                re = false;
+                break;
         }
 
-        // 初期設定をしておく
-        if (Comp.Count > 0)
-            Comp[moveIdx].Init();
-        return true;
+        //// 初期設定をしておく
+        //if (Comp.Count > 0)
+        //    Comp[moveIdx].Init();
+        return re;
     }
 
     // 各コンポーネントのMove関数を入れるデリゲート
     delegate T C_Move<T>(Component_Gimmick gm, int i, out bool isEnd);
 
-    // 各種類に応じて動かす
+    #region // 各種類に応じて動かす
     bool MoveGimmick(Component_Kind kind)
     {
 
@@ -132,12 +142,18 @@ public class Component_Gimmick : MonoBehaviour
             case Component_Kind.Time:
                 DoGimmick<bool>(C_Timer.Move, out isEnd);
                 break;
+            case Component_Kind.Enable:
+                DoGimmick<bool>(C_Enable.Move, out isEnd);
+                break;
+            case Component_Kind.Particle:
+                DoGimmick<bool>(C_Particle.Move, out isEnd);
+                break;
                 
         }
 
         return isEnd;
     }
-
+    #endregion
     // 各コンポーネントを動かす
     void DoGimmick<T>(C_Move<T> move, out bool isEnd)
     {

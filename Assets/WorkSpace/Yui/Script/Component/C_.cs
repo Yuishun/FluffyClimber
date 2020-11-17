@@ -66,18 +66,36 @@ namespace C_
         public float sTime { set { stime = value; } get { return stime; } }
         public bool endActive;
     }
-
+    [System.Serializable]
+    public class Component_Enable:Component_
+    {
+        public Component_Enable() { type = Component_Kind.Enable; }
+        public List<Component> enableList;
+        public bool enable;
+    }
+    [System.Serializable]
+    public class Component_Particle:Component_
+    {
+        public Component_Particle() { type = Component_Kind.Particle; }
+        public ParticleSystem particle;
+        public bool usePrefab;
+        public GameObject Prefab;
+        public bool useDefaultPos;
+        public Vector3 pos;
+    }
 
     #endregion
 
     #region Component_Kind
     public enum Component_Kind
     {
-        Pos,    // 直線的な動き
-        Vec,    // 物理的な動き
-        Rot,    // 回転
-        Move,   // 他のギミックを動かす
-        Time,   // n秒待つ
+        Pos,        // 直線的な動き
+        Vec,        // 物理的な動き
+        Rot,        // 回転
+        Move,       // 他のギミックを動かす
+        Time,       // n秒待つ
+        Enable,     // コンポーネントの ON <--> OFF
+        Particle,   // パーティクルを再生
     }
 
     #endregion

@@ -16,6 +16,9 @@ public class TriggerArea : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (isOnPlayer)
+            return;
+
         if(0 < (other.gameObject.layer &
             ~LayerMask.GetMask("Player_Root", "Player_Bone")))
         {
@@ -23,7 +26,7 @@ public class TriggerArea : MonoBehaviour
             if (p == null || p.bDead)   // 死亡確認
                 return;
             isOnPlayer = true;
-            player = other.transform.root.GetComponent<PlayerMovement_y>();
+            player = p;
         }
     }
 

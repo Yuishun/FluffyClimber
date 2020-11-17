@@ -7,13 +7,15 @@ public class Warning : MonoBehaviour
 {
     float _wartimer;
 
+    GameObject _player;
+
     [SerializeField]
     private Wallup _wallup;
 
     // Start is called before the first frame update
     void Start()
     {
-  
+        _player = GameObject.Find("hito_model");
     }
 
     // Update is called once per frame
@@ -24,16 +26,11 @@ public class Warning : MonoBehaviour
 
         if (_wallup.Warning())
         {
-            //プレイヤーの座標
-            Transform playerTransform
-                = GameObject.Find("hito_model").GetComponent<Transform>();
-            //GameObject.Find("player").transform;
-            Vector3 playerPosition = playerTransform.position;
-
+            
             transform.position =
-            new Vector3(playerPosition.x,
-            playerPosition.y + 1.5f,
-            playerPosition.z);
+            new Vector3(_player.transform.position.x,
+            _player.transform.position.y + 1.5f,
+            _player.transform.position.z);
 
             transform.localScale = new Vector3(0.4f, 0.4f, 1);
         }
