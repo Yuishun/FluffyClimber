@@ -129,6 +129,7 @@ public class Lift : MonoBehaviour
             }
             else
             {
+                // 一定時間以上かつ一定速度以下なら起き上がる
                 Ragtime += Time.deltaTime;
                 if (Ragtime >= 1 && rb.velocity.magnitude <= 3)
                 {
@@ -154,7 +155,7 @@ public class Lift : MonoBehaviour
     // 接触判定
     private void OnCollisionStay(Collision collision)
     {
-        if (Onplayer != null)
+        if (Onplayer != null )//|| isOnPlayer)
             return;
 
         // 本体に当たった時

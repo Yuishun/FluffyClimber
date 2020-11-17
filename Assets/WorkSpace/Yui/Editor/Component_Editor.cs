@@ -83,6 +83,12 @@ public class Component_Editor : Editor
             case Component_Kind.Time:
                 cp = new Component_Time();
                 break;
+            case Component_Kind.Enable:
+                cp = new Component_Enable();
+                break;
+            case Component_Kind.Particle:
+                cp = new Component_Particle();
+                break;
 
             default:
                 cp = new Component_Pos();
