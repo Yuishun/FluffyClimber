@@ -5,12 +5,12 @@ using UnityEngine;
 public class DeathCamera : MonoBehaviour
 {
     Camera2 cam2;
-    Camera childCam;
+   // Camera childCam;
     // Start is called before the first frame update
     void Start()
     {
         cam2 = GetComponent<Camera2>();
-        childCam = transform.GetChild(0).GetComponent<Camera>();
+        //childCam = transform.GetChild(0).GetComponent<Camera>();
     }
 
     public void Death(Transform player)
@@ -21,7 +21,7 @@ public class DeathCamera : MonoBehaviour
 
         //transform.position += (player.position - transform.position).normalized * 8;        
         Camera.main.fieldOfView = 16;   // ズームする
-        childCam.enabled = false;
+        //childCam.enabled = false;
 
         StartCoroutine(CamEndAnim(r));
     }
@@ -52,7 +52,7 @@ public class DeathCamera : MonoBehaviour
         transform.localRotation = r;
 
         Camera.main.fieldOfView = 60;
-        childCam.enabled = true;
+        //childCam.enabled = true;
         //======================================
     }
 }

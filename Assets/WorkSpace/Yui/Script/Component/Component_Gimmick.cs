@@ -22,7 +22,8 @@ public class Component_Gimmick : MonoBehaviour
         Once,
         N_Count,
         PingPong,
-        OneByOne,
+        OneByOne,   // 一つづつ
+        OnlyOnce,   // 一回きり
     }
     public int maxCount = 1;    // N_Count時何回ループするか
     private int nCount = 0;     // N_Count時の現在のループ回数
@@ -57,6 +58,10 @@ public class Component_Gimmick : MonoBehaviour
     // 終わったらfalseを返す
     public bool Move()
     {
+        // 一度きりの判定
+        if (I_movement == IndexMovement.OnlyOnce && moveIdx >= Comp.Count)
+            return false;
+
         bool mo = true;
         if (MoveGimmick(Comp[moveIdx].type))
         {
@@ -108,6 +113,12 @@ public class Component_Gimmick : MonoBehaviour
                     moveIdx = 0;
                 }
                 re = false;
+                break;
+            case IndexMovement.OnlyOnce:
+                if (moveIdx >= Comp.Count)
+                {
+                    re = false;
+                }
                 break;
         }
 
