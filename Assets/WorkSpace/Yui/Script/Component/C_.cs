@@ -67,21 +67,22 @@ namespace C_
         public bool endActive;
     }
     [System.Serializable]
-    public class Component_Enable:Component_
+    public class Component_Enable : Component_
     {
         public Component_Enable() { type = Component_Kind.Enable; }
         public List<Component> enableList;
         public bool enable;
     }
     [System.Serializable]
-    public class Component_Particle:Component_
+    public class Component_Particle : Component_
     {
         public Component_Particle() { type = Component_Kind.Particle; }
         public ParticleSystem particle;
         public bool usePrefab;
         public GameObject Prefab;
-        public bool useDefaultPos;
+        public bool useLocalPos;
         public Vector3 pos;
+        public Vector3 scale;
     }
 
     #endregion

@@ -10,14 +10,21 @@ public class Player : MonoBehaviour
     {
         public InputManager_y.IM_AXIS Axis;
         [Range(-1,1)] public float Checkaxis;
-        public bool useLow;
+        public AxisJudge judge;
+    }
+    public enum AxisJudge
+    {
+        Upper,
+        Lower,
+        ZeroUpper,
+        ZeroLower,
     }
     public CheckAXIS[] Axis;
     public InputManager_y.IM_BUTTON[] Button;
     public bool useLRTrigger;
 
-    [Header("動き")]
-    public Component_Gimmick moveComponent;
+    [Header("0:検知後の動き・1:検知前の動き")]
+    public Component_Gimmick[] moveComponents = new Component_Gimmick[2];
 
     [SerializeField, Header("検知範囲を限定したい場合")]
     TriggerArea useTrigger = null;
@@ -28,7 +35,14 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        moveComponent.Init();
+        Rigidbody rb = GetComponent<Rigidbody>();
+        for (int i = 0; i < 2; i++)
+        {
+            if (moveComponents[i] != null)
+            {
+                moveComponents[i].Init(rb);
+            }
+        }
     }
 
     void FixedUpdate()
@@ -46,7 +60,11 @@ public class Player : MonoBehaviour
 
         if (isOnPlayer)
         {
-            isOnPlayer = moveComponent.Move();
+            isOnPlayer = moveComponents[0].Move();
+        }
+        else if(moveComponents[1] != null)
+        {
+            moveComponents[1].Move();
         }
     }
 
@@ -68,9 +86,25 @@ public class Player : MonoBehaviour
         for(int i = 0; i < Axis.Length; i++)
         {
             float ax = InputManager_y.IMGetAxisValue(Axis[i].Axis);
-            if (Axis[i].useLow && ax < Axis[i].Checkaxis)
-                return true;
-            else if (ax > Axis[i].Checkaxis)
+            bool r = false;
+            switch (Axis[i].judge)
+            {
+                case AxisJudge.ZeroUpper:
+                    if (ax < 0)
+                        break;
+                    goto case AxisJudge.Upper;
+                case AxisJudge.Upper:                
+                    r = ax > Axis[i].Checkaxis;
+                    break;
+                case AxisJudge.ZeroLower:
+                    if (ax > 0)
+                        break;
+                    goto case AxisJudge.Lower;
+                case AxisJudge.Lower:                    
+                    r = ax < Axis[i].Checkaxis;
+                    break;
+            }
+            if (r)
                 return true;
         }
         return false;
