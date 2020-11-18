@@ -22,7 +22,7 @@ public class Wallup : MonoBehaviour
     private float _borderspeed;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         _player = GameObject.Find("hito_model");
         _wall = GameObject.Find("Cube");
