@@ -84,6 +84,27 @@ namespace C_
         public Vector3 pos;
         public Vector3 scale;
     }
+    [System.Serializable]
+    public class Component_Audio : Component_
+    {
+        public Component_Audio() { type = Component_Kind.Audio; }
+        public override void Init() { canPlay = true; }
+        public enum PlayStyle
+        {
+            BGM,SE,CLIP,
+        }
+        public PlayStyle style;
+        public AudioManager.BGM bgm;
+        public AudioManager.SE se;
+        public AudioClip clip;
+        public float volume;
+        public bool isOnce;
+        private bool canPlay;
+        public bool CanPlay { get { return canPlay; } set { canPlay = value; } }
+        public bool loop;
+        public float loop_Time;
+        public float delay;
+    }
 
     #endregion
 
@@ -97,6 +118,7 @@ namespace C_
         Time,       // n秒待つ
         Enable,     // コンポーネントの ON <--> OFF
         Particle,   // パーティクルを再生
+        Audio,      // 音を再生
     }
 
     #endregion

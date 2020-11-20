@@ -159,6 +159,9 @@ public class Component_Gimmick : MonoBehaviour
             case Component_Kind.Particle:
                 DoGimmick<bool>(C_Particle.Move, out isEnd);
                 break;
+            case Component_Kind.Audio:
+                DoGimmick<bool>(C_Audio.Move, out isEnd);
+                break;
                 
         }
 

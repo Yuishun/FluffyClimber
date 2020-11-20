@@ -325,4 +325,33 @@ public class AudioManager : MonoBehaviour
         }
     }
     #endregion
+
+    //  -----------------------------------------
+    //  勝手に追加したやつ (Yui)
+    //  Clip
+    //  -----------------------------------------
+    #region CLIP
+    public  static void PlayClip(AudioClip clip, float volume = 0.25f, int channel = 0, float pitch = 1f)
+    {
+        instance.seSources[channel].volume = volume;
+        instance.seSources[channel].loop = false;
+        instance.seSources[channel].pitch = pitch;        
+        instance.seSources[channel].PlayOneShot(clip, volume);
+    }
+
+    //  最後のチャンネルを使用
+    public static void PlayLoopClip(AudioClip clip, float volume)
+    {
+        int last = instance.seSources.Count - 1;
+        instance.seSources[last].volume = volume;
+        instance.seSources[last].loop = true;
+        instance.seSources[last].clip = clip;
+        instance.seSources[last].Play();
+    }
+    public static void StopLoopClip()
+    {
+        int last = instance.seSources.Count - 1;
+        instance.seSources[last].Stop();
+    }
+    #endregion
 }
