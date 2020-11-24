@@ -13,7 +13,7 @@ public class Warning : MonoBehaviour
     private Wallup _wallup;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         _player = GameObject.Find("hito_model");
     }

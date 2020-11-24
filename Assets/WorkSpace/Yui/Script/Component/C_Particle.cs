@@ -11,13 +11,14 @@ namespace C_
         {
             var c_p = (Component_Particle)gm.Comp[i];
 
-            Vector3 pos = c_p.useDefaultPos ?
-                gm.transform.position : c_p.pos;
+            Vector3 pos = c_p.useLocalPos ?
+                gm.transform.position + c_p.pos : c_p.pos;
 
             if (c_p.usePrefab)
             {
                 GameObject obj = Instantiate(c_p.Prefab, pos, Quaternion.identity);
                 var par = obj.GetComponent<ParticleSystem>();
+                par.transform.localScale = c_p.scale;
                 if(!par.isPlaying)
                     par.Play();
                 Destroy(obj, par.time + 1f);

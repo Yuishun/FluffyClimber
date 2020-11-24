@@ -89,6 +89,9 @@ public class Component_Editor : Editor
             case Component_Kind.Particle:
                 cp = new Component_Particle();
                 break;
+            case Component_Kind.Audio:
+                cp = new Component_Audio();
+                break;
 
             default:
                 cp = new Component_Pos();
