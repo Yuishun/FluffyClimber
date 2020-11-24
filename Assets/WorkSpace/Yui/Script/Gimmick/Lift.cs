@@ -133,6 +133,10 @@ public class Lift : MonoBehaviour
                 Ragtime += Time.deltaTime;
                 if (Ragtime >= 1 && rb.velocity.magnitude <= 3)
                 {
+                    // プレイヤーを疑似的に親子関係にする構造体を作成
+                    Vector2 d = Onplayer.Ragdollctrl.cRb.transform.position - transform.position;
+                    d.y += 0.8f;    // コライダーの半分、上に調整
+                    Onplayer.Ragdollctrl.IsLift = new Ragdoll_enable.Lift_Transform( transform, d);
                     Onplayer.Ragdollctrl.Getup();
                     Ragtime = 0;
                 }

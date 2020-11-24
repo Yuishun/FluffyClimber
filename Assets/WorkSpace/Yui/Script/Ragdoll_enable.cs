@@ -24,6 +24,14 @@ public class Ragdoll_enable : MonoBehaviour
     CapsuleCollider _col;
     float _time;
     Ray _ray;
+    public struct Lift_Transform
+    {
+        public Lift_Transform(Transform t,Vector3 d) { Tra = t; dis = d; }
+        public Transform Tra;
+        public Vector3 dis;
+    }
+    Lift_Transform _isLift;
+    public Lift_Transform IsLift { get { return _isLift; } set { _isLift = value; } }
 
     /* 自分の全ての子供のRigidbodyとColliderを操作 */
     readonly List<RigidComponent> _rigids = new List<RigidComponent>();    
@@ -79,15 +87,20 @@ public class Ragdoll_enable : MonoBehaviour
 
     private void Update()
     {
+        RaycastHit hit;
         _ray.origin = _transforms[0].Transform.position + Vector3.up * 0.2f;
         // 現在Ragdoll状態かつ、起き上がりフラグが立っているかつ、
         // 速度が出ていない時かつ、地面に設置しているとき　起き上がる
         if (_state == RagdollState.Ragdolled && canGetup
             && _rigids[0].RigidBody.velocity.magnitude < 0.07f
-            && Physics.SphereCast(_ray, 0.2f,
+            && Physics.SphereCast(_ray, 0.2f,out hit,
              0.3f, ~LayerMask.GetMask("Player_Root","Player_Bone"))
             )
         {
+            _isLift.Tra = hit.transform;
+            _isLift.dis = _transforms[0].Transform.position - hit.transform.position;
+            _isLift.dis.y += _col.height / 2;
+            _isLift.dis.z = 0;
             Getup();
         }
 
@@ -104,7 +117,7 @@ public class Ragdoll_enable : MonoBehaviour
             return;
 
         _transforms[0].Transform.position = 
-            _transforms[0].PrivPosition;        
+            _transforms[0].PrivPosition;
         _state = RagdollState.RagdolltoAnim2;
     }
 
@@ -121,7 +134,7 @@ public class Ragdoll_enable : MonoBehaviour
             _time = 0;
             while (_time < 1f)
             {
-                _time += Time.deltaTime * 2;
+                _time += Time.deltaTime * 2f;
                 if (_time > 1f)
                     _time = 1;
                 // 円形補完で位置と回転を戻していく
@@ -132,12 +145,21 @@ public class Ragdoll_enable : MonoBehaviour
                     t.Transform.localRotation =
                         Quaternion.Slerp(t.StoredRotation, t.DefaultRot, _time);
                 }
+                if (_isLift.Tra.tag == "Lift_Move")
+                {
+                    transform.position = _isLift.Tra.position + _isLift.dis;
+                }
                 yield return null;
             }
             yield return null;
+            foreach (TransformComponent t in _transforms)
+            {
+                t.Transform.localPosition = t.DefaultPosition;
+                t.Transform.localRotation = t.DefaultRot;
+            }
         }
 
-        
+
         foreach (RigidComponent rb in _rigids)
         {
             if (rb.RigidBody.gameObject.tag != "IgnoreBone")
