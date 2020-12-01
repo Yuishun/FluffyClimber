@@ -227,12 +227,16 @@ public class Component_Gimmick : MonoBehaviour
             case Component_Kind.Vec:
                 var v = (Component_Vec)Comp[0];
                 Vector3 spos = pos;
-                for (float t = 1; t <= v.lifetime; t += 1f)
+                for (float t = 1; t <= v.lifetime;)
                 {
                     Vector3 pos2 = pos +
                         (v.vec.normalized * v.pow * t + 0.5f * v.gravity * t * t); // 放物線をだす
                     Gizmos.DrawLine(spos, pos2);            
-                    spos = pos2;                    
+                    spos = pos2;
+                    if (v.lifetime - t < 1f)
+                        t += v.lifetime - t;
+                    else
+                        t += 1f;
                 }
                 pos = spos;
                 break;
@@ -257,12 +261,16 @@ public class Component_Gimmick : MonoBehaviour
                 case Component_Kind.Vec:
                     var v = (Component_Vec)Comp[i];
                     Vector3 spos = pos;
-                    for (float t = 1; t <= v.lifetime; t += 1)
+                    for (float t = 1; t <= v.lifetime;)
                     {
                         Vector3 pos2 = pos +
                             (v.vec.normalized* v.pow * t + 0.5f * v.gravity * t * t); // 放物線をだす
                         Gizmos.DrawLine(spos, pos2);
                         spos = pos2;
+                        if (v.lifetime - t < 1f)
+                            t += v.lifetime - t;
+                        else
+                            t += 1f;
                     }
                     pos = spos;
                     break;
