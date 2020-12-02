@@ -92,12 +92,19 @@ public class Component_Editor : Editor
             case Component_Kind.Audio:
                 cp = new Component_Audio();
                 break;
+            case Component_Kind.Concurrent:
+                cp = new Component_Concurrent();
+                break;
 
             default:
-                cp = new Component_Pos();
+                if (_target.Comp.Count > 0)
+                    cp = _target.Comp[_target.Comp.Count - 1];
+                else
+                    cp = new Component_Pos();
                 break;
         }
         return cp;
     }
 }
+
 #endif

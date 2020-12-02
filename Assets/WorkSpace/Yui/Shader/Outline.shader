@@ -1,53 +1,27 @@
-﻿Shader "PostEffect"
-{
+﻿Shader "Custom/monoTone" {
 	Properties{
-		_MainTex("Texture", 2D) = "white" {}
+		_MainTex("MainTex", 2D) = ""{}
 	}
-		SubShader
-	{
-		Cull Off
-		ZTest Always
-		ZWrite Off
 
-		Tags { "RenderType" = "Opaque" }
+		SubShader{
+			Pass {
+				CGPROGRAM
 
-		Pass
-		{
-			CGPROGRAM
-			#pragma vertex vert
-			#pragma fragment frag
+				#include "UnityCG.cginc"
 
-			#include "UnityCG.cginc"
+				#pragma vertex vert_img
+				#pragma fragment frag
 
-			struct appdata
-			{
-				float4 vertex : POSITION;
-				float2 uv : TEXCOORD0;
-			};
+				sampler2D _MainTex;
 
-			struct v2f
-			{
-				float2 uv : TEXCOORD0;
-				float4 vertex : SV_POSITION;
-			};
+				fixed4 frag(v2f_img i) : COLOR {
+					fixed4 c = tex2D(_MainTex, i.uv);
+					float gray = c.r * 0.3 + c.g * 0.6 + c.b * 0.1;
+					c.rgb = fixed3(gray, gray, gray);
+					return c;
+				}
 
-			sampler2D _MainTex;
-			float4 _MainTex_ST;
-
-			v2f vert(appdata v)
-			{
-				v2f o;
-				o.vertex = UnityObjectToClipPos(v.vertex);
-				o.uv = TRANSFORM_TEX(v.uv, _MainTex);
-				return o;
+				ENDCG
 			}
-
-			fixed4 frag(v2f i) : SV_Target
-			{
-				fixed4 col = tex2D(_MainTex, i.uv);
-				return 1. - col;
-			}
-			ENDCG
-		}
 	}
 }

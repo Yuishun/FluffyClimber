@@ -5,6 +5,7 @@ using UnityEngine;
 [ExecuteInEditMode, ImageEffectAllowedInSceneView]
 public class PostEffect : MonoBehaviour
 {
+
     [SerializeField]
     private Material _material;
 

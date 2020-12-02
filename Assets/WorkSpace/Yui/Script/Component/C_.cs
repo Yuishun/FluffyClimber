@@ -105,11 +105,29 @@ namespace C_
         public float loop_Time;
         public float delay;
     }
+    [System.Serializable]
+    public class Component_Concurrent : Component_
+    {
+        public Component_Concurrent() { type = Component_Kind.Concurrent; }
+        [System.Serializable] public class Config
+        {
+            [HideInInspector] public bool end;   public bool isstop;
+        }
+        public List<Config> num = new List<Config>();
+        public void ResetEnd() { for (int i = 0; i < num.Count; i++) num[i].end = false; }
+        [HideInInspector]public int sidx;
+        public enum END_TYPE    // 終了条件 : 全て, どれか, 上優先
+        {
+            ALL, ANY, PRIORITY_UP, 
+        }
+        public END_TYPE end_type;
+        public bool end_dont_skip;
+    }
 
-    #endregion
+        #endregion
 
-    #region Component_Kind
-    public enum Component_Kind
+        #region Component_Kind
+        public enum Component_Kind
     {
         Pos,        // 直線的な動き
         Vec,        // 物理的な動き
@@ -119,6 +137,7 @@ namespace C_
         Enable,     // コンポーネントの ON <--> OFF
         Particle,   // パーティクルを再生
         Audio,      // 音を再生
+        Concurrent, // いくつかの下にあるコンポーネントを同時に(1frame)で実行
     }
 
     #endregion

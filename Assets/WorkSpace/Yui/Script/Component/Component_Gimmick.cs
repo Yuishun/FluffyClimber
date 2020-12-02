@@ -27,7 +27,7 @@ public class Component_Gimmick : MonoBehaviour
     }
     public int maxCount = 1;    // N_Count時何回ループするか
     private int nCount = 0;     // N_Count時の現在のループ回数
-    private int moveIdx = 0;    // Compのインデックス
+    public int moveIdx = 0;    // Compのインデックス
     private int plusIdx = 1;    // moveIdxに足す数
     private Rigidbody rb;
 
@@ -132,7 +132,7 @@ public class Component_Gimmick : MonoBehaviour
     delegate T C_Move<T>(Component_Gimmick gm, int i, out bool isEnd);
 
     #region // 各種類に応じて動かす
-    bool MoveGimmick(Component_Kind kind)
+    public bool MoveGimmick(Component_Kind kind)
     {
 
         bool isEnd = false;
@@ -161,6 +161,9 @@ public class Component_Gimmick : MonoBehaviour
                 break;
             case Component_Kind.Audio:
                 DoGimmick<bool>(C_Audio.Move, out isEnd);
+                break;
+            case Component_Kind.Concurrent:
+                DoGimmick<bool>(C_Concurrent.Move, out isEnd);
                 break;
                 
         }
@@ -227,12 +230,16 @@ public class Component_Gimmick : MonoBehaviour
             case Component_Kind.Vec:
                 var v = (Component_Vec)Comp[0];
                 Vector3 spos = pos;
-                for (float t = 1; t <= v.lifetime; t += 1f)
+                for (float t = 1; t <= v.lifetime;)
                 {
                     Vector3 pos2 = pos +
                         (v.vec.normalized * v.pow * t + 0.5f * v.gravity * t * t); // 放物線をだす
                     Gizmos.DrawLine(spos, pos2);            
-                    spos = pos2;                    
+                    spos = pos2;
+                    if (v.lifetime - t < 1f && v.lifetime - t > 0)
+                        t += v.lifetime - t;
+                    else
+                        t += 1f;
                 }
                 pos = spos;
                 break;
@@ -257,12 +264,16 @@ public class Component_Gimmick : MonoBehaviour
                 case Component_Kind.Vec:
                     var v = (Component_Vec)Comp[i];
                     Vector3 spos = pos;
-                    for (float t = 1; t <= v.lifetime; t += 1)
+                    for (float t = 1; t <= v.lifetime;)
                     {
                         Vector3 pos2 = pos +
                             (v.vec.normalized* v.pow * t + 0.5f * v.gravity * t * t); // 放物線をだす
                         Gizmos.DrawLine(spos, pos2);
                         spos = pos2;
+                        if (v.lifetime - t < 1f && v.lifetime - t > 0)
+                            t += v.lifetime - t;
+                        else
+                            t += 1f;
                     }
                     pos = spos;
                     break;
