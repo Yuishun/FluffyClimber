@@ -12,9 +12,11 @@ public class Wallup : MonoBehaviour
 
     GameObject _Maincamera;
 
-    bool _stop_flag;
+    PlayerMovement_y _playerMovement_Y;
 
-    bool w_flag;
+    bool _w_flag;
+
+    bool _once_flag;
 
     [SerializeField]
     private Timer _timer;
@@ -27,8 +29,9 @@ public class Wallup : MonoBehaviour
         _player = GameObject.Find("hito_model");
         _wall = GameObject.Find("Cube");
         _Maincamera = GameObject.Find("Main Camera");
-        _stop_flag = false;
-        w_flag = false;
+        _playerMovement_Y = _player.GetComponent<PlayerMovement_y>();
+        _w_flag = false;
+        _once_flag = false;
     }
 
     // Update is called once per frame
@@ -40,7 +43,7 @@ public class Wallup : MonoBehaviour
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
-        if (_stop_flag == false && _timer.IsTimerOver())
+        if (!_playerMovement_Y.bDead && _timer.IsTimerOver())
         {
                 transform.position =
         new Vector3(transform.position.x,
@@ -48,23 +51,40 @@ public class Wallup : MonoBehaviour
         transform.position.z);
         }
 
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            _stop_flag = true;
-        }
-
         //人と壁の中心の距離
         float distance;
         distance = 12.5f;
-        
 
-        if (distance >= _player.transform.position.y - transform.position.y)
+
+        if (!_playerMovement_Y.bDead)
         {
-            w_flag = true;
+
+            if (distance >= _player.transform.position.y - transform.position.y)
+            {
+                if (_w_flag == false)
+                {
+                    GetComponent<AudioSource>().Play();
+                    Debug.Log("Start");
+                }
+                _w_flag = true;
+            }
+            else
+            {
+                if (_w_flag == true)
+                {
+                    GetComponent<AudioSource>().Stop();
+                    Debug.Log("Stop");
+                }
+
+                _w_flag = false;
+            }
         }
-        else
+
+        if (_playerMovement_Y.bDead &&!_once_flag)
         {
-            w_flag = false;
+            GetComponent<AudioSource>().Stop();
+            Debug.Log("Stop");
+            _once_flag = true;
         }
     }
 
@@ -73,14 +93,15 @@ public class Wallup : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer("Player_Root")||
             collision.gameObject.layer == LayerMask.NameToLayer("Player_Bone"))
         {
-            if (collision.transform.root.GetComponent<PlayerMovement_y>().bGrounded)
-                _stop_flag = true;
+            //if (collision.transform.root.GetComponent<PlayerMovement_y>().bGrounded)
+            // wall_stop_flag == true;
+
             collision.transform.root.GetComponent<PlayerMovement_y>().Explosion();
         }
     }
 
     public bool Warning()
     {
-        return w_flag;
+        return _w_flag;
     }
 }
