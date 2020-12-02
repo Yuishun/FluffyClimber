@@ -50,7 +50,7 @@ public class GameManager_y : MonoBehaviour
             {
                 if(m_CurrentPlayer && !m_CurrentPlayer.bDead)
                 {
-                    if(InputManager_y.IMIsButtonOn(InputManager_y.IM_BUTTON.ESCAPE))
+                    if(InputManager_y.IMIsButtonOn(InputManager_y.IM_BUTTON.START))
                     {
                         if (bMenuVisible)
                             HideMenu();
@@ -113,7 +113,7 @@ public class GameManager_y : MonoBehaviour
 
         while(true)
         {
-            if (Input.GetKeyDown(KeyCode.R))
+            if (InputManager_y.IMIsButtonOn(InputManager_y.IM_BUTTON.JUMP))
                 break;
 
             yield return 0;
@@ -173,7 +173,7 @@ public class GameManager_y : MonoBehaviour
 
         while (true)
         {
-            if (Input.GetKeyDown(KeyCode.R))
+            if (InputManager_y.IMIsButtonOn(InputManager_y.IM_BUTTON.JUMP))
                 break;
 
             yield return 0;

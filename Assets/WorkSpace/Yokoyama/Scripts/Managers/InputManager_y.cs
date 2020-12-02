@@ -135,9 +135,9 @@ public class InputManager_y : MonoBehaviour
             case IM_BUTTON.ATTACK_SECONDARY:
                 if (Input.GetButtonDown("FireSecondary")) r = true;
                 break;
-            case IM_BUTTON.ESCAPE:
-                if (Input.GetKeyDown(KeyCode.Escape)) r = true;
-                break;
+            //case IM_BUTTON.ESCAPE:
+            //    if (Input.GetButtonDown("Escape")) r = true;
+            //    break;
             case IM_BUTTON.START:
                 if (Input.GetButtonDown("Start")) r = true;
                 break;
