@@ -367,6 +367,7 @@ MonoBehaviour:
   basisPos: {x: 0, y: 0, z: 0}
   I_movement: 1
   maxCount: 1
+  moveIdx: 0
   references:
     version: 1
     00000000:
@@ -401,6 +402,7 @@ MonoBehaviour:
   basisPos: {x: 0, y: 0, z: 0}
   I_movement: 1
   maxCount: 1
+  moveIdx: 0
   references:
     version: 1
     00000000:
@@ -1163,6 +1165,7 @@ MonoBehaviour:
   basisPos: {x: 0, y: 0, z: 0}
   I_movement: 0
   maxCount: 1
+  moveIdx: 0
   references:
     version: 1
     00000000:
@@ -2137,6 +2140,7 @@ MonoBehaviour:
   basisPos: {x: 0, y: 0, z: 0}
   I_movement: 1
   maxCount: 1
+  moveIdx: 0
   references:
     version: 1
     00000000:
@@ -2171,6 +2175,7 @@ MonoBehaviour:
   basisPos: {x: 0, y: 0, z: 0}
   I_movement: 1
   maxCount: 1
+  moveIdx: 0
   references:
     version: 1
     00000000:
@@ -2482,6 +2487,7 @@ MonoBehaviour:
   basisPos: {x: 0, y: 0, z: 0}
   I_movement: 5
   maxCount: 1
+  moveIdx: 0
   references:
     version: 1
     00000000:
@@ -2777,6 +2783,7 @@ MonoBehaviour:
   basisPos: {x: 0, y: 0, z: 0}
   I_movement: 0
   maxCount: 1
+  moveIdx: 0
   references:
     version: 1
     00000000:
@@ -3429,6 +3436,7 @@ MonoBehaviour:
   basisPos: {x: 0, y: 0, z: 0}
   I_movement: 1
   maxCount: 1
+  moveIdx: 0
   references:
     version: 1
     00000000:
@@ -4030,6 +4038,7 @@ MonoBehaviour:
   basisPos: {x: 0, y: 0, z: 0}
   I_movement: 5
   maxCount: 1
+  moveIdx: 0
   references:
     version: 1
     00000000:
@@ -4697,6 +4706,7 @@ MonoBehaviour:
   basisPos: {x: 0, y: 0, z: 0}
   I_movement: 1
   maxCount: 1
+  moveIdx: 0
   references:
     version: 1
     00000000:
@@ -4731,6 +4741,7 @@ MonoBehaviour:
   basisPos: {x: 0, y: 0, z: 0}
   I_movement: 1
   maxCount: 1
+  moveIdx: 0
   references:
     version: 1
     00000000:
@@ -4921,6 +4932,7 @@ MonoBehaviour:
   basisPos: {x: 0, y: 0, z: 0}
   I_movement: 5
   maxCount: 1
+  moveIdx: 0
   references:
     version: 1
     00000000:
@@ -5151,10 +5163,13 @@ MonoBehaviour:
   - id: 1
   - id: 2
   - id: 3
+  - id: 4
+  - id: 5
   usebasisDefault: 1
   basisPos: {x: 0, y: 0, z: 0}
   I_movement: 5
   maxCount: 1
+  moveIdx: 0
   references:
     version: 1
     00000000:
@@ -5165,13 +5180,33 @@ MonoBehaviour:
         - {fileID: 1910090211}
         enable: 1
     00000001:
+      type: {class: Component_Concurrent, ns: C_, asm: Assembly-CSharp}
+      data:
+        type: 8
+        num:
+        - end: 0
+          isstop: 0
+        - end: 0
+          isstop: 0
+        sidx: 0
+        end_type: 0
+        end_dont_skip: 0
+    00000002:
+      type: {class: Component_Rot, ns: C_, asm: Assembly-CSharp}
+      data:
+        type: 2
+        rot: {x: 0, y: 0, z: 180}
+        speed: 500
+        use1Rot: 1
+        warp: 0
+    00000003:
       type: {class: Component_Pos, ns: C_, asm: Assembly-CSharp}
       data:
         type: 0
         pos: {x: 0, y: 0, z: 9}
         speed: 10
         warp: 0
-    00000002:
+    00000004:
       type: {class: Component_Particle, ns: C_, asm: Assembly-CSharp}
       data:
         type: 6
@@ -5181,7 +5216,7 @@ MonoBehaviour:
         useLocalPos: 1
         pos: {x: 0, y: 0, z: 0}
         scale: {x: 2, y: 2, z: 2}
-    00000003:
+    00000005:
       type: {class: Component_Audio, ns: C_, asm: Assembly-CSharp}
       data:
         type: 7
