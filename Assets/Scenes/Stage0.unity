@@ -1190,6 +1190,7 @@ MonoBehaviour:
         rot: {x: 0, y: 180, z: 0}
         speed: 0
         use1Rot: 0
+        baseRot: {x: 0, y: 0, z: 0}
         warp: 1
     00000003:
       type: {class: Component_Vec, ns: C_, asm: Assembly-CSharp}
@@ -1206,6 +1207,7 @@ MonoBehaviour:
         rot: {x: 0, y: 180, z: 0}
         speed: 0
         use1Rot: 0
+        baseRot: {x: 0, y: 0, z: 0}
         warp: 1
 --- !u!54 &492001750
 Rigidbody:
@@ -2793,6 +2795,7 @@ MonoBehaviour:
         rot: {x: 0, y: 0, z: -60}
         speed: 50
         use1Rot: 0
+        baseRot: {x: 0, y: 0, z: 0}
         warp: 0
     00000001:
       type: {class: Component_Rot, ns: C_, asm: Assembly-CSharp}
@@ -2801,6 +2804,7 @@ MonoBehaviour:
         rot: {x: 0, y: 0, z: 60}
         speed: 50
         use1Rot: 0
+        baseRot: {x: 0, y: 0, z: 0}
         warp: 0
     00000002:
       type: {class: Component_Audio, ns: C_, asm: Assembly-CSharp}
@@ -3453,6 +3457,7 @@ MonoBehaviour:
         rot: {x: 0, y: 0, z: 90}
         speed: 70
         use1Rot: 0
+        baseRot: {x: 0, y: 0, z: 0}
         warp: 0
     00000002:
       type: {class: Component_Pos, ns: C_, asm: Assembly-CSharp}
@@ -3468,6 +3473,7 @@ MonoBehaviour:
         rot: {x: 0, y: 0, z: 90}
         speed: 70
         use1Rot: 0
+        baseRot: {x: 0, y: 0, z: 0}
         warp: 0
     00000004:
       type: {class: Component_Pos, ns: C_, asm: Assembly-CSharp}
@@ -5185,7 +5191,7 @@ MonoBehaviour:
         type: 8
         num:
         - end: 0
-          isstop: 0
+          isstop: 1
         - end: 0
           isstop: 0
         sidx: 0
@@ -5196,8 +5202,9 @@ MonoBehaviour:
       data:
         type: 2
         rot: {x: 0, y: 0, z: 180}
-        speed: 500
+        speed: 510
         use1Rot: 1
+        baseRot: {x: 0, y: 0, z: 0}
         warp: 0
     00000003:
       type: {class: Component_Pos, ns: C_, asm: Assembly-CSharp}
