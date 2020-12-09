@@ -38,10 +38,10 @@ public class Wallup : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.R))
+        /*if (Input.GetKeyDown(KeyCode.R))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }
+        }*/
 
         if (!_playerMovement_Y.bDead && _timer.IsTimerOver())
         {

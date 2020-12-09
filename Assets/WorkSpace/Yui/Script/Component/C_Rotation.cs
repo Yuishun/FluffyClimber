@@ -12,7 +12,8 @@ namespace C_
             Component_Rot c_r = (Component_Rot)gm.Comp[i];
             if (c_r.sRot.normalized == Quaternion.identity)
             {
-                var sr = Quaternion.Euler(c_r.rot + gm.transform.rotation.eulerAngles);
+                c_r.baseRot = gm.transform.rotation.eulerAngles;
+                var sr = Quaternion.Euler(c_r.rot + c_r.baseRot);
                 if (c_r.warp)   // ワープ時はすぐに返す
                 {
                     isEnd = true;
@@ -31,9 +32,11 @@ namespace C_
                 || gm.transform.rotation.eulerAngles == c_r.sRot.eulerAngles;
 
             // 一回転する場合に 目的角度を更新
-            Quaternion r;
-            if (isEnd && c_r.use1Rot && c_r.sRot != (r = Quaternion.Euler(c_r.rot * 2)))
+            Quaternion r = c_r.sRot * Quaternion.Euler(c_r.rot);
+            if (isEnd && c_r.use1Rot 
+                && Quaternion.Euler(c_r.rot * 2 + c_r.baseRot) == r)
             {
+                
                 c_r.sRot = r;
                 isEnd = false;
             }

@@ -47,6 +47,7 @@ namespace C_
         public Quaternion sRot { set { srot = value; } get { return srot; } }
         public float speed;
         public bool use1Rot;
+        [HideInInspector] public Vector3 baseRot;
         public bool warp;
     }
     [System.Serializable]
