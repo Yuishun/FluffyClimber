@@ -82,7 +82,11 @@ public class PlayerMovement_y : MonoBehaviour
 
         if( Mathf.Abs(Input.GetAxis("LRTrigger")) > 0.5f)
         {
-            Explosion();
+            if(!m_bDead)
+            {
+                DeathManager.SelfKill();
+                Explosion();
+            }
         }
 
         if(IMKeepButtonOn(IM_BUTTON.JUMP))
@@ -410,7 +414,7 @@ public class PlayerMovement_y : MonoBehaviour
     {
         if (bInvincible)
             return;
-
+        
         if (m_bDead)
             return;
 

@@ -246,9 +246,9 @@ public class AudioManager : MonoBehaviour
     /// <returns></returns>
     private IEnumerator IEFadeBGM(float fadeTime, int channel)
     {
-        Debug.Log("IEFadeBGM Start!");
+        //Debug.Log("IEFadeBGM Start!");
         float baseVolume = instance.bgmSources[channel].volume;
-        Debug.Log("Base Volume:" + baseVolume);
+        //Debug.Log("Base Volume:" + baseVolume);
         float time = 0f;
 
         while (time < fadeTime)
@@ -256,12 +256,12 @@ public class AudioManager : MonoBehaviour
             float volume = baseVolume * (1f - (time / fadeTime));
             instance.bgmSources[channel].volume = volume;
             time += Time.deltaTime;
-            Debug.Log("Current Volume:" + volume);
+            //Debug.Log("Current Volume:" + volume);
             yield return 0;
         }
 
         instance.bgmSources[channel].volume = 0;
-        Debug.Log("IEFadeBGM End!");
+        //Debug.Log("IEFadeBGM End!");
     }
 
     private IEnumerator IEWaitForEndingStopBGM()

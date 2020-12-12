@@ -8,6 +8,8 @@ public class ToStageSelectButton : MonoBehaviour
     public void Clicked()
     {
         GameManager_y.HideMenu();
+        DeathCommentManager.ResetAllComments();
+        DeathManager.ClearInformations();
         SceneManager.LoadScene("StageSelect");
     }
 }
