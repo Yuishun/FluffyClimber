@@ -82,7 +82,11 @@ public class PlayerMovement_y : MonoBehaviour
 
         if(IMGetAxisValue(IM_AXIS.L_TRIGGER) > 0.5f && IMGetAxisValue(IM_AXIS.R_TRIGGER) > 0.5f)
         {
-            Explosion();
+            if(!m_bDead)
+            {
+                DeathManager.SelfKill();
+                Explosion();
+            }
         }
 
         if(IMKeepButtonOn(IM_BUTTON.JUMP))
@@ -410,7 +414,7 @@ public class PlayerMovement_y : MonoBehaviour
     {
         if (bInvincible)
             return;
-
+        
         if (m_bDead)
             return;
 

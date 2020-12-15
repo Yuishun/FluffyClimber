@@ -76,6 +76,7 @@ public class Stage_StartAnim_Camera : MonoBehaviour
             time += Time.deltaTime * 2;
             yield return null;
         }
+        GameManager_y.Instance.bInGame = true;
         gameObject.SetActive(false);
     }
 }

@@ -79,6 +79,8 @@ public class GameManager_y : MonoBehaviour
     private bool bProcessing = false;
     private bool bMenuVisible = false;
 
+    public bool bInGame { get; set; }
+
     //-------------------------
     //  Functions
     //-------------------------
@@ -87,6 +89,7 @@ public class GameManager_y : MonoBehaviour
         
         GameOverImage.color = new Color(1, 1, 1, 0);
         ClearImage.color = new Color(1, 1, 1, 0);
+        bInGame = false;
         HideMenu();
     }
 
@@ -102,6 +105,7 @@ public class GameManager_y : MonoBehaviour
             return;
 
         instance.bProcessing = true;
+        DeathCommentManager.ResetAllComments();
         instance.StartCoroutine("IERestartGame");
     }
     private IEnumerator IERestartGame()
@@ -120,6 +124,7 @@ public class GameManager_y : MonoBehaviour
         }
 
         GameOverImage.color = new Color(1, 1, 1, 0);
+        bInGame = false;
         bProcessing = false;        
         SceneManager.LoadScene(m_PrevSceneName);
 
@@ -162,6 +167,7 @@ public class GameManager_y : MonoBehaviour
             return;
 
         instance.bProcessing = true;
+        DeathCommentManager.ResetAllComments();
         UnityAction act_ = instance.ClearBGM;
         AudioManager.StopBGM(true, 0.5f, act_);
         instance.StartCoroutine("IEClearGame");
@@ -170,6 +176,8 @@ public class GameManager_y : MonoBehaviour
     {
         ClearImage.color = new Color(1, 1, 1, 1);
         m_CurrentPlayer = null;
+
+        DeathManager.ClearInformations();
 
         while (true)
         {
@@ -181,6 +189,7 @@ public class GameManager_y : MonoBehaviour
 
         ClearImage.color = new Color(1, 1, 1, 0);
         bProcessing = false;
+        bInGame = false;
         SceneManager.LoadScene("Title");
 
         yield break;
