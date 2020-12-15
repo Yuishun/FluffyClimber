@@ -45,6 +45,8 @@ public class InputManager_y : MonoBehaviour
         L_STICK_Y,
         R_STICK_X,
         R_STICK_Y,
+        L_TRIGGER,
+        R_TRIGGER,
     }
 
 
@@ -199,6 +201,12 @@ public class InputManager_y : MonoBehaviour
                 break;
             case IM_AXIS.R_STICK_Y:
                 val = Input.GetAxis("Vertical2");
+                break;
+            case IM_AXIS.L_TRIGGER:
+                val = Input.GetAxis("LTrigger");
+                break;
+            case IM_AXIS.R_TRIGGER:
+                val = Input.GetAxis("RTrigger");
                 break;
         }
 

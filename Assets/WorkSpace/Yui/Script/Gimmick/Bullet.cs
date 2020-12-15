@@ -39,7 +39,7 @@ public class Bullet : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         if (HideFlag)
         {
-            GetComponentInChildren<SpriteRenderer>().enabled = false;
+            GetComponentInChildren<Renderer>().enabled = false;
             GetComponent<Collider>().enabled = false;
         }
         if (useTrigger == null)
@@ -62,7 +62,7 @@ public class Bullet : MonoBehaviour
             if (isOnPlayer)
             {
                 player = useTrigger.Player.transform;
-                GetComponentInChildren<SpriteRenderer>().enabled = true;
+                GetComponentInChildren<Renderer>().enabled = true;
                 GetComponent<Collider>().enabled = true;
             }
         }
