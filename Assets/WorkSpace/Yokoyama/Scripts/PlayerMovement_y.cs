@@ -80,7 +80,7 @@ public class PlayerMovement_y : MonoBehaviour
     {
         Vector3 _pos = transform.position;
 
-        if( Mathf.Abs(Input.GetAxis("LRTrigger")) > 0.5f)
+        if(IMGetAxisValue(IM_AXIS.L_TRIGGER) > 0.5f && IMGetAxisValue(IM_AXIS.R_TRIGGER) > 0.5f)
         {
             Explosion();
         }

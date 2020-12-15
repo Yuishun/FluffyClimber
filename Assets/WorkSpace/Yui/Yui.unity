@@ -779,7 +779,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f235a9cd29e022a4e99d9b16a0086fd3, type: 2}
+  - {fileID: 2100000, guid: bc76dfcb6d8e8d14792fd115eda081b9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3075,6 +3075,7 @@ MonoBehaviour:
         rot: {x: 0, y: 0, z: 90}
         speed: 40
         use1Rot: 0
+        baseRot: {x: 0, y: 0, z: 0}
         warp: 0
     00000003:
       type: {class: Component_Pos, ns: C_, asm: Assembly-CSharp}
@@ -4270,7 +4271,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: f235a9cd29e022a4e99d9b16a0086fd3, type: 2}
+      objectReference: {fileID: 2100000, guid: bc76dfcb6d8e8d14792fd115eda081b9, type: 2}
     - target: {fileID: 1003829190143978002, guid: 19b44ef0831ea3548b2224c18ae915ac,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4447,7 +4448,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f235a9cd29e022a4e99d9b16a0086fd3, type: 2}
+  - {fileID: 2100000, guid: bc76dfcb6d8e8d14792fd115eda081b9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4487,7 +4488,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: f235a9cd29e022a4e99d9b16a0086fd3, type: 2}
+      objectReference: {fileID: 2100000, guid: bc76dfcb6d8e8d14792fd115eda081b9, type: 2}
     - target: {fileID: 1003829190143978001, guid: 19b44ef0831ea3548b2224c18ae915ac,
         type: 3}
       propertyPath: m_Material
@@ -4670,7 +4671,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f235a9cd29e022a4e99d9b16a0086fd3, type: 2}
+  - {fileID: 2100000, guid: bc76dfcb6d8e8d14792fd115eda081b9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5911,6 +5912,7 @@ MonoBehaviour:
         rot: {x: 0, y: 0, z: -60}
         speed: 90
         use1Rot: 0
+        baseRot: {x: 0, y: 0, z: 0}
         warp: 0
     00000002:
       type: {class: Component_Rot, ns: C_, asm: Assembly-CSharp}
@@ -5919,6 +5921,7 @@ MonoBehaviour:
         rot: {x: 0, y: 0, z: 180}
         speed: 300
         use1Rot: 1
+        baseRot: {x: 0, y: 0, z: 0}
         warp: 0
     00000003:
       type: {class: Component_Time, ns: C_, asm: Assembly-CSharp}
@@ -6124,8 +6127,8 @@ Camera:
   m_GameObject: {fileID: 1685579894}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.7924528, g: 0.7924528, b: 0.7924528, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 1, g: 1, b: 1, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -6429,7 +6432,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f235a9cd29e022a4e99d9b16a0086fd3, type: 2}
+  - {fileID: 2100000, guid: bc76dfcb6d8e8d14792fd115eda081b9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6838,6 +6841,7 @@ MonoBehaviour:
         rot: {x: 0, y: 0, z: 0}
         speed: 0
         use1Rot: 0
+        baseRot: {x: 0, y: 0, z: 0}
         warp: 0
 --- !u!114 &1851307947
 MonoBehaviour:
@@ -7082,6 +7086,7 @@ GameObject:
   - component: {fileID: 1918031460}
   - component: {fileID: 1918031461}
   - component: {fileID: 1918031462}
+  - component: {fileID: 1918031463}
   m_Layer: 0
   m_Name: Sub Camera
   m_TagString: Untagged
@@ -7159,6 +7164,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _material: {fileID: 2100000, guid: 0ce627b4aca06d741b05c25772a5d5bf, type: 2}
+--- !u!114 &1918031463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1918031459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca6a3b28c1af1114393a7d32927c9fac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outline: {fileID: 2100000, guid: 8f7ddbac0584f7f40a506cdd18204fd5, type: 2}
 --- !u!1 &1954858121 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -490610061946023075, guid: a4d2bcd0f63f47040b9ee9f8154b96f8,
