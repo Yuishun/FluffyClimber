@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class Test_DeathComment : MonoBehaviour
 {
-    private DeathCommentHolder holder;
+    [SerializeField] private DeathCommentHolder holder;
     private bool bOnce = false;
 
     private void Start()
     {
-        holder = transform.parent.GetComponentInChildren<DeathCommentHolder>();
+        if(holder == null)
+            holder = transform.parent.GetComponentInChildren<DeathCommentHolder>();
     }
 
     private void OnCollisionEnter(Collision collision)
