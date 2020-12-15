@@ -17,7 +17,7 @@ public class CommentHolderEditor : Editor
         holder = target as DeathCommentHolder;
         style = EditorStyles.label;
         style.wordWrap = true;
-        
+
     }
 
     public override void OnInspectorGUI()
@@ -25,8 +25,9 @@ public class CommentHolderEditor : Editor
         serializedObject.Update();
         EditorGUI.BeginChangeCheck();
 
+
         //  カスタム表示---------------------------------------
-        EditorGUILayout.LabelField("!!--- プレイヤー死亡時にDeathCommentHolderのIncreaseDeathCount()を呼び出してください ---!!", style);
+        //EditorGUILayout.LabelField("!!--- プレイヤー死亡時にDeathCommentHolderのIncreaseDeathCount()を呼び出してください ---!!", style);
 
         //  トラップ情報
         holder.trapType = (TrapType)EditorGUILayout.EnumPopup("トラップの種類", holder.trapType);
@@ -34,15 +35,27 @@ public class CommentHolderEditor : Editor
         holder.bActiveTrigger = EditorGUILayout.Toggle("トリガーを使用", holder.bActiveTrigger);
         holder.bScreenSpaceComment = EditorGUILayout.Toggle("スクリーンスペースに表示", holder.bScreenSpaceComment);
 
+        SerializedProperty prop = serializedObject.FindProperty("dispPos");
+
         EditorGUI.BeginDisabledGroup(holder.bScreenSpaceComment);
-        holder.dispPos = EditorGUILayout.Vector3Field("ワールドスペース表示位置", holder.dispPos);
+        //holder.dispPos = EditorGUILayout.Vector3Field("ワールドスペース表示位置", holder.dispPos);
+        EditorGUILayout.PropertyField(prop);
+        //EditorUtility.SetDirty(holder);
         EditorGUI.EndDisabledGroup();
+
+        //EditorUtility.SetDirty(holder);
 
         //  コメント情報
         SerializedProperty _list = serializedObject.FindProperty("comments");
         DrawList(_list, 0);
 
-        serializedObject.ApplyModifiedProperties();
+
+
+        if(EditorGUI.EndChangeCheck())
+        {
+            //EditorUtility.SetDirty(holder);
+            serializedObject.ApplyModifiedProperties();
+        }
     }
 
     private void DrawList(SerializedProperty self, int mode)

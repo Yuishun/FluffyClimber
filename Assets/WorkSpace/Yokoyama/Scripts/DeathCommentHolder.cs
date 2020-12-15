@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class DeathCommentHolder : MonoBehaviour
 {
     public DeathManager.TrapType trapType;
     public int trapNumber;
-    public bool bActiveTrigger = false;
-    public bool bScreenSpaceComment = true;
+    public bool bActiveTrigger;
+    public bool bScreenSpaceComment;
 
-    public Vector3 dispPos { get; set; }
+    public Vector3 dispPos;
 
     [System.Serializable]
     public struct CommentSt
