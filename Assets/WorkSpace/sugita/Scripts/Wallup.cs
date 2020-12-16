@@ -12,7 +12,11 @@ public class Wallup : MonoBehaviour
 
     GameObject _Maincamera;
 
+    GameObject _goal;
+
     PlayerMovement_y _playerMovement_Y;
+
+    Clear _clear;
 
     bool _w_flag;
 
@@ -29,7 +33,9 @@ public class Wallup : MonoBehaviour
         _player = GameObject.Find("hito_model");
         _wall = GameObject.Find("Cube");
         _Maincamera = GameObject.Find("Main Camera");
+        _goal = GameObject.Find("Goal");
         _playerMovement_Y = _player.GetComponent<PlayerMovement_y>();
+        _clear = _goal.GetComponent<Clear>();
         _w_flag = false;
         _once_flag = false;
     }
@@ -43,7 +49,7 @@ public class Wallup : MonoBehaviour
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }*/
 
-        if (!_playerMovement_Y.bDead && _timer.IsTimerOver())
+        if (!_playerMovement_Y.bDead && _timer.IsTimerOver() && !_clear.Gameclear())
         {
                 transform.position =
         new Vector3(transform.position.x,
