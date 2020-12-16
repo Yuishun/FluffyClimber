@@ -95,6 +95,9 @@ public class Component_Editor : Editor
             case Component_Kind.Concurrent:
                 cp = new Component_Concurrent();
                 break;
+            case Component_Kind.Event:
+                cp = new Component_Event();
+                break;
 
             default:
                 if (_target.Comp.Count > 0)

@@ -165,6 +165,9 @@ public class Component_Gimmick : MonoBehaviour
             case Component_Kind.Concurrent:
                 DoGimmick<bool>(C_Concurrent.Move, out isEnd);
                 break;
+            case Component_Kind.Event:
+                DoGimmick<bool>(C_Event.Move, out isEnd);
+                break;
                 
         }
 
