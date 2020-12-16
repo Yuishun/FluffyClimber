@@ -63,7 +63,7 @@ public class Lift : MonoBehaviour
             if (useTrigger.IsOnPlayer != isOnPlayer)
                 isOnPlayer = useTrigger.IsOnPlayer;
         }
-
+        
         if (!isOnPlayer)    // 通常時
         {
             if (moveComponents[1] == null)
