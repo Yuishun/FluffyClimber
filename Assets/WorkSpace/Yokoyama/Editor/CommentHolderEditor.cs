@@ -12,12 +12,21 @@ public class CommentHolderEditor : Editor
     private DeathCommentHolder holder;
     private GUIStyle style;
 
+    SerializedProperty tt;
+    SerializedProperty tn;
+    SerializedProperty bat;
+    SerializedProperty bssc;
+
     private void Awake()
     {
         holder = target as DeathCommentHolder;
         style = EditorStyles.label;
         style.wordWrap = true;
 
+        tt = serializedObject.FindProperty("trapType");
+        tn = serializedObject.FindProperty("trapNumber");
+        bat = serializedObject.FindProperty("bActiveTrigger");
+        bssc = serializedObject.FindProperty("bScreenSpaceComment");
     }
 
     public override void OnInspectorGUI()
@@ -30,16 +39,22 @@ public class CommentHolderEditor : Editor
         //EditorGUILayout.LabelField("!!--- プレイヤー死亡時にDeathCommentHolderのIncreaseDeathCount()を呼び出してください ---!!", style);
 
         //  トラップ情報
-        holder.trapType = (TrapType)EditorGUILayout.EnumPopup("トラップの種類", holder.trapType);
-        holder.trapNumber = EditorGUILayout.IntField("トラップ番号", holder.trapNumber);
-        holder.bActiveTrigger = EditorGUILayout.Toggle("トリガーを使用", holder.bActiveTrigger);
-        holder.bScreenSpaceComment = EditorGUILayout.Toggle("スクリーンスペースに表示", holder.bScreenSpaceComment);
+
+        //holder.trapType = (TrapType)EditorGUILayout.EnumPopup("トラップの種類", holder.trapType);
+        //holder.trapNumber = EditorGUILayout.IntField("トラップ番号", holder.trapNumber);
+        //holder.bActiveTrigger = EditorGUILayout.Toggle("トリガーを使用", holder.bActiveTrigger);
+        //holder.bScreenSpaceComment = EditorGUILayout.Toggle("スクリーンスペースに表示", holder.bScreenSpaceComment);
+        EditorGUILayout.PropertyField(tt, new GUIContent("トラップの種類"));
+        EditorGUILayout.PropertyField(tn, new GUIContent("トラップ番号"));
+        EditorGUILayout.PropertyField(bat, new GUIContent("トリガーを使用"));
+        EditorGUILayout.PropertyField(bssc, new GUIContent("スクリーンスペースに表示"));
+
 
         SerializedProperty prop = serializedObject.FindProperty("dispPos");
 
         EditorGUI.BeginDisabledGroup(holder.bScreenSpaceComment);
         //holder.dispPos = EditorGUILayout.Vector3Field("ワールドスペース表示位置", holder.dispPos);
-        EditorGUILayout.PropertyField(prop);
+        EditorGUILayout.PropertyField(prop, new GUIContent("ワールドスペース表示位置"));
         //EditorUtility.SetDirty(holder);
         EditorGUI.EndDisabledGroup();
 

@@ -472,6 +472,7 @@ MonoBehaviour:
   MaxModelNum: 20
   models: []
   CurrentModelNum: 1
+  firstSelected: {fileID: 331609361}
 --- !u!1 &756698403
 GameObject:
   m_ObjectHideFlags: 0
@@ -1401,10 +1402,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2176314408816006670, guid: 5515215aeea21ae4a93351d19e393ca2,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2538385551044480053, guid: 5515215aeea21ae4a93351d19e393ca2,
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2538385551186604008, guid: 5515215aeea21ae4a93351d19e393ca2,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2538385551186604011, guid: 5515215aeea21ae4a93351d19e393ca2,
         type: 3}
@@ -1465,6 +1476,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Managers
+      objectReference: {fileID: 0}
+    - target: {fileID: 2538385551186604013, guid: 5515215aeea21ae4a93351d19e393ca2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8673889001794733978, guid: 5515215aeea21ae4a93351d19e393ca2,
         type: 3}

@@ -94,7 +94,7 @@ public class DeathCommentManager : MonoBehaviour
         {
             if(coroutines[i] != null)
             {
-                StopCoroutine(coroutines[0]);
+                StopCoroutine(coroutines[i]);
                 coroutines[i] = null;
             }
         }
