@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 /**
  * コンポーネントのクラスと種類を置いている
@@ -124,11 +125,17 @@ namespace C_
         public END_TYPE end_type;
         public bool end_dont_skip;
     }
+    [System.Serializable]
+    public class Component_Event : Component_
+    {
+        public Component_Event() { type = Component_Kind.Event; }
+        public UnityEvent events;
+    }
 
-        #endregion
+    #endregion
 
-        #region Component_Kind
-        public enum Component_Kind
+    #region Component_Kind
+    public enum Component_Kind
     {
         Pos,        // 直線的な動き
         Vec,        // 物理的な動き
@@ -139,6 +146,7 @@ namespace C_
         Particle,   // パーティクルを再生
         Audio,      // 音を再生
         Concurrent, // いくつかの下にあるコンポーネントを同時に(1frame)で実行
+        Event,      // UnityEventを実行
     }
 
     #endregion
