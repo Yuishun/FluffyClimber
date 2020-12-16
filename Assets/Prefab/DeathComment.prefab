@@ -48,6 +48,7 @@ MonoBehaviour:
   trapNumber: 0
   bActiveTrigger: 0
   bScreenSpaceComment: 1
+  dispPos: {x: 0, y: 0, z: 0}
   comments:
   - deathNum: 1
     commentList:

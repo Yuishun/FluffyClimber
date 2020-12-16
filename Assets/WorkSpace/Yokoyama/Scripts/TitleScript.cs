@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 
 public class TitleScript : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class TitleScript : MonoBehaviour
 
     [SerializeField] private List<GameObject> models;
     [SerializeField] private int CurrentModelNum = 1;
+
+    [SerializeField] private GameObject firstSelected;
 
     private float timer = 5;
     private double modelIncTimer = 0;
@@ -28,6 +31,9 @@ public class TitleScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        EventSystem.current.firstSelectedGameObject =firstSelected;
+        EventSystem.current.SetSelectedGameObject(firstSelected);
+
         models = new List<GameObject>(MaxModelNum);
         GameObject _obj = Instantiate(hito, Vector3.zero, Quaternion.identity) as GameObject;
         models.Add(_obj);
