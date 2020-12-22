@@ -29,4 +29,21 @@ public class Test_DeathComment : MonoBehaviour
             }
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (0 < (other.gameObject.layer &
+            ~LayerMask.GetMask("Player_Root", "Player_Bone")))
+        {
+            //  一度だけ
+            if (!bOnce)
+            {
+                if (holder != null)
+                {
+                    holder.IncreaseDeathCount();
+                }
+                bOnce = true;
+            }
+        }
+    }
 }
