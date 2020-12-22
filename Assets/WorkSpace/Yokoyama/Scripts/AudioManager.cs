@@ -76,7 +76,7 @@ public class AudioManager : MonoBehaviour
     private string[] bgmNames = new string[]
     {
         "のんびりタイム",
-        "情動カタルシスL",
+        "Cunning_Monsters",//"Pappa_Parappa",//"情動カタルシスL",
         "bass_slap1",
         "clearBGM",
     };
