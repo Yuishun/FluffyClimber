@@ -13,8 +13,10 @@ public class DeathManager : MonoBehaviour
         Needle,
         A,
         B,
+        C,
         Max,
-        None    //  Trapと関連付けない
+        None,    //  Trapと関連付けない
+        Type
     };
     [System.Serializable]
     public struct CauseOfDeath
