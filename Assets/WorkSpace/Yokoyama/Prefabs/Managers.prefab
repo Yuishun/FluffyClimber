@@ -100,7 +100,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 0.9254902, g: 0.30980393, b: 0.30980393, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -465,6 +465,7 @@ MonoBehaviour:
   GameOverImage: {fileID: 2538385551866851720}
   ClearImage: {fileID: 7926738626049901053}
   MenuCanvas: {fileID: 8785403468838209787}
+  restartButton: {fileID: 1518186568502852592}
 --- !u!114 &3101971699925628827
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -609,7 +610,7 @@ GameObject:
   - component: {fileID: 2480153499869443181}
   - component: {fileID: 7758731819304945036}
   - component: {fileID: 1518186568502852592}
-  - component: {fileID: 8438300652112734386}
+  - component: {fileID: 3103604743223162012}
   m_Layer: 0
   m_Name: EndButton
   m_TagString: Untagged
@@ -697,7 +698,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 0.9254902, g: 0.30980393, b: 0.30980393, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -717,7 +718,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8438300652112734386}
+      - m_Target: {fileID: 3103604743223162012}
         m_MethodName: Clicked
         m_Mode: 1
         m_Arguments:
@@ -728,7 +729,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &8438300652112734386
+--- !u!114 &3103604743223162012
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -737,7 +738,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2754998039184968508}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca127f638aa86e542bf904c8e9843bb6, type: 3}
+  m_Script: {fileID: 11500000, guid: 0f0dfd484cea0b741b32bfbc8f2da22b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &3213557981054129902
@@ -1030,7 +1031,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 0.9245283, g: 0.30962977, b: 0.30962977, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -1467,7 +1468,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalAxis: Horizontal
   m_VerticalAxis: Vertical
-  m_SubmitButton: Submit
+  m_SubmitButton: Jump
   m_CancelButton: Cancel
   m_InputActionsPerSecond: 10
   m_RepeatDelay: 0.5

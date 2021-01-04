@@ -78,6 +78,7 @@ public class PlayerMovement_y : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         Vector3 _pos = transform.position;
 
         if(IMGetAxisValue(IM_AXIS.L_TRIGGER) > 0.5f && IMGetAxisValue(IM_AXIS.R_TRIGGER) > 0.5f)
@@ -167,7 +168,7 @@ public class PlayerMovement_y : MonoBehaviour
         {
             //  SE
             if(bGround)
-                AudioManager.PlaySE(AudioManager.SE.walk, 0.75f, 0);
+                AudioManager.PlaySE(AudioManager.SE.walk, 0.5f, 0);
 
             if(Mathf.Sign(m_fHorAxisInput) > 0)
             {
@@ -240,7 +241,7 @@ public class PlayerMovement_y : MonoBehaviour
                 JumpElapsedTime = 0;
                 jumpState = JumpState.HoldBtn;
                 rb.AddForce(Vector3.up * JUMP_IMPACT, ForceMode.Impulse);
-                AudioManager.PlaySE(AudioManager.SE.jump, 0.75f, 1);
+                AudioManager.PlaySE(AudioManager.SE.jump, 1f, 1);
                 bGround = false;
             }
         }

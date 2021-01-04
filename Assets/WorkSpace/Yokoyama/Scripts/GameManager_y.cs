@@ -18,6 +18,7 @@ public class GameManager_y : MonoBehaviour
 
     //  メニュー
     [SerializeField] private CanvasGroup MenuCanvas;
+    [SerializeField] private Button restartButton;
 
     /// <summary>
     /// 生成時処理
@@ -78,6 +79,7 @@ public class GameManager_y : MonoBehaviour
 
     private bool bProcessing = false;
     private bool bMenuVisible = false;
+    public bool MenuVisible { get { return bMenuVisible; } }
 
     public bool bInGame { get; set; }
 
@@ -208,6 +210,7 @@ public class GameManager_y : MonoBehaviour
         instance.MenuCanvas.interactable = true;
         instance.MenuCanvas.blocksRaycasts = true;
         instance.bMenuVisible = true;
+        instance.restartButton.Select();
     }
     static public void HideMenu()
     {
