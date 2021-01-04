@@ -121,7 +121,7 @@ public class Lift : MonoBehaviour
             if (!Onplayer.Ragdollctrl.IsRagdoll)
             {
                 // 動いている途中は、速度に補正を加える
-                if (oldvel == rb.velocity)
+                if (oldvel == rb.velocity || oldvel.normalized == rb.velocity.normalized)
                     Onplayer.Ragdollctrl.rb.velocity += rb.velocity * Time.deltaTime;
                 // 目的地が変わるときは、velocityを上書きする
                 else
