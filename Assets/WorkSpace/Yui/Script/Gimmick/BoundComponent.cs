@@ -133,16 +133,22 @@ public class BoundComponent : MonoBehaviour
         if(0 < (PowFlag & CanPowerFlag.Up))
         {
             flag |= p.transform.position.y > transform.position.y;
+            if (flag)
+                return flag;
         }
         if(0 < (PowFlag & CanPowerFlag.Down))
         {
             flag |= p.transform.position.y < transform.position.y;
+            if (flag)
+                return flag;
         }
-        if(0 < (PowFlag & CanPowerFlag.Right))
+        if (0 < (PowFlag & CanPowerFlag.Right))
         {
             flag |= p.transform.position.x > transform.position.x;
+            if (flag)
+                return flag;
         }
-        if(0 < (PowFlag & CanPowerFlag.Left))
+        if (0 < (PowFlag & CanPowerFlag.Left))
         {
             flag |= p.transform.position.x < transform.position.x;
         }

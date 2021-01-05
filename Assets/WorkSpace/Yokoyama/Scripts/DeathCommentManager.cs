@@ -27,13 +27,15 @@ public class DeathCommentManager : MonoBehaviour
     static public DeathCommentManager instance;
 
     [SerializeField] private Canvas screenSpaceCanvas;
-    public Canvas SSCanvas { get; }
+    public Canvas SSCanvas { get { return screenSpaceCanvas; } }
     private Text ssCanvasText;
+    public Text SSText { get { return ssCanvasText; } set { ssCanvasText = value; } }
     private Color ssTextDefaultColor;
 
     [SerializeField] private Canvas worldSpaceCanvas;
-    public Canvas WSCanvas { get; }
+    public Canvas WSCanvas { get { return worldSpaceCanvas; } }
     private Text wsCanvasText;
+    public Text WSText { get { return wsCanvasText; } set { wsCanvasText = value; } }
     private Color wsTextDefaultColor;
 
     //  変数

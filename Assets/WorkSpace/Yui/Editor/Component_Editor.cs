@@ -30,7 +30,10 @@ public class Component_Editor : Editor
         {
             if (_target.Comp[i] == null)
             {
-                _target.Comp[i] = NumToComponent_(Component_Kind.Pos);                
+                if (_target.Comp.Count == 1)
+                    _target.Comp[i] = NumToComponent_(Component_Kind.Pos);
+                else
+                    _target.Comp[i] = NumToComponent_(_target.Comp[i - 1].type);
                 var prop = list.GetArrayElementAtIndex(i);
                 prop.managedReferenceValue = _target.Comp[i];
             }
@@ -97,6 +100,9 @@ public class Component_Editor : Editor
                 break;
             case Component_Kind.Event:
                 cp = new Component_Event();
+                break;
+            case Component_Kind.Text:
+                cp = new Component_Text();
                 break;
 
             default:

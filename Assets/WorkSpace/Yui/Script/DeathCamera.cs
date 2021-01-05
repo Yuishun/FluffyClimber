@@ -5,17 +5,22 @@ using UnityEngine;
 public class DeathCamera : MonoBehaviour
 {
     Camera2 cam2;
+    Camera_Hori cam_hori;
    // Camera childCam;
     // Start is called before the first frame update
     void Start()
     {
         cam2 = GetComponent<Camera2>();
+        cam_hori = GetComponent<Camera_Hori>();
         //childCam = transform.GetChild(0).GetComponent<Camera>();
     }
 
     public void Death(Transform player)
     {
-        cam2.enabled = false;   // 邪魔しないように停止
+        if(cam2!=null)
+            cam2.enabled = false;   // 邪魔しないように停止
+        if (cam_hori != null)
+            cam_hori.enabled = false;
         Quaternion r = transform.localRotation;
         transform.LookAt(player, Vector2.up);
 

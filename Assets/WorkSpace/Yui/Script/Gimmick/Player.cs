@@ -19,9 +19,15 @@ public class Player : MonoBehaviour
         ZeroUpper,
         ZeroLower,
     }
+
+    [Header("「全てのAxisがtrueなら」にする")]
+    public bool AndAxis;
     public CheckAXIS[] Axis;
     public InputManager_y.IM_BUTTON[] Button;
     public bool useLRTrigger;
+
+    [Header("入力中のみ動作する場合(離したらfalseにする)")]
+    public bool onlyTrue;
 
     [Header("0:検知後の動き・1:検知前の動き")]
     public Component_Gimmick[] moveComponents = new Component_Gimmick[2];
@@ -53,7 +59,7 @@ public class Player : MonoBehaviour
                 return;
         }
 
-        if (!isOnPlayer)
+        if (!isOnPlayer || onlyTrue)
         {
             isOnPlayer = CheckPlayer();
         }
@@ -83,6 +89,7 @@ public class Player : MonoBehaviour
                 return true;
         }
 
+        bool rbool = true;
         for(int i = 0; i < Axis.Length; i++)
         {
             float ax = InputManager_y.IMGetAxisValue(Axis[i].Axis);
@@ -104,9 +111,13 @@ public class Player : MonoBehaviour
                     r = ax < Axis[i].Checkaxis;
                     break;
             }
-            if (r)
+            if (!AndAxis && r)
                 return true;
+            else
+                rbool &= r;
         }
+        if (AndAxis)
+            return rbool;
         return false;
     }
 }

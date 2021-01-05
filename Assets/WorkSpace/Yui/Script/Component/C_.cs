@@ -120,7 +120,7 @@ namespace C_
         [HideInInspector]public int sidx;
         public enum END_TYPE    // 終了条件 : 全て, どれか, 上優先
         {
-            ALL, ANY, PRIORITY_UP, 
+            ALL, ANY, PRIORITY_UP, PRIORITY_DOWN,
         }
         public END_TYPE end_type;
         public bool end_dont_skip;
@@ -130,6 +130,25 @@ namespace C_
     {
         public Component_Event() { type = Component_Kind.Event; }
         public UnityEvent events;
+    }
+    [System.Serializable]
+    public class Component_Text : Component_
+    {
+        public Component_Text() { type = Component_Kind.Text; color = Color.black; }
+        [HideInInspector]
+        public FlowText ftext = null;
+        public string text;
+        public Vector3 localpos;
+        public Color color;
+        public float maxtime;
+        [HideInInspector]
+        public float _time;
+        public enum TextSize
+        {
+            Minimum = 0,Small,Normal,Big,Maximum
+        }
+        public TextSize size;
+
     }
 
     #endregion
@@ -147,6 +166,7 @@ namespace C_
         Audio,      // 音を再生
         Concurrent, // いくつかの下にあるコンポーネントを同時に(1frame)で実行
         Event,      // UnityEventを実行
+        Text,       // Textを生成
     }
 
     #endregion

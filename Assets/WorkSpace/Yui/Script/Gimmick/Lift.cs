@@ -131,7 +131,7 @@ public class Lift : MonoBehaviour
             {
                 // 一定時間以上かつ一定速度以下なら起き上がる
                 Ragtime += Time.deltaTime;
-                if (Ragtime >= 1 && rb.velocity.magnitude <= 3)
+                if (Ragtime >= 1 && rb.velocity.magnitude <= 3 && Onplayer.Ragdollctrl.canGetup)
                 {
                     // プレイヤーを疑似的に親子関係にする構造体を作成
                     Vector2 d = Onplayer.Ragdollctrl.cRb.transform.position - transform.position;

@@ -125,7 +125,8 @@ public class GameManager_y : MonoBehaviour
 
         GameOverImage.color = new Color(1, 1, 1, 0);
         bInGame = false;
-        bProcessing = false;        
+        bProcessing = false;
+        FlowTextManager.instance.ResetTexts();  // テキストのリセット
         SceneManager.LoadScene(m_PrevSceneName);
 
         yield break;

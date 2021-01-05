@@ -2580,6 +2580,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3acc668a70bfdc94690b7a77115f4a85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AndAxis: 0
   Axis: []
   Button: 06000000
   useLRTrigger: 0
@@ -4073,9 +4074,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3acc668a70bfdc94690b7a77115f4a85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Axis: []
+  AndAxis: 1
+  Axis:
+  - Axis: 6
+    Checkaxis: 0.5
+    judge: 0
+  - Axis: 7
+    Checkaxis: 0.5
+    judge: 0
   Button: 
-  useLRTrigger: 1
+  useLRTrigger: 0
   moveComponents:
   - {fileID: 1450658986}
   - {fileID: 0}
@@ -5031,6 +5039,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3acc668a70bfdc94690b7a77115f4a85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AndAxis: 0
   Axis:
   - Axis: 3
     Checkaxis: -0.5
@@ -5437,6 +5446,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3acc668a70bfdc94690b7a77115f4a85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AndAxis: 0
   Axis:
   - Axis: 2
     Checkaxis: -0.5

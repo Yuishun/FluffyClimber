@@ -64,7 +64,7 @@ public class DeathCommentHolder : MonoBehaviour
             return;
 
         if (0 < (other.gameObject.layer &
-            ~LayerMask.GetMask("Player_Root", "Player_Bone")))
+            LayerMask.GetMask("Player_Root", "Player_Bone")))
         {
             var p = other.transform.root.GetComponent<PlayerMovement_y>();
             if(p != null)

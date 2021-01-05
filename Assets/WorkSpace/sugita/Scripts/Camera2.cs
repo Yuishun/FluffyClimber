@@ -9,7 +9,6 @@ public class Camera2 : MonoBehaviour
     Transform _player;
     PlayerMovement_y p_Y;
 
-
     public List<Sou> upArea = new List<Sou>();
     public List<float> cameraY = new List<float>();
 

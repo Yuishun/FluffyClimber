@@ -8,7 +8,7 @@ using C_;
 public class Component_Gimmick : MonoBehaviour
 {
     // 各コンポーネントを入れるリスト
-    [SerializeReference]
+    [SerializeReference, ContextMenuItem("Insert", "InsertElement")]
     List<Component_> _Comp = new List<Component_>();
     public List<Component_> Comp { get { return _Comp; } }
 
@@ -41,6 +41,8 @@ public class Component_Gimmick : MonoBehaviour
     }*/
     public void Init(Rigidbody Rb = null)  // 初期設定
     {
+        if (rb != null)
+            return;
         if(Rb == null && rb == null) // どちらもnullなら自力で
             rb = GetComponent<Rigidbody>();
         else
@@ -168,6 +170,9 @@ public class Component_Gimmick : MonoBehaviour
             case Component_Kind.Event:
                 DoGimmick<bool>(C_Event.Move, out isEnd);
                 break;
+            case Component_Kind.Text:
+                DoGimmick<bool>(C_Text.Move, out isEnd);
+                break;
                 
         }
 
@@ -212,6 +217,11 @@ public class Component_Gimmick : MonoBehaviour
             time += Time.deltaTime;
             yield return new WaitForFixedUpdate();
         }
+    }
+
+    public void InsertElement()
+    {
+        Comp.Insert(0, new Component_Pos());
     }
 
     #region Gizumo

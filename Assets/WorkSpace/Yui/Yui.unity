@@ -2090,6 +2090,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a4d2bcd0f63f47040b9ee9f8154b96f8, type: 3}
+--- !u!224 &526935960 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 8379853367620908692, guid: 5515215aeea21ae4a93351d19e393ca2,
+    type: 3}
+  m_PrefabInstance: {fileID: 1695810243}
+  m_PrefabAsset: {fileID: 0}
 --- !u!54 &551861140 stripped
 Rigidbody:
   m_CorrespondingSourceObject: {fileID: 1717031193735868323, guid: 23a0309937adb264fab21867d1faf6be,
@@ -2521,6 +2527,52 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 602793536}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &622098646
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 622098647}
+  - component: {fileID: 622098648}
+  m_Layer: 5
+  m_Name: FlowTextManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &622098647
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 622098646}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 526935960}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &622098648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 622098646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3d06a609a3a16843a76bc89388711d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flowtextPrefab: {fileID: 183993481214415261, guid: 8170b5a8ed18024448e52fa39a627da1,
+    type: 3}
+  basisPos: {x: 15, y: 1}
 --- !u!1 &622397109 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -6895422888917978749, guid: a4d2bcd0f63f47040b9ee9f8154b96f8,
@@ -3082,14 +3134,15 @@ MonoBehaviour:
         speed: 1
         warp: 0
     00000002:
-      type: {class: Component_Rot, ns: C_, asm: Assembly-CSharp}
+      type: {class: Component_Text, ns: C_, asm: Assembly-CSharp}
       data:
-        type: 2
-        rot: {x: 0, y: 0, z: 90}
-        speed: 40
-        use1Rot: 0
-        baseRot: {x: 0, y: 0, z: 0}
-        warp: 0
+        type: 10
+        ftext: {fileID: 0}
+        text: "\u30C6\u30B9\u30C8"
+        localpos: {x: 0, y: 0, z: 0}
+        maxtime: 3
+        _time: 0
+        size: 4
     00000003:
       type: {class: Component_Pos, ns: C_, asm: Assembly-CSharp}
       data:

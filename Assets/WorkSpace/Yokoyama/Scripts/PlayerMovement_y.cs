@@ -116,7 +116,7 @@ public class PlayerMovement_y : MonoBehaviour
             JumpUpdate();
 
             //  腕上げ
-            if (Input.GetKey(KeyCode.UpArrow))
+            if (IMIsButtonOn(IM_BUTTON.UP))
             {
                 rbL.AddForce(Vector3.up * 100);
                 rbR.AddForce(Vector3.up * 100);

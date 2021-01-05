@@ -78,6 +78,24 @@ namespace C_
                         }
                     }
                     break;
+                case Component_Concurrent.END_TYPE.PRIORITY_DOWN:
+                    if (end[end.Count - 1].end) // 1番下が終わっていたら終了
+                        return true;
+                    for (int i = end.Count - 2; i >= 0; i--)
+                    {
+                        if (end[i].end) // 下のものも全て終わっていたら終了
+                        {
+                            ending = true;
+                            for (int j = i + 1; j < end.Count; j++)
+                            {
+                                if (!(ending &= end[j].end))
+                                    break;
+                            }
+                            if (ending)
+                                return true;
+                        }
+                    }
+                    break;
             }
             return ending;
         }
