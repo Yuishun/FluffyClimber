@@ -1537,12 +1537,12 @@ PrefabInstance:
     - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
         type: 3}
       propertyPath: comments.Array.data[0].commentList.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
         type: 3}
       propertyPath: comments.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
         type: 3}
@@ -1562,7 +1562,7 @@ PrefabInstance:
     - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
         type: 3}
       propertyPath: comments.Array.data[0].commentList.Array.data[0].comment
-      value: "\u4E57\u308A\u7D9A\u3051\u3066\u3044\u308B\u306E\u306F\u5371\u967A\u3067\u3059\uFF01"
+      value: "\u3042\uFF5E\uFF5E\u523A\u3055\u3063\u3061\u3083\u3044\u307E\u3057\u305F"
       objectReference: {fileID: 0}
     - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
         type: 3}
@@ -4515,12 +4515,12 @@ PrefabInstance:
     - target: {fileID: 2538385551186604011, guid: 5515215aeea21ae4a93351d19e393ca2,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.4168312
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2538385551186604011, guid: 5515215aeea21ae4a93351d19e393ca2,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.8730674
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2538385551186604011, guid: 5515215aeea21ae4a93351d19e393ca2,
         type: 3}
@@ -6123,7 +6123,7 @@ PrefabInstance:
     - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
         type: 3}
       propertyPath: comments.Array.data[0].commentList.Array.data[0].comment
-      value: "\u3053\u3093\u306A\u6240\u306B\u6765\u308B\u306E\u304B\uFF01"
+      value: "\u3064\u3089\u3089\u7684\u306A\u3084\u3064\u3067\u3059\u3088\uFF01"
       objectReference: {fileID: 0}
     - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
         type: 3}
@@ -6697,7 +6697,7 @@ PrefabInstance:
     - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
         type: 3}
       propertyPath: comments.Array.data[0].commentList.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
         type: 3}
