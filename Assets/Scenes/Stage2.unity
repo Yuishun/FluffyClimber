@@ -795,6 +795,21 @@ PrefabInstance:
       propertyPath: trapNumber
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
+        type: 3}
+      propertyPath: bScreenSpaceComment
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
+        type: 3}
+      propertyPath: dispPos.z
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
+        type: 3}
+      propertyPath: comments.Array.data[0].commentList.Array.data[0].comment
+      value: "\u30AD\u30EC\u30A4\u3067\u3059\u3088\u306D\uFF5E"
+      objectReference: {fileID: 0}
     - target: {fileID: 3994420457549054055, guid: f30b5aa0533294b49bb5a073fc1a4137,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1562,7 +1577,7 @@ PrefabInstance:
     - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
         type: 3}
       propertyPath: comments.Array.data[0].commentList.Array.data[0].comment
-      value: "\u3042\uFF5E\uFF5E\u523A\u3055\u3063\u3061\u3083\u3044\u307E\u3057\u305F"
+      value: "\u3042\uFF5E\uFF5E\u523A\u3055\u3063\u3061\u3083\u3044\u307E\u3057\u305F\uFF5E\uFF5E\uFF5E"
       objectReference: {fileID: 0}
     - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
         type: 3}
