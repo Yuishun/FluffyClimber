@@ -180,15 +180,29 @@ public class GameManager_y : MonoBehaviour
         m_CurrentPlayer = null;
 
         DeathManager.ClearInformations();
+        float timer = 0;
+        const float ParticleInitCycle = 0.1f;
+        int particleNum = EffectManager.Instance.numberOfparticleType;
 
         while (true)
         {
             if (InputManager_y.IMIsButtonOn(InputManager_y.IM_BUTTON.JUMP))
                 break;
 
+            if((timer += Time.deltaTime) >= ParticleInitCycle)
+            {
+                int particleID = Random.Range(0, particleNum - 1);
+                float xsign = Mathf.Sign(Random.Range(-1f, 1f));
+                float ysign = Mathf.Sign(Random.Range(-1f, 1f));
+                float randomPos = Random.Range(1f, 3f);
+                EffectManager.ParticleInit(particleID, new Vector3(randomPos * xsign, randomPos * ysign, 0));
+                timer -= ParticleInitCycle;
+            }
+
             yield return 0;
         }
 
+        EffectManager.Clear();
         ClearImage.color = new Color(1, 1, 1, 0);
         bProcessing = false;
         bInGame = false;

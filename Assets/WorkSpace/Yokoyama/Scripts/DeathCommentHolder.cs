@@ -7,6 +7,7 @@ public class DeathCommentHolder : MonoBehaviour
 {
     public DeathManager.TrapType trapType;
     public int trapNumber;
+    public bool bExcessUse = false;
     public bool bActiveTrigger;
     public bool bScreenSpaceComment;
 
@@ -97,13 +98,23 @@ public class DeathCommentHolder : MonoBehaviour
             DeathManager.CauseOfDeath _cod = DeathManager.GetPreviousDeathInfo();
             if(trapNumber == _cod.TrapNumber)
             {
-                for(int i = 0; i < comments.Count; ++i)
+                int i = 0;
+                for(i = 0; i < comments.Count; ++i)
                 {
                     if(comments[i].deathNum == _cod.DeathCount)
                     {
                         activeIndex = i;
                         bActive = true;
-                        break;
+                        return;
+                    }
+                }
+                if(bExcessUse)
+                {
+                    if(i >= comments.Count && _cod.DeathCount > comments[comments.Count - 1].deathNum)
+                    {
+                        activeIndex = comments.Count - 1;
+                        bActive = true;
+                        return;
                     }
                 }
             }

@@ -13,29 +13,28 @@ public class EffectManager : MonoBehaviour
     private Dictionary<int, ParticlePool> particles;
     public int numberOfparticleType { get; set; }
 
-
     class ParticlePool
     {
         private GameObject prefab;
-        private List<ParticleSystem> particles;
+        private List<ParticleSystem> particleList;
 
         public ParticlePool(GameObject obj)
         {
             obj.GetComponent<ParticleSystem>().playOnAwake = false;
             prefab = obj;
-            particles = new List<ParticleSystem>(4);
-            ParticleSystem ps = (Instantiate(prefab) as GameObject).GetComponent<ParticleSystem>();
-            particles.Add(ps);
+            particleList = new List<ParticleSystem>(4);
+            //ParticleSystem ps = (Instantiate(prefab) as GameObject).GetComponent<ParticleSystem>();
+            //particleList.Add(ps);
         }
 
         public void InitParticle(Vector3 pos)
         {
-            for(int i = 0; i < particles.Count; ++i)
+            for(int i = 0; i < particleList.Count; ++i)
             {
-                if(!particles[i].isPlaying)
+                if(!particleList[i].isPlaying)
                 {
-                    particles[i].transform.position = pos;
-                    particles[i].Play();
+                    particleList[i].transform.position = pos;
+                    particleList[i].Play();
                     return;
                 }
             }
@@ -43,20 +42,18 @@ public class EffectManager : MonoBehaviour
             ParticleSystem ps = (Instantiate(prefab) as GameObject).GetComponent<ParticleSystem>();
             ps.transform.position = pos;
             ps.Play();
-            particles.Add(ps);
+            particleList.Add(ps);
         }
 
         public void Clear()
         {
-            for (int i = particles.Count - 1; i >= 0; ++i)
+            for (int i = 0; i < particleList.Count; ++i)
             {
-                particles[i].Stop();
-                if(i > 0)
-                {
-                    Destroy(particles[i].gameObject);
-                    particles.RemoveAt(i);
-                }
+                particleList[i].Stop();
+                
+                Destroy(particleList[i].gameObject);
             }
+            particleList.Clear();
         }
     }
 
@@ -85,7 +82,7 @@ public class EffectManager : MonoBehaviour
     {
         numberOfparticleType = prefabs.Count;
         particles = new Dictionary<int, ParticlePool>(numberOfparticleType);
-        for(int i = 0; i < particles.Count; ++i)
+        for(int i = 0; i < numberOfparticleType; ++i)
         {
             ParticlePool pool = new ParticlePool(prefabs[i]);
             particles.Add(i, pool);

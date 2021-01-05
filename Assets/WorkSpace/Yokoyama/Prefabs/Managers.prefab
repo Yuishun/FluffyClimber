@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3902041379235393972}
   - component: {fileID: 1556614484581744047}
   - component: {fileID: 3174326980763217105}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: StageSelectButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -154,7 +154,7 @@ GameObject:
   - component: {fileID: 1047208029253231412}
   - component: {fileID: 1894130318544481969}
   - component: {fileID: 8543476534487073153}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -228,7 +228,7 @@ GameObject:
   - component: {fileID: 4770638741744085099}
   - component: {fileID: 3212023665469386500}
   - component: {fileID: 1266943695279831293}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -309,7 +309,7 @@ GameObject:
   - component: {fileID: 2538385551044480048}
   - component: {fileID: 2538385551044480051}
   - component: {fileID: 2538385551044480050}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -330,7 +330,7 @@ RectTransform:
   - {fileID: 2538385551866851734}
   - {fileID: 8881072314900063755}
   m_Father: {fileID: 2538385551186604011}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -346,8 +346,8 @@ Canvas:
   m_GameObject: {fileID: 2538385551044480052}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_RenderMode: 1
+  m_Camera: {fileID: 1036736340895012490}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -430,6 +430,7 @@ Transform:
   m_LocalPosition: {x: -0.4168312, y: 4.8730674, z: 0.04817772}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 4349006195454978421}
   - {fileID: 1817069599945951370}
   - {fileID: 2538385551044480053}
   - {fileID: 8673889001794733978}
@@ -542,7 +543,7 @@ GameObject:
   - component: {fileID: 2538385551866851734}
   - component: {fileID: 2538385551866851721}
   - component: {fileID: 2538385551866851720}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -618,7 +619,7 @@ GameObject:
   - component: {fileID: 7758731819304945036}
   - component: {fileID: 1518186568502852592}
   - component: {fileID: 3103604743223162012}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: EndButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -759,7 +760,7 @@ GameObject:
   - component: {fileID: 7914756189100263781}
   - component: {fileID: 3861964248548784510}
   - component: {fileID: 1831071394791840146}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -822,6 +823,80 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &4030974848904967542
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4349006195454978421}
+  - component: {fileID: 1036736340895012490}
+  m_Layer: 0
+  m_Name: UICamera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4349006195454978421
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4030974848904967542}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -3.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2538385551186604011}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!20 &1036736340895012490
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4030974848904967542}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 3
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 0
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_FocalLength: 50
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 0
+  orthographic size: 5
+  m_Depth: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 32
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
 --- !u!1 &4360449131177397993
 GameObject:
   m_ObjectHideFlags: 0
@@ -835,7 +910,7 @@ GameObject:
   - component: {fileID: 6541045750392894177}
   - component: {fileID: 107978083274101915}
   - component: {fileID: 8785403468838209787}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: MenuCanvasGroup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -859,7 +934,7 @@ RectTransform:
   - {fileID: 6617731596729218416}
   - {fileID: 124637540806028812}
   m_Father: {fileID: 2538385551186604011}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -875,8 +950,8 @@ Canvas:
   m_GameObject: {fileID: 4360449131177397993}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_RenderMode: 1
+  m_Camera: {fileID: 1036736340895012490}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -951,7 +1026,7 @@ GameObject:
   - component: {fileID: 3012625186902377586}
   - component: {fileID: 1618147229907640681}
   - component: {fileID: 5316165029472334960}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: TitleButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1092,7 +1167,7 @@ GameObject:
   - component: {fileID: 1454975507604750661}
   - component: {fileID: 7304295445390446108}
   - component: {fileID: 7046304084649235374}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1170,7 +1245,7 @@ GameObject:
   - component: {fileID: 8494060007528007933}
   - component: {fileID: 8747080976059858435}
   - component: {fileID: 5600748423931292334}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1249,7 +1324,7 @@ GameObject:
   - component: {fileID: 5948278037676522756}
   - component: {fileID: 2618679652086084454}
   - component: {fileID: 6711136649534961348}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: SSCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1269,7 +1344,7 @@ RectTransform:
   m_Children:
   - {fileID: 4770638741744085099}
   m_Father: {fileID: 2538385551186604011}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1286,7 +1361,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 1036736340895012490}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -1347,7 +1422,7 @@ GameObject:
   - component: {fileID: 7389115723714704738}
   - component: {fileID: 3005182949941785827}
   - component: {fileID: 3867822221730455459}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1444,7 +1519,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2538385551186604011}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7540382344597845144
 MonoBehaviour:
@@ -1491,7 +1566,7 @@ GameObject:
   - component: {fileID: 2030422295703454751}
   - component: {fileID: 6327898633644035027}
   - component: {fileID: 2974457859022576738}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1569,7 +1644,7 @@ GameObject:
   - component: {fileID: 8881072314900063755}
   - component: {fileID: 7634053900818664928}
   - component: {fileID: 7926738626049901053}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: ClearImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1644,7 +1719,7 @@ GameObject:
   - component: {fileID: 4604925100495777826}
   - component: {fileID: 1005409673837521657}
   - component: {fileID: 9107325157909978548}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: WSCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1664,7 +1739,7 @@ RectTransform:
   m_Children:
   - {fileID: 8494060007528007933}
   m_Father: {fileID: 2538385551186604011}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}

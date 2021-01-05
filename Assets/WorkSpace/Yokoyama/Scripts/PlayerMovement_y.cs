@@ -182,7 +182,7 @@ public class PlayerMovement_y : MonoBehaviour
             //  VFX
             Vector3 _pos = transform.position;
             _pos.y -= 1f;
-            EffectManager.ParticleInit(0, _pos);
+            //EffectManager.ParticleInit(0, _pos);
         }
 
         //transform.position += vecDelta_;
