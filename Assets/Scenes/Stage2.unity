@@ -508,7 +508,7 @@ PrefabInstance:
     - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
         type: 3}
       propertyPath: comments.Array.data[0].commentList.Array.data[0].comment
-      value: "\u521D\u898B\u6BBA\u3057\uFF5E\u305D\u306E\uFF12\uFF5E"
+      value: "\u98DB\u3073\u51FA\u3057\u6CE8\u610F\uFF12\uFF01"
       objectReference: {fileID: 0}
     - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
         type: 3}
@@ -3452,7 +3452,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 3863
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -3579,7 +3579,7 @@ PrefabInstance:
     - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
         type: 3}
       propertyPath: comments.Array.data[0].commentList.Array.data[0].comment
-      value: "\u521D\u898B\u6BBA\u3057\uFF5E\u305D\u306E\uFF11\uFF5E"
+      value: "\u98DB\u3073\u51FA\u3057\u6CE8\u610F\uFF01"
       objectReference: {fileID: 0}
     - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
         type: 3}
