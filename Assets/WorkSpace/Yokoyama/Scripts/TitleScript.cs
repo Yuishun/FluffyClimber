@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
+using static InputManager_y;
 
 public class TitleScript : MonoBehaviour
 {
@@ -12,7 +14,9 @@ public class TitleScript : MonoBehaviour
     [SerializeField] private List<GameObject> models;
     [SerializeField] private int CurrentModelNum = 1;
 
-    [SerializeField] private GameObject firstSelected;
+    [SerializeField] private Button startButton;
+    [SerializeField] private Button endButton;
+
 
     private float timer = 5;
     private double modelIncTimer = 0;
@@ -31,13 +35,14 @@ public class TitleScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        EventSystem.current.firstSelectedGameObject =firstSelected;
-        EventSystem.current.SetSelectedGameObject(firstSelected);
-
+        //EventSystem.current.firstSelectedGameObject =firstSelected;
+        //EventSystem.current.SetSelectedGameObject(firstSelected);
+        Time.timeScale = 1.0f;
         models = new List<GameObject>(MaxModelNum);
         GameObject _obj = Instantiate(hito, Vector3.zero, Quaternion.identity) as GameObject;
         models.Add(_obj);
         StartCoroutine("IEStart");
+        StartCoroutine("IEOnceInput");
     }
     private IEnumerator IEStart()
     {
@@ -52,9 +57,31 @@ public class TitleScript : MonoBehaviour
         yield break;
     }
 
+    private IEnumerator IEOnceInput()
+    {
+        while(true)
+        {
+            if(IMGetAxisValue(IM_AXIS.L_STICK_X) < 0f)
+            {
+                startButton.Select();
+                break;
+            }
+            else if(IMGetAxisValue(IM_AXIS.L_STICK_X) > 0f)
+            {
+                endButton.Select();
+                break;
+            }
+
+            yield return 0;
+        }
+
+        yield break;
+    }
+
     // Update is called once per frame
     void Update()
     {
+
         //  モデル数増加
         if (CurrentModelNum < MaxModelNum)
         { 

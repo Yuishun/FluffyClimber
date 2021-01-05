@@ -299,7 +299,8 @@ MonoBehaviour:
   MaxModelNum: 20
   models: []
   CurrentModelNum: 1
-  firstSelected: {fileID: 0}
+  startButton: {fileID: 772319572}
+  endButton: {fileID: 1095163937}
 --- !u!1 &772319569
 GameObject:
   m_ObjectHideFlags: 0
@@ -397,7 +398,7 @@ MonoBehaviour:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
+    m_SelectedTrigger: Highlighted
     m_DisabledTrigger: Disabled
   m_Interactable: 1
   m_TargetGraphic: {fileID: 772319573}
@@ -653,7 +654,7 @@ MonoBehaviour:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
+    m_SelectedTrigger: Highlighted
     m_DisabledTrigger: Disabled
   m_Interactable: 1
   m_TargetGraphic: {fileID: 1095163938}
@@ -1245,7 +1246,7 @@ MonoBehaviour:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
+    m_SelectedTrigger: Highlighted
     m_DisabledTrigger: Disabled
   m_Interactable: 1
   m_TargetGraphic: {fileID: 1846968110}

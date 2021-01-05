@@ -492,6 +492,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
         type: 3}
+      propertyPath: comments.Array.data[0].commentList.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
+        type: 3}
       propertyPath: trapType
       value: 3
       objectReference: {fileID: 0}
@@ -499,6 +504,26 @@ PrefabInstance:
         type: 3}
       propertyPath: trapNumber
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
+        type: 3}
+      propertyPath: comments.Array.data[0].commentList.Array.data[0].comment
+      value: "\u98DB\u3073\u51FA\u3057\u6CE8\u610F\uFF12\uFF01"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
+        type: 3}
+      propertyPath: comments.Array.data[0].commentList.Array.data[1].comment
+      value: "\u300CB\u306E\u518D\u6765\uFF01\u300D"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
+        type: 3}
+      propertyPath: bScreenSpaceComment
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
+        type: 3}
+      propertyPath: dispPos.z
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 3994420457549054055, guid: f30b5aa0533294b49bb5a073fc1a4137,
         type: 3}
@@ -770,6 +795,21 @@ PrefabInstance:
       propertyPath: trapNumber
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
+        type: 3}
+      propertyPath: bScreenSpaceComment
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
+        type: 3}
+      propertyPath: dispPos.z
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
+        type: 3}
+      propertyPath: comments.Array.data[0].commentList.Array.data[0].comment
+      value: "\u30AD\u30EC\u30A4\u3067\u3059\u3088\u306D\uFF5E"
+      objectReference: {fileID: 0}
     - target: {fileID: 3994420457549054055, guid: f30b5aa0533294b49bb5a073fc1a4137,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -973,12 +1013,22 @@ PrefabInstance:
     - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
         type: 3}
       propertyPath: comments.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
         type: 3}
       propertyPath: comments.Array.data[1].commentList.Array.size
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
+        type: 3}
+      propertyPath: comments.Array.data[2].commentList.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
+        type: 3}
+      propertyPath: comments.Array.data[0].commentList.Array.size
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
         type: 3}
@@ -988,22 +1038,47 @@ PrefabInstance:
     - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
         type: 3}
       propertyPath: comments.Array.data[0].commentList.Array.data[0].comment
-      value: "\u639B\u304B\u3063\u3066\u3057\u307E\u3044\u307E\u3057\u305F\u2026\u2026"
+      value: "\u305D\u3053\u306F\u30EF\u30CA\u306A\u3093\u3067\u3059\u3088\u306D\uFF5E"
       objectReference: {fileID: 0}
     - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
         type: 3}
       propertyPath: comments.Array.data[1].deathNum
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
         type: 3}
       propertyPath: comments.Array.data[1].commentList.Array.data[0].comment
-      value: "\u6B21\u306F\u6C17\u3092\u4ED8\u3051\u307E\u3057\u3087\u3046\uFF01"
+      value: "\u518D\u653E\u9001"
       objectReference: {fileID: 0}
     - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
         type: 3}
       propertyPath: comments.Array.data[1].commentList.Array.data[0].textSpeed
-      value: 2
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
+        type: 3}
+      propertyPath: comments.Array.data[2].deathNum
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
+        type: 3}
+      propertyPath: comments.Array.data[2].commentList.Array.data[0].comment
+      value: "\u30C7\u30B8\u30E3\u30F4"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
+        type: 3}
+      propertyPath: comments.Array.data[0].commentList.Array.data[1].comment
+      value: "\u6B21\u306F\u6C17\u3092\u4ED8\u3051\u307E\u3057\u3087\u3046\uFF01"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
+        type: 3}
+      propertyPath: bScreenSpaceComment
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
+        type: 3}
+      propertyPath: dispPos.z
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 3994420457549054055, guid: f30b5aa0533294b49bb5a073fc1a4137,
         type: 3}
@@ -1476,6 +1551,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
         type: 3}
+      propertyPath: comments.Array.data[0].commentList.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
+        type: 3}
+      propertyPath: comments.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
+        type: 3}
+      propertyPath: comments.Array.data[1].commentList.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
+        type: 3}
       propertyPath: trapType
       value: 1
       objectReference: {fileID: 0}
@@ -1483,6 +1573,41 @@ PrefabInstance:
         type: 3}
       propertyPath: trapNumber
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
+        type: 3}
+      propertyPath: comments.Array.data[0].commentList.Array.data[0].comment
+      value: "\u3042\uFF5E\uFF5E\u523A\u3055\u3063\u3061\u3083\u3044\u307E\u3057\u305F\uFF5E\uFF5E\uFF5E"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
+        type: 3}
+      propertyPath: comments.Array.data[0].commentList.Array.data[1].comment
+      value: "\u65E9\u3081\u306B\u964D\u308A\u307E\u3057\u3087\u3046\uFF01\uFF01"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
+        type: 3}
+      propertyPath: comments.Array.data[1].deathNum
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
+        type: 3}
+      propertyPath: comments.Array.data[1].commentList.Array.data[0].comment
+      value: "\u964D\u308A\u308B\u30BF\u30A4\u30DF\u30F3\u30B0\u304C\u9045\u3044\u3067\u3059"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
+        type: 3}
+      propertyPath: comments.Array.data[1].commentList.Array.data[1].comment
+      value: "\u65E9\u3081\u306B\u964D\u308A\u307E\u3057\u3087\u3046\uFF01\uFF01"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
+        type: 3}
+      propertyPath: bScreenSpaceComment
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
+        type: 3}
+      propertyPath: dispPos.z
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 3994420457549054055, guid: f30b5aa0533294b49bb5a073fc1a4137,
         type: 3}
@@ -3342,7 +3467,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 3863
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -3453,6 +3578,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
         type: 3}
+      propertyPath: comments.Array.data[0].commentList.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
+        type: 3}
       propertyPath: trapType
       value: 3
       objectReference: {fileID: 0}
@@ -3460,6 +3590,26 @@ PrefabInstance:
         type: 3}
       propertyPath: trapNumber
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
+        type: 3}
+      propertyPath: comments.Array.data[0].commentList.Array.data[0].comment
+      value: "\u98DB\u3073\u51FA\u3057\u6CE8\u610F\uFF01"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
+        type: 3}
+      propertyPath: comments.Array.data[0].commentList.Array.data[1].comment
+      value: "\u300CB\u306E\u5947\u8972\uFF01\u300D"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
+        type: 3}
+      propertyPath: bScreenSpaceComment
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
+        type: 3}
+      propertyPath: dispPos.z
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 3994420457549054055, guid: f30b5aa0533294b49bb5a073fc1a4137,
         type: 3}
@@ -4380,12 +4530,12 @@ PrefabInstance:
     - target: {fileID: 2538385551186604011, guid: 5515215aeea21ae4a93351d19e393ca2,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.4168312
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2538385551186604011, guid: 5515215aeea21ae4a93351d19e393ca2,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.8730674
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2538385551186604011, guid: 5515215aeea21ae4a93351d19e393ca2,
         type: 3}
@@ -5724,6 +5874,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
         type: 3}
+      propertyPath: comments.Array.data[0].commentList.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
+        type: 3}
       propertyPath: trapType
       value: 2
       objectReference: {fileID: 0}
@@ -5731,6 +5886,31 @@ PrefabInstance:
         type: 3}
       propertyPath: trapNumber
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
+        type: 3}
+      propertyPath: comments.Array.data[0].commentList.Array.data[0].comment
+      value: "\u3082\u3046\u5C11\u3057\u3067\u3057\u305F......"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
+        type: 3}
+      propertyPath: comments.Array.data[0].commentList.Array.data[1].comment
+      value: "\u60DC\u3057\u304B\u3063\u305F\u3067\u3059\u306D\uFF5E"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
+        type: 3}
+      propertyPath: comments.Array.data[0].commentList.Array.data[2].comment
+      value: "\u6B21\u306F\u3044\u3051\u307E\u3059\u306D\uFF01"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
+        type: 3}
+      propertyPath: bScreenSpaceComment
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
+        type: 3}
+      propertyPath: dispPos.z
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 3994420457549054055, guid: f30b5aa0533294b49bb5a073fc1a4137,
         type: 3}
@@ -5954,6 +6134,21 @@ PrefabInstance:
         type: 3}
       propertyPath: trapNumber
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
+        type: 3}
+      propertyPath: comments.Array.data[0].commentList.Array.data[0].comment
+      value: "\u3064\u3089\u3089\u7684\u306A\u3084\u3064\u3067\u3059\u3088\uFF01"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
+        type: 3}
+      propertyPath: bScreenSpaceComment
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
+        type: 3}
+      propertyPath: dispPos.z
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 3994420457549054055, guid: f30b5aa0533294b49bb5a073fc1a4137,
         type: 3}
@@ -6516,6 +6711,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
         type: 3}
+      propertyPath: comments.Array.data[0].commentList.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
+        type: 3}
+      propertyPath: comments.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
+        type: 3}
+      propertyPath: comments.Array.data[1].commentList.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
+        type: 3}
       propertyPath: trapType
       value: 1
       objectReference: {fileID: 0}
@@ -6523,6 +6733,36 @@ PrefabInstance:
         type: 3}
       propertyPath: trapNumber
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
+        type: 3}
+      propertyPath: comments.Array.data[0].commentList.Array.data[0].comment
+      value: "\u304A\u3063\u3068\uFF01\u305D\u3053\u306B\u306F\u30C8\u30B2\u304C\uFF01\uFF01"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
+        type: 3}
+      propertyPath: comments.Array.data[0].commentList.Array.data[1].comment
+      value: "\u5C11\u3057\u53F3\u306B\u5BC4\u308A\u307E\u3057\u3087\u3046\uFF01"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
+        type: 3}
+      propertyPath: comments.Array.data[1].deathNum
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
+        type: 3}
+      propertyPath: comments.Array.data[1].commentList.Array.data[0].comment
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
+        type: 3}
+      propertyPath: bScreenSpaceComment
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3994420457549054054, guid: f30b5aa0533294b49bb5a073fc1a4137,
+        type: 3}
+      propertyPath: dispPos.z
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 3994420457549054055, guid: f30b5aa0533294b49bb5a073fc1a4137,
         type: 3}

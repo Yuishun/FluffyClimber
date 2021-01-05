@@ -14,6 +14,7 @@ public class CommentHolderEditor : Editor
 
     SerializedProperty tt;
     SerializedProperty tn;
+    SerializedProperty beu;
     SerializedProperty bat;
     SerializedProperty bssc;
 
@@ -25,6 +26,7 @@ public class CommentHolderEditor : Editor
 
         tt = serializedObject.FindProperty("trapType");
         tn = serializedObject.FindProperty("trapNumber");
+        beu = serializedObject.FindProperty("bExcessUse");
         bat = serializedObject.FindProperty("bActiveTrigger");
         bssc = serializedObject.FindProperty("bScreenSpaceComment");
     }
@@ -46,6 +48,7 @@ public class CommentHolderEditor : Editor
         //holder.bScreenSpaceComment = EditorGUILayout.Toggle("スクリーンスペースに表示", holder.bScreenSpaceComment);
         EditorGUILayout.PropertyField(tt, new GUIContent("トラップの種類"));
         EditorGUILayout.PropertyField(tn, new GUIContent("トラップ番号"));
+        EditorGUILayout.PropertyField(beu, new GUIContent("最大死亡数超過時に繰り返し表示する"));
         EditorGUILayout.PropertyField(bat, new GUIContent("トリガーを使用"));
         EditorGUILayout.PropertyField(bssc, new GUIContent("スクリーンスペースに表示"));
 

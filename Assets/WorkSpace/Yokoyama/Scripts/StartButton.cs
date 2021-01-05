@@ -5,8 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class StartButton : MonoBehaviour
 {
+    bool bProcessing = false;
+
     public void Clicked()
     {
+        Debug.Log("clicked.");
+        if (bProcessing)
+            return;
+
+        bProcessing = true;
         AudioManager.PlaySE(AudioManager.SE.button, 1f);
         StartCoroutine("StartLoad");
     }

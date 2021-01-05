@@ -7,6 +7,8 @@ public class AnimationButton : MonoBehaviour
 {
     [SerializeField] private string LoadSceneName = "";
 
+    private bool bProcessing = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +23,10 @@ public class AnimationButton : MonoBehaviour
 
     public void Clicked()
     {
+        if (bProcessing)
+            return;
+
+        bProcessing = true;
         AudioManager.PlaySE(AudioManager.SE.button, 1f);
         StartCoroutine("StartLoad");
     }
