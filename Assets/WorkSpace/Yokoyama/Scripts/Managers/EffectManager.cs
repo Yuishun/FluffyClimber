@@ -8,10 +8,58 @@ public class EffectManager : MonoBehaviour
     static public EffectManager Instance { get { return instance; } }
 
     [Header("prefab"), Space(3)]
-    [SerializeField] private GameObject prefabPSRun;
+    [SerializeField] private List<GameObject> prefabs = new List<GameObject>();
 
-    [Header("particle system"), Space(3)]
-    [SerializeField] private ParticleSystem psRun;
+    private Dictionary<int, ParticlePool> particles;
+    public int numberOfparticleType { get; set; }
+
+
+    class ParticlePool
+    {
+        private GameObject prefab;
+        private List<ParticleSystem> particles;
+
+        public ParticlePool(GameObject obj)
+        {
+            obj.GetComponent<ParticleSystem>().playOnAwake = false;
+            prefab = obj;
+            particles = new List<ParticleSystem>(4);
+            ParticleSystem ps = (Instantiate(prefab) as GameObject).GetComponent<ParticleSystem>();
+            particles.Add(ps);
+        }
+
+        public void InitParticle(Vector3 pos)
+        {
+            for(int i = 0; i < particles.Count; ++i)
+            {
+                if(!particles[i].isPlaying)
+                {
+                    particles[i].transform.position = pos;
+                    particles[i].Play();
+                    return;
+                }
+            }
+
+            ParticleSystem ps = (Instantiate(prefab) as GameObject).GetComponent<ParticleSystem>();
+            ps.transform.position = pos;
+            ps.Play();
+            particles.Add(ps);
+        }
+
+        public void Clear()
+        {
+            for (int i = particles.Count - 1; i >= 0; ++i)
+            {
+                particles[i].Stop();
+                if(i > 0)
+                {
+                    Destroy(particles[i].gameObject);
+                    particles.RemoveAt(i);
+                }
+            }
+        }
+    }
+
 
     private void Awake()
     {
@@ -35,33 +83,37 @@ public class EffectManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if(prefabPSRun)
+        numberOfparticleType = prefabs.Count;
+        particles = new Dictionary<int, ParticlePool>(numberOfparticleType);
+        for(int i = 0; i < particles.Count; ++i)
         {
-            GameObject _obj = Instantiate(prefabPSRun) as GameObject;
-            _obj.transform.SetParent(this.transform);
-            psRun = _obj.GetComponent<ParticleSystem>();
+            ParticlePool pool = new ParticlePool(prefabs[i]);
+            particles.Add(i, pool);
         }
     }
 
     //  VFX Init
     static public void ParticleInit(int id, Vector3 pos)
     {
-        switch(id)
-        {
-            case 0:
-                if(instance.psRun)
-                    instance.ParticleInitFunc(instance.psRun, pos);
-                break;
-            default:
-                break;
-        }
+        instance.ParticleInitFunc(id, pos);
     }
-    private void ParticleInitFunc(ParticleSystem ps, Vector3 pos)
+    private void ParticleInitFunc(int id, Vector3 pos)
     {
-        if(!ps.isPlaying)
+        if (id < 0 || id >= particles.Count)
+            return;
+
+        particles[id].InitParticle(pos);
+    }
+
+    static public void Clear()
+    {
+        instance.ClearFunc();
+    }
+    private void ClearFunc()
+    {
+        for (int i = 0; i < particles.Count; ++i)
         {
-            ps.transform.position = pos;
-            ps.Play();
+            particles[i].Clear();
         }
     }
 }

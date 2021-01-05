@@ -492,9 +492,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67b318a4b3f48c04eb7360f3934e35a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabPSRun: {fileID: 2003619157219985157, guid: 4433011bb64e95a4381229409bd8e8aa,
-    type: 3}
-  psRun: {fileID: 0}
+  prefabs:
+  - {fileID: 1247311384876784, guid: 4adffb0018aeda44e9263f901167af1f, type: 3}
+  - {fileID: 100018, guid: a40b64bf23366dc42a892af2c6ff6140, type: 3}
+  - {fileID: 1995403933065894, guid: 4961a16ba01e09547be3e1c9d16d5ad0, type: 3}
+  - {fileID: 100006, guid: 8fc06027b01064e4f885fd8dd2929310, type: 3}
+  - {fileID: 1134129239631916, guid: 7e48ba6b1b968764490bbc70b66e3fe1, type: 3}
+  - {fileID: 100004, guid: 757df604761b8ef42831192c70ee1099, type: 3}
+  - {fileID: 100000, guid: 83cd9cc9f9c88824ba18dc59b05ae328, type: 3}
+  - {fileID: 1750940742320366, guid: ec1383a81f8b26e41bd5795fba065567, type: 3}
+  - {fileID: 1845240806346120, guid: b395d5d6eb4b4b846acc021ee036b744, type: 3}
 --- !u!114 &3320731510219619295
 MonoBehaviour:
   m_ObjectHideFlags: 0
