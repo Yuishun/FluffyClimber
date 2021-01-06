@@ -3083,6 +3083,7 @@ GameObject:
   - component: {fileID: 718780800}
   - component: {fileID: 718780798}
   - component: {fileID: 718780799}
+  - component: {fileID: 718780805}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -3124,7 +3125,7 @@ MonoBehaviour:
         - end: 0
           isstop: 0
         sidx: 0
-        end_type: 2
+        end_type: 3
         end_dont_skip: 0
     00000001:
       type: {class: Component_Pos, ns: C_, asm: Assembly-CSharp}
@@ -3140,6 +3141,7 @@ MonoBehaviour:
         ftext: {fileID: 0}
         text: "\u30C6\u30B9\u30C8"
         localpos: {x: 0, y: 0, z: 0}
+        color: {r: 0, g: 0, b: 0, a: 0}
         maxtime: 3
         _time: 0
         size: 4
@@ -3171,7 +3173,7 @@ MonoBehaviour:
   isOnPlayer: 0
   moveComponents:
   - {fileID: 0}
-  - {fileID: 718780798}
+  - {fileID: 718780805}
 --- !u!54 &718780800
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3262,6 +3264,66 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &718780805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 718780797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c05dcec51ab8554e86b2a18cf5503b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Comp:
+  - id: 0
+  - id: 1
+  - id: 2
+  - id: 3
+  usebasisDefault: 1
+  basisPos: {x: 0, y: 0, z: 0}
+  I_movement: 0
+  maxCount: 1
+  moveIdx: 0
+  references:
+    version: 1
+    00000000:
+      type: {class: Component_Concurrent, ns: C_, asm: Assembly-CSharp}
+      data:
+        type: 8
+        num:
+        - end: 0
+          isstop: 0
+        - end: 0
+          isstop: 0
+        sidx: 0
+        end_type: 2
+        end_dont_skip: 0
+    00000001:
+      type: {class: Component_Vec, ns: C_, asm: Assembly-CSharp}
+      data:
+        type: 1
+        vec: {x: -0.5, y: 1, z: 0}
+        pow: 20
+        lifetime: 3
+        gravity: {x: 0.27, y: -11.2, z: 0}
+    00000002:
+      type: {class: Component_Rot, ns: C_, asm: Assembly-CSharp}
+      data:
+        type: 2
+        rot: {x: 0, y: 0, z: -180}
+        speed: 350
+        use1Rot: 1
+        baseRot: {x: 0, y: 0, z: 0}
+        warp: 0
+    00000003:
+      type: {class: Component_Pos, ns: C_, asm: Assembly-CSharp}
+      data:
+        type: 0
+        pos: {x: 0, y: 0, z: 0}
+        speed: 10
+        warp: 0
 --- !u!4 &791129027 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4299389363154545412, guid: 01e2056ad8201c3478c02320ee2060e9,

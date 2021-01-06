@@ -15,6 +15,7 @@ namespace C_
     {
         public Component_Kind type;
         public virtual void Init() { }
+        public virtual void Reset() { }
     }
     [System.Serializable]
     public class Component_Pos : Component_ 
@@ -29,6 +30,7 @@ namespace C_
     {
         public Component_Vec() { type = Component_Kind.Vec;}
         public override void Init() { svec= Vector3.forward * 1000; }
+        public override void Reset() { svec= Vector3.forward * 1000; }
         public Vector3 vec;
         private Vector3 svec;
         public Vector3 sVec { set { svec = value; } get { return svec; } }
@@ -42,7 +44,9 @@ namespace C_
     public class Component_Rot : Component_ 
     {
         public Component_Rot() { type = Component_Kind.Rot; }
-        public override void Init() { srot = Quaternion.identity; }
+        public override void Init() { srot = new Quaternion(0,0,0,0); }
+        public override void Reset() { srot = new Quaternion(0,0,0,0); }
+        public bool UseWorldrot;
         public Vector3 rot;
         private Quaternion srot;
         public Quaternion sRot { set { srot = value; } get { return srot; } }
@@ -123,7 +127,7 @@ namespace C_
             ALL, ANY, PRIORITY_UP, PRIORITY_DOWN,
         }
         public END_TYPE end_type;
-        public bool end_dont_skip;
+        public bool end_dont_skip;  // 終了時Indexを飛ばさない場合
     }
     [System.Serializable]
     public class Component_Event : Component_
@@ -135,6 +139,14 @@ namespace C_
     public class Component_Text : Component_
     {
         public Component_Text() { type = Component_Kind.Text; color = Color.black; }
+        public override void Reset()
+        {
+            if (ftext != null)
+            {
+                ftext.gameObject.SetActive(false);
+                ftext = null;
+            }
+        }
         [HideInInspector]
         public FlowText ftext = null;
         public string text;
