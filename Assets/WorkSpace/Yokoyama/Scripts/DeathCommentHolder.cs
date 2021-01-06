@@ -65,7 +65,7 @@ public class DeathCommentHolder : MonoBehaviour
             return;
 
         if (0 < (other.gameObject.layer &
-            LayerMask.GetMask("Player_Root", "Player_Bone")))
+            ~LayerMask.GetMask("Player_Root", "Player_Bone")))
         {
             var p = other.transform.root.GetComponent<PlayerMovement_y>();
             if(p != null)
@@ -122,6 +122,15 @@ public class DeathCommentHolder : MonoBehaviour
         else
         {
             int _deathNum = DeathManager.GetTotalDeathCount();
+            if (bExcessUse)
+            {
+                if(_deathNum >= comments.Count && _deathNum > comments[comments.Count - 1].deathNum)
+                {
+                    activeIndex = comments.Count - 1;
+                    bActive = true;
+                    return;
+                }
+            }
             for (int i = 0; i < comments.Count; ++i)
             {
                 if(_deathNum == comments[i].deathNum)

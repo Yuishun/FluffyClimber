@@ -10,13 +10,20 @@ using C_;
 [CustomEditor(typeof(Component_Gimmick))]
 public class Component_Editor : Editor
 {
-    
+    Mochineko.SimpleReorderableList.ReorderableList reorderableList;
     private C_G _target;
 
     private void Awake()
     {
         _target = target as Component_Gimmick;
         //list = serializedObject.FindProperty("_Comp");
+    }
+
+    private void OnEnable()
+    {
+        reorderableList = new Mochineko.SimpleReorderableList.ReorderableList(
+            serializedObject.FindProperty("_Comp")
+            );
     }
 
     public override void OnInspectorGUI()
@@ -56,7 +63,11 @@ public class Component_Editor : Editor
         EditorGUILayout.PropertyField(serializedObject.FindProperty("I_movement"));
         if (_target.I_movement == C_G.IndexMovement.N_Count)
             EditorGUILayout.PropertyField(serializedObject.FindProperty("maxCount"));
-        CustomEditorUtility.DrawList(serializedObject.FindProperty("_Comp"), _target);
+        //CustomEditorUtility.DrawList(serializedObject.FindProperty("_Comp"), _target);
+        Mochineko.SimpleReorderableList.Samples.Editor
+            .EditorFieldUtility.ReadOnlyComponentField(target as MonoBehaviour, this);
+        if (reorderableList != null)
+            reorderableList.Layout();
 
         // GUIの更新があったら実行
         if (EditorGUI.EndChangeCheck())

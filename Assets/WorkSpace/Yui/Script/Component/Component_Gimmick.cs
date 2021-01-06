@@ -8,7 +8,7 @@ using C_;
 public class Component_Gimmick : MonoBehaviour
 {
     // 各コンポーネントを入れるリスト
-    [SerializeReference, ContextMenuItem("Insert", "InsertElement")]
+    [SerializeReference]
     List<Component_> _Comp = new List<Component_>();
     public List<Component_> Comp { get { return _Comp; } }
 
@@ -69,6 +69,11 @@ public class Component_Gimmick : MonoBehaviour
         {
             // 目的を達成したら次のIndexへ
             mo = NextMoveIdx();
+            if(!mo)
+                foreach(var cp in Comp)
+                {
+                    cp.Reset();
+                }
         }
         return mo;
     }
@@ -219,10 +224,6 @@ public class Component_Gimmick : MonoBehaviour
         }
     }
 
-    public void InsertElement()
-    {
-        Comp.Insert(0, new Component_Pos());
-    }
 
     #region Gizumo
     private void OnDrawGizmosSelected()

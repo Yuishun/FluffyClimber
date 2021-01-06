@@ -10,10 +10,12 @@ namespace C_
         public static Quaternion Move(C_G gm, int i, out bool isEnd)
         {
             Component_Rot c_r = (Component_Rot)gm.Comp[i];
-            if (c_r.sRot.normalized == Quaternion.identity)
+            
+            if (Quaternion.Equals( c_r.sRot , new Quaternion(0,0,0,0)))
             {
                 c_r.baseRot = gm.transform.rotation.eulerAngles;
-                var sr = Quaternion.Euler(c_r.rot + c_r.baseRot);
+                var rotVec = c_r.UseWorldrot ? c_r.rot : c_r.rot + c_r.baseRot;
+                var sr = Quaternion.Euler(rotVec);
                 if (c_r.warp)   // ワープ時はすぐに返す
                 {
                     isEnd = true;
@@ -43,7 +45,7 @@ namespace C_
 
             if (isEnd)
             {
-                c_r.sRot = Quaternion.identity;
+                c_r.sRot = new Quaternion(0,0,0,0);
             }
 
             return rot;
