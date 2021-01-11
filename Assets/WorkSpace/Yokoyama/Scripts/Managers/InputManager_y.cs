@@ -35,6 +35,12 @@ public class InputManager_y : MonoBehaviour
         CHANGE_AMMO,
         ESCAPE,
         START,
+        A,
+        B,
+        X,
+        Y,
+        L,
+        R,
     };
 
     public enum IM_AXIS
@@ -142,6 +148,24 @@ public class InputManager_y : MonoBehaviour
             //    break;
             case IM_BUTTON.START:
                 if (Input.GetButtonDown("Start")) r = true;
+                break;
+            case IM_BUTTON.A:
+                if (Input.GetButtonDown("A")) r = true;
+                break;
+            case IM_BUTTON.B:
+                if (Input.GetButtonDown("B")) r = true;
+                break;
+            case IM_BUTTON.X:
+                if (Input.GetButtonDown("X")) r = true;
+                break;
+            case IM_BUTTON.Y:
+                if (Input.GetButtonDown("Y")) r = true;
+                break;
+            case IM_BUTTON.L:
+                if (Input.GetButtonDown("L")) r = true;
+                break;
+            case IM_BUTTON.R:
+                if (Input.GetButtonDown("R")) r = true;
                 break;
         }
 

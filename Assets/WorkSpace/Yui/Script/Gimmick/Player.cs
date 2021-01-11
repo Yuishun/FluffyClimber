@@ -23,6 +23,8 @@ public class Player : MonoBehaviour
     [Header("「全てのAxisがtrueなら」にする")]
     public bool AndAxis;
     public CheckAXIS[] Axis;
+    [Header("「全てのButtonがtrueなら」にする")]
+    public bool AndButton;
     public InputManager_y.IM_BUTTON[] Button;
     public bool useLRTrigger;
 
@@ -82,17 +84,28 @@ public class Player : MonoBehaviour
         {
             return true;
         }
-
-        for(int i = 0; i < Button.Length; i++)
-        {
-            if (InputManager_y.IMIsButtonOn(Button[i]))
-                return true;
-        }
-
         bool rbool = true;
+        for (int i = 0; i < Button.Length; i++)
+        {
+            bool b = InputManager_y.IMIsButtonOn(Button[i]);
+            if (!AndButton)
+            {
+                if (b)
+                    return true;
+            }
+            else
+            {
+                rbool &= b;
+            }
+        }
+        if (AndButton && !AndAxis)
+            return rbool;
+
+        
         for(int i = 0; i < Axis.Length; i++)
         {
             float ax = InputManager_y.IMGetAxisValue(Axis[i].Axis);
+            Debug.Log(Axis[i].Axis + "：" + ax);
             bool r = false;
             switch (Axis[i].judge)
             {

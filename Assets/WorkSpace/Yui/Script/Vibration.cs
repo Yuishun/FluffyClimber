@@ -21,6 +21,11 @@ public class Vibration : MonoBehaviour
         }
     }
 
+    // 左右のパワーセット
+    public void SetLR_Power(float p)
+    {
+        lp = rp = p;
+    } 
     // 左のバイブレーション
     public void SetL_Vibration(float p)
     {
@@ -34,6 +39,11 @@ public class Vibration : MonoBehaviour
         if(rp!=p)
             XInputDotNetPure.GamePad.SetVibration(0, lp, rp);
         rp = p;
+    }
+    // 両方のバイブレーション
+    public void SetLR_Vibration()
+    {
+        XInputDotNetPure.GamePad.SetVibration(0, lp, rp);
     }
     // delay秒後、止める
     public void StopDelayVibration(float delay)
@@ -49,6 +59,8 @@ public class Vibration : MonoBehaviour
     // バイブレーションを止める
     public void StopVibration()
     {
+        if (lp == 0 && rp == 0)
+            return;
         XInputDotNetPure.GamePad.SetVibration(0, 0, 0);
         lp = rp = 0;
     }
@@ -69,6 +81,11 @@ public class Vibration : MonoBehaviour
     public void SetPowerMaxVibration(float time)
     {
         StartCoroutine(DoVibration(1, 1, time));
+    }
+    // time秒間バイブレーション
+    public void SetLRPowerVibration(float time)
+    {
+        StartCoroutine(DoVibration(lp, rp, time));
     }
 
     // パワーと時間指定バイブレーション

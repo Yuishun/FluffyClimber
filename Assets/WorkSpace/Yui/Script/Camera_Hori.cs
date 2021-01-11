@@ -59,7 +59,7 @@ public class Camera_Hori : MonoBehaviour
         {
             transform.position = new Vector3(movepos.x,
                                               movepos.y,
-                                              -10);
+                                              transform.position.z);
         }
 
         /*// プレイヤーの座標をビュー座標に変換
@@ -89,7 +89,7 @@ public class Camera_Hori : MonoBehaviour
                             new Vector3(w, h, 0));
 
         Gizmos.color = Color.red;
-        var frustumHeight = 2.0f * 10 * Mathf.Tan(Camera.main.fieldOfView * 0.5f * Mathf.Deg2Rad);
+        var frustumHeight = 2.0f * Mathf.Abs(transform.position.z) * Mathf.Tan(Camera.main.fieldOfView * 0.5f * Mathf.Deg2Rad);
         var Width = frustumHeight * Camera.main.aspect;
         var Height = Width / Camera.main.aspect;
         Gizmos.matrix = transform.localToWorldMatrix;

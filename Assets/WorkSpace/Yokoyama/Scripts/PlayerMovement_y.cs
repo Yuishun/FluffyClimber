@@ -81,7 +81,7 @@ public class PlayerMovement_y : MonoBehaviour
 
         Vector3 _pos = transform.position;
 
-        if(IMGetAxisValue(IM_AXIS.L_TRIGGER) > 0.5f && IMGetAxisValue(IM_AXIS.R_TRIGGER) > 0.5f)
+        if(IMGetAxisValue(IM_AXIS.L_TRIGGER) > 0.7f && IMGetAxisValue(IM_AXIS.R_TRIGGER) > 0.7f)
         {
             if(!m_bDead)
             {
@@ -421,6 +421,7 @@ public class PlayerMovement_y : MonoBehaviour
 
         m_bDead = true;
         RagdollCtrl.Explosion();
+        GetComponent<Vibration>().StopVibration();
         AudioManager.PlaySE(AudioManager.SE.death, 1f, 3);
 
         //UnityAction act_ = this.PlayDeathBGM;

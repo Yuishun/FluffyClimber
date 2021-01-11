@@ -80,8 +80,12 @@ public class BoundComponent : MonoBehaviour
             AudioManager.PlaySE(AudioManager.SE.death, 0.7f, 3);
             StartCoroutine(ReturnSprite(1));
         }
-        if (isOnce)
-            canBound = false;
+        
+        canBound = false;
+        if(!isOnce)
+        {
+            Invoke("truecanbound", 0.1f);
+        }
 
         if (!ignorePlayer)
             yield break;
@@ -92,6 +96,8 @@ public class BoundComponent : MonoBehaviour
             yield return null;
         p.enabled = true;
     }
+
+    void truecanbound() { canBound = true; }
 
     IEnumerator ReturnSprite(float time)
     {
@@ -118,7 +124,7 @@ public class BoundComponent : MonoBehaviour
             ~LayerMask.GetMask("Player_Root", "Player_Bone")))
         {
             PlayerMovement_y p = collision.transform.root.GetComponent<PlayerMovement_y>();
-            // 地面についているかつポジションが上にある場合乗っている
+            
             if (CanBound(p) && p.Ragdollctrl.cRb.velocity.magnitude >= Speed)
             {
                 StartCoroutine(Bound(p));

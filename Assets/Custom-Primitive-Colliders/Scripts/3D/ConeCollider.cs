@@ -31,6 +31,8 @@ namespace CustomPrimitiveColliders
         {
             X,Y,Z
         }
+        [SerializeField]
+        bool dirminus;
 
         private void Awake()
         {
@@ -170,37 +172,60 @@ namespace CustomPrimitiveColliders
 
         Vector3 LengthVector1(LengthDir dir, float angleCos, float angleSin)
         {
+            Vector3 vec;
             switch (dir)
             {
                 case LengthDir.X:
-                    return
+                    vec =
                         new Vector3(-m_length, m_radius * angleSin, m_radius * angleCos);
+                    if (dirminus)
+                        vec.x *= -1;
+                    break;
                 case LengthDir.Y:
-                    return
+                    vec =
                         new Vector3(m_radius * angleCos, -m_length, m_radius * angleSin);
+                    if (dirminus)
+                        vec.y *= -1;
+                    break;
                 case LengthDir.Z:
-                    return
+                    vec =
                         new Vector3(m_radius * angleCos, m_radius * angleSin, m_length);
+                    if (dirminus)
+                        vec.z *= -1;
+                    break;
                 default:
                     return Vector3.zero;
             }
+            
+            return vec;
         }
         Vector3 LengthVector2(LengthDir dir)
         {
+            Vector3 vec;
             switch (dir)
             {
                 case LengthDir.X:
-                    return
+                    vec =
                         new Vector3(-m_length, 0, 0);
+                    if (dirminus)
+                        vec.x *= -1;
+                    break;
                 case LengthDir.Y:
-                    return
+                    vec =
                         new Vector3(0, -m_length, 0);
+                    if (dirminus)
+                        vec.y *= -1;
+                    break;
                 case LengthDir.Z:
-                    return
+                    vec =
                         new Vector3(0, 0, m_length);
+                    if (dirminus)
+                        vec.z *= -1;
+                    break;
                 default:
                     return Vector3.zero;
             }
+            return vec;
         }
     }    
 }

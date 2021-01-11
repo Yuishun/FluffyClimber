@@ -934,6 +934,7 @@ GameObject:
   - component: {fileID: 1717031194834644870}
   - component: {fileID: 1717031194834644869}
   - component: {fileID: 8197700}
+  - component: {fileID: 25874913832667101}
   m_Layer: 8
   m_Name: hito_model
   m_TagString: Untagged
@@ -1018,9 +1019,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bInvincible: 1
-  psRunPrefab: {fileID: 2003619157219985157, guid: 4433011bb64e95a4381229409bd8e8aa,
-    type: 3}
-  psRun: {fileID: 0}
   VELOCITY: 30
   bDecline: 0
   DECLINE: 15
@@ -1152,6 +1150,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &25874913832667101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7274988849450179694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06e22aff4d7c70a4ba7298bf413a05f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7318639586541009400
 GameObject:
   m_ObjectHideFlags: 0

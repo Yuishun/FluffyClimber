@@ -38,10 +38,11 @@ public class FlowTextManager : MonoBehaviour
         var ftext = GetFlowText();
         ftext.Domove = true;
         ftext.text.text = str;
-        ftext.speed = SetSpeed(2, 5);
+        ftext.text.color = Color.black;
+        ftext.speed = SetSpeed(3, 6);
         ftext.maxtime = 8;
         ftext.rtrans.position = new Vector2(GetRandomX(basisPos.x), GetRandomY(basisPos.y));
-        ftext.rtrans.localScale = GetRandomScale(1, 3);
+        ftext.rtrans.localScale = GetRandomScale(0, 2);
     }
 
     public void SetBasisX(float x) { basisPos.x = x; }
@@ -52,7 +53,7 @@ public class FlowTextManager : MonoBehaviour
     public void SetBasisY(float y) { basisPos.y = y; }
     float GetRandomY(float n)
     {
-        return Random.Range(n - 3, n + 3);
+        return Random.Range((int)n - 3, (int)n + 4);
     }
 
     float SetSpeed(float min, float max)
@@ -84,7 +85,7 @@ public class FlowTextManager : MonoBehaviour
                 s *= 0.06f;
                 break;
             case 4: // 極大
-                s *= 0.1f;
+                s *= 0.08f;
                 break;
         }
         return s;

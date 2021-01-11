@@ -60,6 +60,7 @@ public class AudioManager : MonoBehaviour
         game,
         death,
         clear,
+        exgame,
         BGM_MAX,
     };
     public enum SE : int
@@ -76,9 +77,10 @@ public class AudioManager : MonoBehaviour
     private string[] bgmNames = new string[]
     {
         "のんびりタイム",
-        "Cunning_Monsters",//"Pappa_Parappa",//"情動カタルシスL",
+        "Cunning_Monsters",//"情動カタルシスL",
         "bass_slap1",
         "clearBGM",
+        "Pappa_Parappa",
     };
     private string[] seNames = new string[] {
         "kokeru",

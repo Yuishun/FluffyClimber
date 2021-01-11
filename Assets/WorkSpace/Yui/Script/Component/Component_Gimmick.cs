@@ -69,13 +69,17 @@ public class Component_Gimmick : MonoBehaviour
         {
             // 目的を達成したら次のIndexへ
             mo = NextMoveIdx();
-            if(!mo)
-                foreach(var cp in Comp)
-                {
-                    cp.Reset();
-                }
+            if (!mo)
+                Component_Reset();
         }
         return mo;
+    }
+    public void Component_Reset()
+    {
+        foreach (var cp in Comp)
+        {
+            cp.Reset();
+        }
     }
 
     // インデックスを各設定に応じて進める
