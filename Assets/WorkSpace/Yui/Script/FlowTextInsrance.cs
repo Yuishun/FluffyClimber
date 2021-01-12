@@ -14,4 +14,8 @@ public class FlowTextInsrance : MonoBehaviour
         FlowTextManager.instance.FlowingText(str);
     }
 
+    public void ResetText()
+    {
+        FlowTextManager.instance.ResetTexts();
+    }
 }
