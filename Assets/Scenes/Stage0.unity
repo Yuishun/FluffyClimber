@@ -1221,6 +1221,7 @@ MonoBehaviour:
       type: {class: Component_Rot, ns: C_, asm: Assembly-CSharp}
       data:
         type: 2
+        UseWorldrot: 0
         rot: {x: 0, y: 180, z: 0}
         speed: 0
         use1Rot: 0
@@ -1238,6 +1239,7 @@ MonoBehaviour:
       type: {class: Component_Rot, ns: C_, asm: Assembly-CSharp}
       data:
         type: 2
+        UseWorldrot: 0
         rot: {x: 0, y: 180, z: 0}
         speed: 0
         use1Rot: 0
@@ -1595,17 +1597,17 @@ PrefabInstance:
     - target: {fileID: 2538385551186604011, guid: 5515215aeea21ae4a93351d19e393ca2,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.4168312
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2538385551186604011, guid: 5515215aeea21ae4a93351d19e393ca2,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.8730674
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2538385551186604011, guid: 5515215aeea21ae4a93351d19e393ca2,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.04817772
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2538385551186604011, guid: 5515215aeea21ae4a93351d19e393ca2,
         type: 3}
@@ -2582,8 +2584,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AndAxis: 0
   Axis: []
+  AndButton: 0
   Button: 06000000
   useLRTrigger: 0
+  onlyTrue: 0
   moveComponents:
   - {fileID: 973750517}
   - {fileID: 0}
@@ -2832,6 +2836,7 @@ MonoBehaviour:
       type: {class: Component_Rot, ns: C_, asm: Assembly-CSharp}
       data:
         type: 2
+        UseWorldrot: 0
         rot: {x: 0, y: 0, z: -60}
         speed: 50
         use1Rot: 0
@@ -2841,6 +2846,7 @@ MonoBehaviour:
       type: {class: Component_Rot, ns: C_, asm: Assembly-CSharp}
       data:
         type: 2
+        UseWorldrot: 0
         rot: {x: 0, y: 0, z: 60}
         speed: 50
         use1Rot: 0
@@ -3495,6 +3501,7 @@ MonoBehaviour:
       type: {class: Component_Rot, ns: C_, asm: Assembly-CSharp}
       data:
         type: 2
+        UseWorldrot: 0
         rot: {x: 0, y: 0, z: 90}
         speed: 70
         use1Rot: 0
@@ -3511,6 +3518,7 @@ MonoBehaviour:
       type: {class: Component_Rot, ns: C_, asm: Assembly-CSharp}
       data:
         type: 2
+        UseWorldrot: 0
         rot: {x: 0, y: 0, z: 90}
         speed: 70
         use1Rot: 0
@@ -4082,8 +4090,10 @@ MonoBehaviour:
   - Axis: 7
     Checkaxis: 0.5
     judge: 0
+  AndButton: 0
   Button: 
   useLRTrigger: 0
+  onlyTrue: 0
   moveComponents:
   - {fileID: 1450658986}
   - {fileID: 0}
@@ -5044,8 +5054,10 @@ MonoBehaviour:
   - Axis: 3
     Checkaxis: -0.5
     judge: 1
+  AndButton: 0
   Button: 
   useLRTrigger: 0
+  onlyTrue: 0
   moveComponents:
   - {fileID: 1826880327}
   - {fileID: 0}
@@ -5349,6 +5361,7 @@ MonoBehaviour:
       type: {class: Component_Rot, ns: C_, asm: Assembly-CSharp}
       data:
         type: 2
+        UseWorldrot: 0
         rot: {x: 0, y: 0, z: 180}
         speed: 510
         use1Rot: 1
@@ -5454,8 +5467,10 @@ MonoBehaviour:
   - Axis: 2
     Checkaxis: 0.5
     judge: 0
+  AndButton: 0
   Button: 
   useLRTrigger: 0
+  onlyTrue: 0
   moveComponents:
   - {fileID: 1910090210}
   - {fileID: 0}

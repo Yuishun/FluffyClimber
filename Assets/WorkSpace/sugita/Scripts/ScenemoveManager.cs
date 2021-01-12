@@ -11,7 +11,7 @@ public class ScenemoveManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        FlowTextManager.instance.ResetTexts();
     }
 
     // Update is called once per frame
