@@ -105,7 +105,7 @@ public class Player : MonoBehaviour
         for(int i = 0; i < Axis.Length; i++)
         {
             float ax = InputManager_y.IMGetAxisValue(Axis[i].Axis);
-            Debug.Log(Axis[i].Axis + "：" + ax);
+            //Debug.Log(Axis[i].Axis + "：" + ax);
             bool r = false;
             switch (Axis[i].judge)
             {

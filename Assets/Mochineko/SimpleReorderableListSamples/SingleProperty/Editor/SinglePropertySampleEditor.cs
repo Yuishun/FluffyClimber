@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-
+#if UNITY_EDITOR
 namespace Mochineko.SimpleReorderableList.Samples.Editor
 {
 	[CustomEditor(typeof(SinglePropertySample))]
@@ -35,3 +35,4 @@ namespace Mochineko.SimpleReorderableList.Samples.Editor
 		}
 	}
 }
+#endif

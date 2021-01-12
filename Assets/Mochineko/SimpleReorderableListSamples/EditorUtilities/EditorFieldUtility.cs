@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-
+#if UNITY_EDITOR
 namespace Mochineko.SimpleReorderableList.Samples.Editor
 {
 	/// <summary>
@@ -118,3 +118,4 @@ namespace Mochineko.SimpleReorderableList.Samples.Editor
 		}
 	}
 }
+#endif

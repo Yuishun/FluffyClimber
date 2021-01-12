@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using UnityEditor;
-
+#if UNITY_EDITOR
 namespace Mochineko.SimpleReorderableList
 {
 	/// <summary>
@@ -422,3 +422,4 @@ namespace Mochineko.SimpleReorderableList
 
 	}
 }
+#endif

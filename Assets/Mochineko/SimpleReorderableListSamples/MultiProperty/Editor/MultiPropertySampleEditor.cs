@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+#if UNITY_EDITOR
 
 namespace Mochineko.SimpleReorderableList.Samples.Editor
 {
@@ -35,3 +36,4 @@ namespace Mochineko.SimpleReorderableList.Samples.Editor
 		}
 	}
 }
+#endif
