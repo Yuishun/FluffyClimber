@@ -182,8 +182,10 @@ public class GameManager_y : MonoBehaviour
 
         DeathManager.ClearInformations();
         float timer = 0;
+        float seTimer = 0;
         const float ParticleInitCycle = 0.1f;
         int particleNum = EffectManager.Instance.numberOfparticleType;
+        AudioManager.PlaySE(AudioManager.SE.clear1, 0.5f);
 
         while (true)
         {
@@ -200,6 +202,14 @@ public class GameManager_y : MonoBehaviour
                 timer -= ParticleInitCycle;
             }
 
+            if((seTimer += Time.deltaTime) >= 1.5f)
+            {
+                int id = Random.Range(0, 1);
+                AudioManager.SE e = (AudioManager.SE)((int)AudioManager.SE.clear1 + id);
+                AudioManager.PlaySE(e, 0.5f);
+                seTimer = 0;
+            }
+
             yield return 0;
         }
 
@@ -207,7 +217,7 @@ public class GameManager_y : MonoBehaviour
         ClearImage.color = new Color(1, 1, 1, 0);
         bProcessing = false;
         bInGame = false;
-        SceneManager.LoadScene("Title");
+        SceneManager.LoadScene("StageSelect");
 
         yield break;
     }

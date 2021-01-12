@@ -70,6 +70,8 @@ public class AudioManager : MonoBehaviour
         walk,
         death,
         button,
+        clear1,
+        clear2,
         SE_MAX,
     };
 
@@ -88,6 +90,8 @@ public class AudioManager : MonoBehaviour
         "walk3",
         "shinu",
         "buttonSE",
+        "clearse1",
+        "clearse2",
     };
 
     //=============================================================================================
