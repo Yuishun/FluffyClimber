@@ -53,7 +53,7 @@ public class GameManager_y : MonoBehaviour
             string sceneName = SceneManager.GetActiveScene().name;
             if(sceneName != "Title" && sceneName != "StageSelect")
             {
-                if(m_CurrentPlayer && !m_CurrentPlayer.bDead)
+                if(bInGame && m_CurrentPlayer && !m_CurrentPlayer.bDead)
                 {
                     if(InputManager_y.IMIsButtonOn(InputManager_y.IM_BUTTON.START))
                     {
