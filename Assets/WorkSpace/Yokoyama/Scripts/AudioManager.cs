@@ -72,6 +72,8 @@ public class AudioManager : MonoBehaviour
         button,
         clear1,
         clear2,
+        drumroll,
+        drumroll_end,
         SE_MAX,
     };
 
@@ -92,6 +94,8 @@ public class AudioManager : MonoBehaviour
         "buttonSE",
         "clearse1",
         "clearse2",
+        "drumroll",
+        "drumroll_end",
     };
 
     //=============================================================================================
