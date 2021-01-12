@@ -182,7 +182,7 @@ public class GameManager_y : MonoBehaviour
         instance.bProcessing = true;
         DeathCommentManager.ResetAllComments();
         UnityAction act_ = instance.ClearBGM;
-        AudioManager.StopBGM(true, 0.5f, act_);
+        AudioManager.StopBGM(true, 0.5f);
         instance.StartCoroutine("IEClearGame");
     }
     private IEnumerator IEClearGame()
@@ -280,6 +280,14 @@ public class GameManager_y : MonoBehaviour
                     commentTimer = 0;
                     break;
                 case 4:
+                    if(commentTimer >= 1.5f)
+                    {
+                        commentTimer = 0f;
+                        phase = 5;
+                        AudioManager.PlayBGM(AudioManager.BGM.clear, 0.5f);
+                    }
+                    break;
+                case 5:
                     if (commentTimer >= 0.1f)
                     {
                         ++currentComment;
@@ -287,11 +295,11 @@ public class GameManager_y : MonoBehaviour
                         commentTimer = 0;
                         if (currentComment == clearComment.Length)
                         {
-                            phase = 5;
+                            phase = 6;
                         }
                     }
                     break;
-                case 5:
+                case 6:
                     break;
             }
             
