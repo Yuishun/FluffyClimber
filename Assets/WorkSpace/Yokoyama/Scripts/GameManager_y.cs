@@ -15,6 +15,10 @@ public class GameManager_y : MonoBehaviour
 
     [SerializeField] private MaskableGraphic GameOverImage;
     [SerializeField] private MaskableGraphic ClearImage;
+    [SerializeField] private Text ClearText;
+    [SerializeField] private Text DeathNumText;
+    private Color ClearTextColor;
+    private Color DeathNumTextColor;
 
     //  メニュー
     [SerializeField] private CanvasGroup MenuCanvas;
@@ -91,6 +95,12 @@ public class GameManager_y : MonoBehaviour
         
         GameOverImage.color = new Color(1, 1, 1, 0);
         ClearImage.color = new Color(1, 1, 1, 0);
+        ClearTextColor = ClearText.color;
+        ClearTextColor.a = 0;
+        ClearText.color = ClearTextColor;
+        DeathNumTextColor = DeathNumText.color;
+        DeathNumTextColor.a = 0;
+        DeathNumText.color = DeathNumTextColor;
         bInGame = false;
         HideMenu();
     }
@@ -177,8 +187,21 @@ public class GameManager_y : MonoBehaviour
     }
     private IEnumerator IEClearGame()
     {
-        ClearImage.color = new Color(1, 1, 1, 1);
         m_CurrentPlayer = null;
+
+        ClearImage.color = new Color(1, 1, 1, 1);
+        ClearTextColor.a = 1;
+        ClearText.color = ClearTextColor;
+        ClearText.text = "";
+        DeathNumTextColor.a = 1;
+        DeathNumText.color = DeathNumTextColor;
+        DeathNumText.text = "";
+        int deathNum = DeathManager.GetTotalDeathCount();
+        float commentTimer = 0;
+        float commentTimer2 = 0;
+        int currentComment = 0;
+        string clearComment = "あなたの死亡回数は　　　　　回でした！";
+        int phase = 0;
 
         DeathManager.ClearInformations();
         float timer = 0;
@@ -210,11 +233,78 @@ public class GameManager_y : MonoBehaviour
                 seTimer = 0;
             }
 
+            commentTimer += Time.deltaTime;
+            switch(phase)
+            {
+                case 0:
+                    if(commentTimer >= 0.1f)
+                    {
+                        ++currentComment;
+                        ClearText.text = clearComment.Substring(0, currentComment);
+                        commentTimer = 0;
+                        if(currentComment == 9)
+                        {
+                            phase = 1;
+                        }
+                    }
+
+                    break;
+                case 1:
+                    AudioManager.PlaySE(AudioManager.SE.drumroll, 0.8f, 1);
+                    commentTimer = 0;
+                    phase = 2;
+                    break;
+                case 2:
+                    commentTimer2 += Time.deltaTime;
+                    if(commentTimer2 >= 0.05f)
+                    {
+                        int a = Random.Range(0, 9);
+                        int b = Random.Range(0, 9);
+                        int c = Random.Range(0, 9);
+
+                        DeathNumText.text = a.ToString() + b + c;
+
+                        commentTimer2 = 0;
+                    }
+
+                    if(commentTimer > 4.5f)
+                    {
+                        phase = 3;
+                    }
+                    break;
+                case 3:
+                    AudioManager.PlaySE(AudioManager.SE.drumroll_end, 0.8f, 2);
+                    DeathNumText.text = deathNum.ToString();
+                    phase = 4;
+                    currentComment = 15;
+                    commentTimer = 0;
+                    break;
+                case 4:
+                    if (commentTimer >= 0.1f)
+                    {
+                        ++currentComment;
+                        ClearText.text = clearComment.Substring(0, currentComment);
+                        commentTimer = 0;
+                        if (currentComment == clearComment.Length)
+                        {
+                            phase = 5;
+                        }
+                    }
+                    break;
+                case 5:
+                    break;
+            }
+            
+
             yield return 0;
         }
 
         EffectManager.Clear();
         ClearImage.color = new Color(1, 1, 1, 0);
+        ClearTextColor.a = 0;
+        ClearText.color = ClearTextColor;
+        DeathNumTextColor.a = 0;
+        DeathNumText.color = DeathNumTextColor;
         bProcessing = false;
         bInGame = false;
         SceneManager.LoadScene("StageSelect");
