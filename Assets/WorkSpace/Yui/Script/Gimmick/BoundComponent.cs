@@ -78,7 +78,7 @@ public class BoundComponent : MonoBehaviour
             spRend.enabled = false;
             par.Play();
             AudioManager.PlaySE(AudioManager.SE.death, 0.7f, 3);
-            StartCoroutine(ReturnSprite(1));
+            Invoke("spRendtrue", 1);
         }
         
         canBound = false;
@@ -99,6 +99,7 @@ public class BoundComponent : MonoBehaviour
 
     void truecanbound() { canBound = true; }
 
+    void spRendtrue() { spRend.enabled = true; }
     IEnumerator ReturnSprite(float time)
     {
         float t = 0;
