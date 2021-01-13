@@ -2012,4 +2012,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flowtextPrefab: {fileID: 183993481214415261, guid: 8170b5a8ed18024448e52fa39a627da1,
     type: 3}
-  basisPos: {x: 173, y: 1}
+  basisPos: {x: 173, y: 2}
